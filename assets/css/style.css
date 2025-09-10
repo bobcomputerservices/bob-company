@@ -1811,3 +1811,13 @@ section {
     padding-top: 4px;
   }
 }
+
+/* --- Custom Company Logo Text --- */
+.logo-text {
+  font-family: 'Times New Roman', serif;
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: -2px;
+  white-space: nowrap;
+  margin-left: 8px;
+  vertical-align: middle;
