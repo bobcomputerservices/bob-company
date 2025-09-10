@@ -145,7 +145,7 @@ h1, h2, h3, h4, h5, h6 {
 * Desktop Navigation 
 */
 .navbar {
-  padding: 0;
+  padding: 20px 0;
 }
 
 .navbar ul {
