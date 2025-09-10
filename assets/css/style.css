@@ -1858,5 +1858,10 @@ section {
   color: #333;        /* 字体颜色，深灰更柔和，比纯黑好看 */
 }
 
+#about {
+  border-top: 1px solid #eee;   /* 上边框，淡灰色 */
+  border-bottom: 1px solid #eee; /* 下边框，淡灰色 */
+  padding: 60px 0;              /* 上下留白，避免文字贴边 */
+}
 
 
