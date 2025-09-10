@@ -1817,13 +1817,14 @@ section {
   font-family: 'Times New Roman', serif;
   font-size: 48px;
   font-weight: 600;
+  font-color: white;
   letter-spacing: -2px;
   white-space: nowrap;
   margin-left: 8px;
   vertical-align: middle;
 
-#hero .hero-img img {
-  max-width: 80% !important;   
-  margin-top: 40px !important; 
+.navbar {
+  margin-top: -20px;  
 }
+
 
