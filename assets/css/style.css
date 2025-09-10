@@ -1823,6 +1823,6 @@ section {
   vertical-align: middle;
 
 .hero-img img {
-  max-width: 80%;     /* 缩小图片，比如 80%，你可以改成 70% / 90% */
-  margin-top: 40px;   /* 往下移动 40px，可以改成 20px / 60px 看效果 */
+  max-width: 50%;    
+  margin-top: 60px;  
 }
