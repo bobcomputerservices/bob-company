@@ -1824,6 +1824,13 @@ section {
   color: #fff;
 }
 
+#hero {
+  background: url("assets/img/hero-bg1.jpg") no-repeat center center;
+  background-size: cover;   /* 自动铺满，不会拉伸 */
+  background-attachment: fixed; /* 让背景固定不动，增加高级感（可选） */
+  position: relative;
+  color: #fff;  /* 让文字保持白色 */
+}
 
 
 
