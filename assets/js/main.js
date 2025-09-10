@@ -256,25 +256,39 @@
 
 })()
 
-// Animate skills progress bars with Intersection Observer
+// Animate skills progress bars with percentage count
 document.addEventListener("DOMContentLoaded", function() {
   let skillsSection = document.querySelector('#skills');
   let progressBars = document.querySelectorAll('#skills .progress-bar');
+  let percents = document.querySelectorAll('#skills .skill .val');
 
   if (skillsSection) {
     let observer = new IntersectionObserver(function(entries, observer) {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          progressBars.forEach(bar => {
-            let target = bar.getAttribute('aria-valuenow');
+          progressBars.forEach((bar, index) => {
+            let target = parseInt(bar.getAttribute('aria-valuenow'));
             bar.style.width = target + '%';
+
+            // Animate the percentage number
+            let counter = 0;
+            let interval = setInterval(() => {
+              if (counter >= target) {
+                clearInterval(interval);
+              } else {
+                counter++;
+                percents[index].textContent = counter + '%';
+              }
+            }, 20); // 速度: 每 20ms +1，可以调节
           });
-          observer.unobserve(skillsSection); // 触发一次就停止观察
+
+          observer.unobserve(skillsSection); // 只触发一次
         }
       });
-    }, { threshold: 0.3 }); // 当 30% 的区块进入视窗时触发
+    }, { threshold: 0.3 });
 
     observer.observe(skillsSection);
   }
 });
+
 
