@@ -1883,3 +1883,8 @@ section {
   transition: width 2s ease-in-out;
 }
 
+/* Progress bar animation */
+.progress-bar {
+  width: 0;
+  transition: width 2s ease-in-out;
+}
