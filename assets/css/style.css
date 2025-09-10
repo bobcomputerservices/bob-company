@@ -1863,4 +1863,23 @@ section {
   padding-bottom: 60px;
 }
 
+/* Gradient Progress Bars */
+.progress-blue {
+  background: linear-gradient(90deg, #6ec1ff, #007bff);
+}
+.progress-green {
+  background: linear-gradient(90deg, #a8e063, #28a745);
+}
+.progress-orange {
+  background: linear-gradient(90deg, #fbd786, #f7797d);
+}
+.progress-red {
+  background: linear-gradient(90deg, #ff6a6a, #dc3545);
+}
+
+/* Progress bar animation */
+.progress-bar {
+  width: 0;
+  transition: width 2s ease-in-out;
+}
 
