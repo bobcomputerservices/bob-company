@@ -255,3 +255,24 @@
   });
 
 })()
+
+// Animate skills progress bars on scroll
+let skillsSection = document.querySelector('#skills');
+let progressBars = document.querySelectorAll('#skills .progress-bar');
+
+function animateSkills() {
+  if (!skillsSection) return;
+
+  let rect = skillsSection.getBoundingClientRect();
+  let inView = rect.top < window.innerHeight && rect.bottom >= 0;
+
+  if (inView) {
+    progressBars.forEach(bar => {
+      let target = bar.getAttribute('aria-valuenow');
+      bar.style.width = target + '%';
+    });
+    window.removeEventListener('scroll', animateSkills); // 只触发一次
+  }
+}
+
+window.addEventListener('scroll', animateSkills);
