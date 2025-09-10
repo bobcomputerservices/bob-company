@@ -256,23 +256,25 @@
 
 })()
 
-// Animate skills progress bars on scroll
-let skillsSection = document.querySelector('#skills');
-let progressBars = document.querySelectorAll('#skills .progress-bar');
+// Animate skills progress bars with Intersection Observer
+document.addEventListener("DOMContentLoaded", function() {
+  let skillsSection = document.querySelector('#skills');
+  let progressBars = document.querySelectorAll('#skills .progress-bar');
 
-function animateSkills() {
-  if (!skillsSection) return;
+  if (skillsSection) {
+    let observer = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          progressBars.forEach(bar => {
+            let target = bar.getAttribute('aria-valuenow');
+            bar.style.width = target + '%';
+          });
+          observer.unobserve(skillsSection); // 触发一次就停止观察
+        }
+      });
+    }, { threshold: 0.3 }); // 当 30% 的区块进入视窗时触发
 
-  let rect = skillsSection.getBoundingClientRect();
-  let inView = rect.top < window.innerHeight && rect.bottom >= 0;
-
-  if (inView) {
-    progressBars.forEach(bar => {
-      let target = bar.getAttribute('aria-valuenow');
-      bar.style.width = target + '%';
-    });
-    window.removeEventListener('scroll', animateSkills); // 只触发一次
+    observer.observe(skillsSection);
   }
-}
+});
 
-window.addEventListener('scroll', animateSkills);
