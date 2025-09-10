@@ -1846,6 +1846,17 @@ section {
   z-index: -1;
 }
 
+.about-text {
+  max-width: 800px;   /* 限制文字区块的宽度 */
+  margin: 40px auto;  /* 上下留空 40px，左右自动居中 */
+  text-align: justify; /* 文字两端对齐，更整齐专业 */
+}
+
+.about-text p {
+  font-size: 16px;    /* 字体大小 */
+  line-height: 1.7;   /* 行距，读起来更轻松 */
+  color: #333;        /* 字体颜色，深灰更柔和，比纯黑好看 */
+}
 
 
 
