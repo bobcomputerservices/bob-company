@@ -1822,7 +1822,8 @@ section {
   margin-left: 8px;
   vertical-align: middle;
 
-.hero-img img {
-  max-width: 50%;    
-  margin-top: 60px;  
+#hero .hero-img img {
+  max-width: 80% !important;   
+  margin-top: 40px !important; 
 }
+
