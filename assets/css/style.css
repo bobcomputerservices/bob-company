@@ -1847,7 +1847,7 @@ section {
 }
 
 .about-text {
-  max-width: 800px;   /* 限制文字区块的宽度 */
+  max-width: 400px;   /* 限制文字区块的宽度 */
   margin: 40px auto;  /* 上下留空 40px，左右自动居中 */
   text-align: justify; /* 文字两端对齐，更整齐专业 */
 }
