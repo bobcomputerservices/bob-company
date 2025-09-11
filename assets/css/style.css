@@ -1846,21 +1846,11 @@ section {
   z-index: -1;
 }
 
-.about-text {
-  max-width: 400px;   /* 限制文字区块的宽度 */
-  margin: 40px auto;  /* 上下留空 40px，左右自动居中 */
-  text-align: justify; /* 文字两端对齐，更整齐专业 */
-}
-
-.about-text p {
-  font-size: 16px;    /* 字体大小 */
-  line-height: 1.7;   /* 行距，读起来更轻松 */
-  color: #333;        /* 字体颜色，深灰更柔和，比纯黑好看 */
-}
-
-#about {
-  border-bottom: 1px solid #eee;
-  padding-bottom: 60px;
+.about .section-title p {
+  max-width: 700px;   /* 收窄文字宽度 */
+  margin: 0 auto;     /* 让它居中 */
+  font-size: 17px;    /* 可选：字体稍微放大一点 */
+  line-height: 1.6;   /* 可选：行距拉开一点 */
 }
 
 /* Gradient Progress Bars */
