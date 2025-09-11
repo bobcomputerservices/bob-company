@@ -1846,11 +1846,18 @@ section {
   z-index: -1;
 }
 
-.about .section-title p {
-  max-width: 700px;   /* 收窄文字宽度 */
-  margin: 0 auto;     /* 让它居中 */
-  font-size: 17px;    /* 可选：字体稍微放大一点 */
-  line-height: 1.6;   /* 可选：行距拉开一点 */
+#about .container {
+  max-width: 900px;   /* 限制 About Us 整体宽度 */
+  margin: 0 auto;     /* 居中容器 */
+}
+
+#about .content {
+  max-width: 700px;   /* 限制文字区块宽度 */
+  margin-left: auto;
+  margin-right: auto;
+  text-align: justify;   
+  font-size: 17px;    /* 字号稍微大一点 */
+  line-height: 1.6;   /* 舒服的行距 */
 }
 
 /* Gradient Progress Bars */
