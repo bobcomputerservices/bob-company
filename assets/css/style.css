@@ -1855,7 +1855,7 @@ section {
   max-width: 500px;   /* 限制文字区块宽度 */
   margin-left: auto;
   margin-right: auto;
-  text-align: center;   
+  text-align: center !important;   
   font-size: 17px;    /* 字号稍微大一点 */
   line-height: 1.6;   /* 舒服的行距 */
 }
