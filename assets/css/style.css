@@ -1852,7 +1852,7 @@ section {
 }
 
 #about .content {
-  max-width: 600px;   /* 限制文字区块宽度 */
+  max-width: 500px;   /* 限制文字区块宽度 */
   margin-left: auto;
   margin-right: auto;
   text-align: center;   
