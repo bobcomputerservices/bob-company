@@ -198,12 +198,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.addEventListener("scroll", checkScroll);
   }
-
-/**
- * Initiate Pure Counter 
- */
-new PureCounter();
-
+});
 
   /**
    * Porfolio isotope and filter
