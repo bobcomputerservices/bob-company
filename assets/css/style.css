@@ -1880,3 +1880,12 @@ section {
   transition: width 2s ease-in-out;
 }
 
+.skill-note {
+  font-size: 14px;
+  color: #6c757d; /* 淡灰色，比正文浅一点 */
+  font-style: italic; /* 注释用斜体，看起来像解释说明 */
+  margin-top: 6px;
+  text-align: left; /* 左对齐比较专业，也能对齐进度条 */
+  line-height: 1.4;
+}
+
