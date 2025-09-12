@@ -172,17 +172,27 @@
   });
 
   /**
-   * Skills animation
+   * Skills animation with fade-in
    */
 document.addEventListener("DOMContentLoaded", function() {
   let skillSection = document.querySelector(".skills-content");
   if (skillSection) {
     let progressBars = document.querySelectorAll(".progress-bar");
+    let progressContainers = document.querySelectorAll(".progress");
+    let progressNotes = document.querySelectorAll(".progress-note");
 
     function showProgress() {
       progressBars.forEach(bar => {
         let value = bar.getAttribute("aria-valuenow");
         bar.style.width = value + "%";
+      });
+
+      progressContainers.forEach(container => {
+        container.classList.add("visible");
+      });
+
+      progressNotes.forEach(note => {
+        note.classList.add("visible");
       });
     }
 
@@ -190,9 +200,9 @@ document.addEventListener("DOMContentLoaded", function() {
       let sectionPos = skillSection.getBoundingClientRect().top;
       let screenPos = window.innerHeight;
 
-      if (sectionPos < screenPos - 100) { // 当区块进入视口
+      if (sectionPos < screenPos - 100) {
         showProgress();
-        window.removeEventListener("scroll", checkScroll); // 只触发一次
+        window.removeEventListener("scroll", checkScroll);
       }
     }
 
