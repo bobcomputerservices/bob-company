@@ -1880,6 +1880,34 @@ section {
   transition: width 2s ease;
 }
 
+/* Progress bar fade-in effect */
+.progress {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-in-out;
+}
+
+.progress.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.progress-note {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.8s ease-in-out;
+  text-align: center; /* 让注释文字居中 */
+  font-size: 14px;
+  color: #555;
+  margin-top: 8px;
+}
+
+.progress-note.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 .skill-note {
   font-size: 14px;
   color: #6c757d; /* 淡灰色，比正文浅一点 */
