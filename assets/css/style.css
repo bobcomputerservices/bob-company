@@ -1926,3 +1926,10 @@ section {
   margin-bottom: 40px;  /* 每组和下一组之间的间距 */
 }
 
+.services .icon-box {
+  min-height: 280px;   /* 固定每个格子的最小高度 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
