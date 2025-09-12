@@ -174,19 +174,40 @@
   /**
    * Skills animation
    */
-  let skilsContent = select('.skills-content');
-  if (skilsContent) {
-    new Waypoint({
-      element: skilsContent,
-      offset: '80%',
-      handler: function(direction) {
-        let progress = select('.progress .progress-bar', true);
-        progress.forEach((el) => {
-          el.style.width = el.getAttribute('aria-valuenow') + '%'
-        });
+  /**
+ * Skills animation
+ */
+document.addEventListener("DOMContentLoaded", function() {
+  let skillSection = document.querySelector(".skills-content");
+  if (skillSection) {
+    let progressBars = document.querySelectorAll(".progress-bar");
+
+    function showProgress() {
+      progressBars.forEach(bar => {
+        let value = bar.getAttribute("aria-valuenow");
+        bar.style.width = value + "%";
+      });
+    }
+
+    function checkScroll() {
+      let sectionPos = skillSection.getBoundingClientRect().top;
+      let screenPos = window.innerHeight;
+
+      if (sectionPos < screenPos - 100) { // 当区块进入视口
+        showProgress();
+        window.removeEventListener("scroll", checkScroll); // 只触发一次
       }
-    })
+    }
+
+    window.addEventListener("scroll", checkScroll);
   }
+});
+
+/**
+ * Initiate Pure Counter 
+ */
+new PureCounter();
+
 
   /**
    * Porfolio isotope and filter
@@ -256,40 +277,6 @@
 
 })()
 
-// Animate skills progress bars with percentage count
-document.addEventListener("DOMContentLoaded", function() {
-  let skillsSection = document.querySelector('#skills');
-  let progressBars = document.querySelectorAll('#skills .progress-bar');
-  let percents = document.querySelectorAll('#skills .skill .val');
-
-  if (skillsSection) {
-    let observer = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          progressBars.forEach((bar, index) => {
-            let target = parseInt(bar.getAttribute('aria-valuenow'));
-            bar.style.width = target + '%';
-
-            // Animate the percentage number
-            let counter = 0;
-            let interval = setInterval(() => {
-              if (counter >= target) {
-                clearInterval(interval);
-              } else {
-                counter++;
-                percents[index].textContent = counter + '%';
-              }
-            }, 20); // 速度: 每 20ms +1，可以调节
-          });
-
-          observer.unobserve(skillsSection); // 只触发一次
-        }
-      });
-    }, { threshold: 0.3 });
-
-    observer.observe(skillsSection);
-  }
-});
 
 
 
