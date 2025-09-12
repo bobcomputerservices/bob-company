@@ -1927,7 +1927,7 @@ section {
 }
 
 .services .icon-box {
-  min-height: 310px;   /* 固定每个格子的最小高度 */
+  min-height: 320px;   /* 固定每个格子的最小高度 */
   display: flex;
   flex-direction: column;
   justify-content: center;
