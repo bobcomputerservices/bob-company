@@ -174,9 +174,6 @@
   /**
    * Skills animation
    */
-  /**
- * Skills animation
- */
 document.addEventListener("DOMContentLoaded", function() {
   let skillSection = document.querySelector(".skills-content");
   if (skillSection) {
@@ -201,7 +198,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.addEventListener("scroll", checkScroll);
   }
-});
 
 /**
  * Initiate Pure Counter 
