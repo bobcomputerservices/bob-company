@@ -1907,7 +1907,6 @@ section {
   transform: translateY(0);
 }
 
-
 .skill-note {
   font-size: 14px;
   color: #6c757d; /* 淡灰色，比正文浅一点 */
@@ -1915,5 +1914,15 @@ section {
   margin-top: 6px;
   text-align: left; /* 左对齐比较专业，也能对齐进度条 */
   line-height: 1.4;
+}
+
+/* Skills section progress bar spacing */
+#skills .progress {
+  margin-bottom: 10px; /* bar 和 note 之间的间距 */
+}
+
+#skills .progress-note {
+  margin-top: 8px;      /* note 和 bar 的间距 */
+  margin-bottom: 40px;  /* 每组和下一组之间的间距 */
 }
 
