@@ -346,14 +346,15 @@
 
 <!-- ======= Business Card Modal ======= -->
 <div class="modal fade" id="businessCardModal" tabindex="-1" aria-labelledby="businessCardModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body text-center">
-        <img src="assets/img/businesscard.jpg" alt="Business Card" class="img-fluid">
+  <div class="modal-dialog modal-fullscreen"> <!-- 改成全屏 -->
+    <div class="modal-content bg-dark"> <!-- 背景设深色，避免四边白边 -->
+      <div class="modal-body p-0"> <!-- 移除 padding -->
+        <img src="assets/img/businesscard.jpg" alt="Business Card" class="w-100 h-100" style="object-fit: contain;">
       </div>
     </div>
   </div>
 </div>
+
     </section><!-- End Cta Section -->
 
     <!-- ======= Portfolio Section ======= -->
