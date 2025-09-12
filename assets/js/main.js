@@ -172,7 +172,7 @@
   });
 
   /**
-   * Skills animation with fade-in
+   * Skills animation with staggered delay
    */
 document.addEventListener("DOMContentLoaded", function() {
   let skillSection = document.querySelector(".skills-content");
@@ -182,17 +182,13 @@ document.addEventListener("DOMContentLoaded", function() {
     let progressNotes = document.querySelectorAll(".progress-note");
 
     function showProgress() {
-      progressBars.forEach(bar => {
+      progressBars.forEach((bar, index) => {
         let value = bar.getAttribute("aria-valuenow");
-        bar.style.width = value + "%";
-      });
-
-      progressContainers.forEach(container => {
-        container.classList.add("visible");
-      });
-
-      progressNotes.forEach(note => {
-        note.classList.add("visible");
+        setTimeout(() => {
+          bar.style.width = value + "%";
+          progressContainers[index].classList.add("visible");
+          progressNotes[index].classList.add("visible");
+        }, index * 400); // 每个延迟 0.4 秒
       });
     }
 
