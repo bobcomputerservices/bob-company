@@ -574,7 +574,7 @@ section {
 
 .clients .col-lg-2 img {
   width: 100%;      /* 横向填满格子 */
-  height: auto;     /* 保持比例 */
+  height: 100%;     /* 保持比例 */
   object-fit: contain; /* 防止变形 */
 }
 
