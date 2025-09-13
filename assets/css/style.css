@@ -566,16 +566,10 @@ section {
 }
 
 .cliens img {
-  max-width: 45%;
-  transition: all 0.4s ease-in-out;
-  display: inline-block;
-  padding: 15px 0;
-  filter: grayscale(100);
-}
-
-.cliens img:hover {
+  max-width: 100%;
+  height: auto
+  transition: none;
   filter: none;
-  transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
