@@ -566,16 +566,10 @@ section {
 }
 
 .cliens img {
-  max-width: 70%;
+  max-width: 75%;
   height: auto
   transition: none;
   filter: none;
-}
-
-.clients .col-lg-2 img {
-  width: 100%;      /* 横向填满格子 */
-  height: 100%;     /* 保持比例 */
-  object-fit: contain; /* 防止变形 */
 }
 
 @media (max-width: 768px) {
