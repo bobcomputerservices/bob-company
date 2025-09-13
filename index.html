@@ -346,10 +346,16 @@
 
 <!-- ======= Business Card Modal ======= -->
 <div class="modal fade" id="businessCardModal" tabindex="-1" aria-labelledby="businessCardModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen"> <!-- 改成全屏 -->
-    <div class="modal-content bg-dark"> <!-- 背景设深色，避免四边白边 -->
-      <div class="modal-body p-0"> <!-- 移除 padding -->
-        <img src="assets/img/businesscard.jpg" alt="Business Card" class="w-100 h-100" style="object-fit: contain;">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 900px;"> <!-- 控制宽度 -->
+    <div class="modal-content">
+      <!-- Close button -->
+      <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close"></button>
+      
+      <div class="modal-body p-0" style="aspect-ratio:16/9;"> <!-- 固定 16:9 比例 -->
+        <img src="assets/img/businesscard.jpg" 
+             alt="Business Card" 
+             class="w-100 h-100" 
+             style="object-fit: cover;">
       </div>
     </div>
   </div>
