@@ -217,6 +217,14 @@ window.addEventListener('load', () => {
       filter: '.filter-autocount' // 默认只显示 AutoCount & Customized Plugins
     });
 
+    // ✅ 初始化时强制刷新一次
+    portfolioIsotope.arrange({
+      filter: '.filter-autocount'
+    });
+    portfolioIsotope.on('arrangeComplete', function() {
+      AOS.refresh()
+    });
+
     let portfolioFilters = select('#portfolio-flters li', true);
 
     on('click', '#portfolio-flters li', function(e) {
@@ -235,6 +243,7 @@ window.addEventListener('load', () => {
     }, true);
   }
 });
+
 
 
   /**
