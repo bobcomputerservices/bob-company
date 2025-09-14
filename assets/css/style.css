@@ -1951,4 +1951,28 @@ section {
   background: none;      /* 绝对不显示背景 */
 }
 
+/* Carousel indicators container 背景条 */
+.carousel-indicators {
+  bottom: 10px;                  /* 调整到图片底部上方一点 */
+  background: rgba(0, 0, 0, 0.4);/* 半透明黑底 */
+  padding: 6px 12px;             /* 内边距，让圆点不紧贴边 */
+  border-radius: 20px;           /* 圆角条 */
+  display: inline-flex;          /* 让圆点横向居中 */
+}
+
+/* 圆点本身 */
+.carousel-indicators [data-bs-target] {
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  margin: 0 4px; /* 圆点间距 */
+}
+
+/* 当前选中的圆点 */
+.carousel-indicators .active {
+  background-color: #000;
+}
+
 
