@@ -214,14 +214,13 @@ window.addEventListener('load', () => {
   if (portfolioContainer) {
     let portfolioIsotope = new Isotope(portfolioContainer, {
       itemSelector: '.portfolio-item',
-      filter: '.filter-autocount' // 默认只显示 AutoCount
+      filter: '.filter-autocount' // 默认显示 AutoCount & Customized Plugins
     });
 
-    // ✅ 等待图片加载完成后，再触发 Isotope
+    // 初始化时，确保图片加载完成再布局
     imagesLoaded(portfolioContainer, function() {
-      portfolioIsotope.arrange({
-        filter: '.filter-autocount'
-      });
+      portfolioIsotope.arrange({ filter: '.filter-autocount' });
+      portfolioIsotope.layout();
       AOS.refresh();
     });
 
@@ -234,24 +233,39 @@ window.addEventListener('load', () => {
       });
       this.classList.add('filter-active');
 
-      portfolioIsotope.arrange({
-        filter: this.getAttribute('data-filter')
-      });
+      const filterValue = this.getAttribute('data-filter');
+      portfolioIsotope.arrange({ filter: filterValue });
 
+      // ⭐ 关键：延迟执行 -> 重置 carousel & 等图片加载再强制 layout
       setTimeout(() => {
-        portfolioIsotope.layout();
-        AOS.refresh();
-      }, 300);
-      
-      // ✅ 切换 tab 时，也等图片加载完再 refresh
-      imagesLoaded(portfolioContainer, function() {
-        portfolioIsotope.layout();
-        AOS.refresh();
-      });
+        // 1. 重置可见的 carousel 到第一张，避免横图导致高度塌陷
+        const visibleCarousels = portfolioContainer.querySelectorAll(
+          '.portfolio-item:not(.isotope-hidden) .carousel'
+        );
+        visibleCarousels.forEach(c => {
+          let instance = bootstrap.Carousel.getInstance(c);
+          if (!instance) {
+            instance = new bootstrap.Carousel(c, { interval: 3000, pause: 'hover' });
+          }
+          try {
+            instance.to(0);
+          } catch (err) {
+            console.warn('Carousel reset failed:', err);
+          }
+        });
+
+        // 2. 等可见图片加载完，再强制 layout
+        imagesLoaded(portfolioContainer, { background: true }, function() {
+          portfolioIsotope.layout();
+          setTimeout(() => {
+            portfolioIsotope.layout();
+            AOS.refresh();
+          }, 150);
+        });
+      }, 200); // 延迟 200ms 可视情况调大/调小
     }, true);
   }
 });
-
 
   /**
    * Initiate portfolio lightbox 
