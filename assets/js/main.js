@@ -214,15 +214,15 @@ window.addEventListener('load', () => {
   if (portfolioContainer) {
     let portfolioIsotope = new Isotope(portfolioContainer, {
       itemSelector: '.portfolio-item',
-      filter: '.filter-autocount' // 默认只显示 AutoCount & Customized Plugins
+      filter: '.filter-autocount' // 默认只显示 AutoCount
     });
 
-    // ✅ 初始化时强制刷新一次
-    portfolioIsotope.arrange({
-      filter: '.filter-autocount'
-    });
-    portfolioIsotope.on('arrangeComplete', function() {
-      AOS.refresh()
+    // ✅ 等待图片加载完成后，再触发 Isotope
+    imagesLoaded(portfolioContainer, function() {
+      portfolioIsotope.arrange({
+        filter: '.filter-autocount'
+      });
+      AOS.refresh();
     });
 
     let portfolioFilters = select('#portfolio-flters li', true);
@@ -237,13 +237,15 @@ window.addEventListener('load', () => {
       portfolioIsotope.arrange({
         filter: this.getAttribute('data-filter')
       });
-      portfolioIsotope.on('arrangeComplete', function() {
-        AOS.refresh()
+
+      // ✅ 切换 tab 时，也等图片加载完再 refresh
+      imagesLoaded(portfolioContainer, function() {
+        portfolioIsotope.layout();
+        AOS.refresh();
       });
     }, true);
   }
 });
-
 
 
   /**
