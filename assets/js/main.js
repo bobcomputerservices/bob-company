@@ -210,55 +210,47 @@ document.addEventListener("DOMContentLoaded", function() {
  * Portfolio isotope and filter
  */
 window.addEventListener('load', () => {
-let portfolioContainer = select('.portfolio-container');
-if (portfolioContainer) {
-  let portfolioIsotope = new Isotope(portfolioContainer, {
-    itemSelector: '.portfolio-item',
-    filter: '.filter-autocount'
-  });
+  let portfolioContainer = select('.portfolio-container');
+  if (portfolioContainer) {
+    let portfolioIsotope = new Isotope(portfolioContainer, {
+      itemSelector: '.portfolio-item',
+      filter: '.filter-autocount' // 默认只显示 AutoCount
+    });
 
-  // 等图片加载完成后再首次 arrange（稳妥）
-  imagesLoaded(portfolioContainer, function() {
-    portfolioIsotope.arrange({ filter: '.filter-autocount' });
-    portfolioIsotope.layout();
-    AOS.refresh();
-  });
+    // ✅ 等待图片加载完成后，再触发 Isotope
+    imagesLoaded(portfolioContainer, function() {
+      portfolioIsotope.arrange({
+        filter: '.filter-autocount'
+      });
+      AOS.refresh();
+    });
 
-  let portfolioFilters = select('#portfolio-flters li', true);
+    let portfolioFilters = select('#portfolio-flters li', true);
 
-  on('click', '#portfolio-flters li', function(e) {
-    e.preventDefault();
-    portfolioFilters.forEach(function(el) { el.classList.remove('filter-active'); });
-    this.classList.add('filter-active');
+    on('click', '#portfolio-flters li', function(e) {
+      e.preventDefault();
+      portfolioFilters.forEach(function(el) {
+        el.classList.remove('filter-active');
+      });
+      this.classList.add('filter-active');
 
-    const filterValue = this.getAttribute('data-filter');
-
-    // 先 arrange（Isotope 会隐藏/显示项目）
-    portfolioIsotope.arrange({ filter: filterValue });
-
-    // *** 关键：稍后两步（重置可见 carousel 到第一张 + 等图片加载再 layout） ***
-    setTimeout(() => {
-      // 1) 把当前可见的 carousel 重置到 slide 0（避免某些 carousel 顶部不是 portrait 导致高度变化）
-      const visibleCarousels = portfolioContainer.querySelectorAll('.portfolio-item:not(.isotope-hidden) .carousel');
-      visibleCarousels.forEach(c => {
-        // 获取或创建 bootstrap Carousel instance
-        let instance = bootstrap.Carousel.getInstance(c);
-        if (!instance) instance = new bootstrap.Carousel(c, { interval: 3000, pause: 'hover' });
-        try { instance.to(0); } catch (err) { /* ignore */ }
+      portfolioIsotope.arrange({
+        filter: this.getAttribute('data-filter')
       });
 
-      // 2) 等这些可见项目的图片都加载完再强制 layout
-      imagesLoaded(portfolioContainer, { background: true }, function() {
-        // layout twice 以确保浏览器计算稳定
+      setTimeout(() => {
         portfolioIsotope.layout();
-        setTimeout(() => {
-          portfolioIsotope.layout();
-          AOS.refresh();
-        }, 150);
+        AOS.refresh();
+      }, 300);
+      
+      // ✅ 切换 tab 时，也等图片加载完再 refresh
+      imagesLoaded(portfolioContainer, function() {
+        portfolioIsotope.layout();
+        AOS.refresh();
       });
-    }, 120); // 延迟 120ms，你可以试 100~300 ms，视部署速度微调
-  }, true);
-}
+    }, true);
+  }
+});
 
 
   /**
