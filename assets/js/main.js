@@ -238,6 +238,11 @@ window.addEventListener('load', () => {
         filter: this.getAttribute('data-filter')
       });
 
+      setTimeout(() => {
+        portfolioIsotope.layout();
+        AOS.refresh();
+      }, 300);
+      
       // ✅ 切换 tab 时，也等图片加载完再 refresh
       imagesLoaded(portfolioContainer, function() {
         portfolioIsotope.layout();
