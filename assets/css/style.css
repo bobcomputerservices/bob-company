@@ -1967,11 +1967,13 @@ section {
 }
 
 #header {
-  transition: transform 0.5s ease, opacity 0.5s ease;
+  transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.3s ease;
+  opacity: 1; /* 初始完全不透明 */
 }
 
 #header.hidden {
   transform: translateY(-100%); /* 向上滑走 */
-  opacity: 0;
+  opacity: 0.8; /* 渐变到半透明 */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 阴影效果 */
 }
 
