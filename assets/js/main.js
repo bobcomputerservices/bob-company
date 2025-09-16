@@ -305,6 +305,23 @@ window.addEventListener('load', () => {
 
 })()
 
+document.addEventListener("scroll", function () {
+  const navbar = document.querySelector("#navbar");
+  const portfolio = document.querySelector("#portfolio");
+
+  if (!navbar || !portfolio) return;
+
+  const portfolioRect = portfolio.getBoundingClientRect();
+
+  // 判断是否有任何部分进入视口
+  const inViewport = portfolioRect.top < window.innerHeight && portfolioRect.bottom > 0;
+
+  if (inViewport) {
+    navbar.classList.add("hidden"); // 隐藏
+  } else {
+    navbar.classList.remove("hidden"); // 显示
+  }
+});
 
 
 
