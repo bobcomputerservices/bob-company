@@ -302,7 +302,7 @@ window.addEventListener('load', () => {
       mirror: false
     });
   });
-
+})()
   
 document.addEventListener("scroll", function () {
   const navbar = document.querySelector("#navbar");
