@@ -1966,4 +1966,12 @@ section {
   background-color: #000;
 }
 
+#navbar {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+#navbar.hidden {
+  transform: translateY(-100%); /* 向上滑走 */
+  opacity: 0;
+}
 
