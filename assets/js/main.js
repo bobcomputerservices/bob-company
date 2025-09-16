@@ -302,8 +302,8 @@ window.addEventListener('load', () => {
       mirror: false
     });
   });
-})()
-  
+
+// ⭐ Portfolio 部分进入视口时隐藏 navbar  
 document.addEventListener("scroll", function () {
   const navbar = document.querySelector("#navbar");
   const portfolio = document.querySelector("#portfolio");
