@@ -171,40 +171,53 @@
     selector: '.glightbox'
   });
 
-  /**
-   * Skills animation with staggered delay
-   */
-document.addEventListener("DOMContentLoaded", function() {
-  let skillSection = document.querySelector(".skills-content");
-  if (skillSection) {
-    let progressBars = document.querySelectorAll(".progress-bar");
-    let progressContainers = document.querySelectorAll(".progress");
-    let progressNotes = document.querySelectorAll(".progress-note");
+  
+  /* ======= Skills animation (staggered, auto-trigger on scroll, safe) ======= */
+(function() {
+  // wait until DOM parsed
+  document.addEventListener('DOMContentLoaded', function() {
+    const skillSection = document.querySelector('.skills-content');
+    if (!skillSection) return; // 没有 skills section 就退出
 
-progressBars.forEach((bar, index) => {
-  let value = bar.getAttribute("aria-valuenow");
-  setTimeout(() => {
-    bar.style.width = value + "%";
-    progressContainers[index].classList.add("visible");
-    if (progressNotes[index]) {
-      progressNotes[index].classList.add("visible");
+    const progressBars = skillSection.querySelectorAll('.progress-bar');
+    const progressContainers = skillSection.querySelectorAll('.progress');
+    const progressNotes = skillSection.querySelectorAll('.progress-note');
+
+    let animated = false; // 只动画一次
+
+    function showProgress() {
+      if (animated) return;
+      animated = true;
+
+      progressBars.forEach((bar, index) => {
+        const value = bar.getAttribute('aria-valuenow') || bar.dataset.value || 0;
+        setTimeout(() => {
+          if (bar) bar.style.width = value + '%';
+          if (progressContainers[index]) progressContainers[index].classList.add('visible');
+          if (progressNotes[index]) progressNotes[index].classList.add('visible');
+        }, index * 400);
+      });
     }
-  }, index * 400); // 每个延迟 0.4 秒
-});
 
     function checkScroll() {
-      let sectionPos = skillSection.getBoundingClientRect().top;
-      let screenPos = window.innerHeight;
+      const rect = skillSection.getBoundingClientRect();
+      const screenHeight = window.innerHeight || document.documentElement.clientHeight;
 
-      if (sectionPos < screenPos - 100) {
+      // 当区块有任何部分进入视口时触发
+      if (rect.top < screenHeight - 100) {
         showProgress();
-        window.removeEventListener("scroll", checkScroll);
+        window.removeEventListener('scroll', checkScroll);
+        window.removeEventListener('resize', checkScroll);
       }
     }
 
-    window.addEventListener("scroll", checkScroll);
-  }
-});
+    // 绑定监听器并立即检查一次（以防页面初始就处于可见位置）
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    window.addEventListener('resize', checkScroll);
+    checkScroll();
+  });
+})();
+
 
 /**
  * Portfolio isotope and filter
