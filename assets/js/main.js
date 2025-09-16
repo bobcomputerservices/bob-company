@@ -187,7 +187,9 @@ document.addEventListener("DOMContentLoaded", function() {
         setTimeout(() => {
           bar.style.width = value + "%";
           progressContainers[index].classList.add("visible");
-          progressNotes[index].classList.add("visible");
+          if (progressNotes[index]) {
+            progressNotes[index].classList.add("visible");
+          }
         }, index * 400); // 每个延迟 0.4 秒
       });
     }
