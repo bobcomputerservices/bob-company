@@ -181,18 +181,16 @@ document.addEventListener("DOMContentLoaded", function() {
     let progressContainers = document.querySelectorAll(".progress");
     let progressNotes = document.querySelectorAll(".progress-note");
 
-    function showProgress() {
-      progressBars.forEach((bar, index) => {
-        let value = bar.getAttribute("aria-valuenow");
-        setTimeout(() => {
-          bar.style.width = value + "%";
-          progressContainers[index].classList.add("visible");
-          if (progressNotes[index]) {
-            progressNotes[index].classList.add("visible");
-          }
-        }, index * 400); // 每个延迟 0.4 秒
-      });
+progressBars.forEach((bar, index) => {
+  let value = bar.getAttribute("aria-valuenow");
+  setTimeout(() => {
+    bar.style.width = value + "%";
+    progressContainers[index].classList.add("visible");
+    if (progressNotes[index]) {
+      progressNotes[index].classList.add("visible");
     }
+  }, index * 400); // 每个延迟 0.4 秒
+});
 
     function checkScroll() {
       let sectionPos = skillSection.getBoundingClientRect().top;
