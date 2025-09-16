@@ -316,24 +316,34 @@ window.addEventListener('load', () => {
     });
   });
 
-// ⭐ Portfolio 部分进入视口时隐藏 navbar  
-document.addEventListener("scroll", function () {
-  const navbar = document.querySelector("#navbar");
-  const portfolio = document.querySelector("#portfolio");
+  
+/**
+ * Smart Sticky Header
+ * Hide on scroll down, show on scroll up
+ */
+document.addEventListener("DOMContentLoaded", function () {
+  const header = document.querySelector("#header");
+  if (!header) return;
 
-  if (!navbar || !portfolio) return;
+  let lastScrollY = window.scrollY;
 
-  const portfolioRect = portfolio.getBoundingClientRect();
-
-  // 判断是否有任何部分进入视口
-  const inViewport = portfolioRect.top < window.innerHeight && portfolioRect.bottom > 0;
-
-  if (inViewport) {
-    navbar.classList.add("hidden"); // 隐藏
-  } else {
-    navbar.classList.remove("hidden"); // 显示
+  function smartStickyHeader() {
+    if (window.scrollY === 0) {
+      // 页面在最顶端 -> 永远显示
+      header.classList.remove("hidden");
+    } else if (window.scrollY > lastScrollY) {
+      // 向下滚动 -> 隐藏
+      header.classList.add("hidden");
+    } else {
+      // 向上滚动 -> 显示
+      header.classList.remove("hidden");
+    }
+    lastScrollY = window.scrollY;
   }
+
+  window.addEventListener("scroll", smartStickyHeader);
 });
+
 
 })(); 
 
