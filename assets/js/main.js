@@ -303,8 +303,7 @@ window.addEventListener('load', () => {
     });
   });
 
-})()
-
+  
 document.addEventListener("scroll", function () {
   const navbar = document.querySelector("#navbar");
   const portfolio = document.querySelector("#portfolio");
