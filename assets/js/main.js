@@ -280,6 +280,28 @@ window.addEventListener('load', () => {
   }
 });
 
+    // * Navigation menu - Portfolio dropdown menu
+    document.querySelectorAll('#navbar .dropdown a[data-filter]').forEach(link => {
+      link.addEventListener('click', function(e) {
+      e.preventDefault();
+
+    let filterValue = this.getAttribute('data-filter');
+
+    // Isotope 过滤
+    portfolioIsotope.arrange({ filter: filterValue });
+
+    // Tabs highlight 同步
+    const filterItems = document.querySelectorAll('#portfolio-flters li');
+    filterItems.forEach(el => el.classList.remove('filter-active'));
+
+    const targetItem = document.querySelector(`#portfolio-flters li[data-filter="${filterValue}"]`);
+    if (targetItem) targetItem.classList.add('filter-active');
+
+    // 平滑滚动
+    document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
   /**
    * Initiate portfolio lightbox 
    */
@@ -343,32 +365,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addEventListener("scroll", smartStickyHeader);
 });
-
-/**
- * Navigation menu - Portfolio dropdown menu
- * 点击 dropdown item 时，自动触发 Isotope filter：
- */
-document.querySelectorAll('#navbar .dropdown a[data-filter]').forEach(link => {
-  link.addEventListener('click', function(e) {
-    e.preventDefault();
-
-    let filterValue = this.getAttribute('data-filter');
-
-    // Isotope 过滤
-    portfolioIsotope.arrange({ filter: filterValue });
-
-    // Tabs highlight 同步
-    const filterItems = document.querySelectorAll('#portfolio-flters li');
-    filterItems.forEach(el => el.classList.remove('filter-active'));
-
-    const targetItem = document.querySelector(`#portfolio-flters li[data-filter="${filterValue}"]`);
-    if (targetItem) targetItem.classList.add('filter-active');
-
-    // 平滑滚动
-    document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
-  });
-});
-
 
 
 
