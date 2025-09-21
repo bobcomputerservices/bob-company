@@ -344,6 +344,34 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("scroll", smartStickyHeader);
 });
 
+/**
+ * Navigation menu - Portfolio dropdown menu
+ * 点击 dropdown item 时，自动触发 Isotope filter：
+ */
+document.addEventListener("DOMContentLoaded", function () {
+  const portfolioFilters = document.querySelectorAll('#navbar .dropdown a[data-filter]');
+  const iso = new Isotope('.portfolio-container', {
+    itemSelector: '.portfolio-item'
+  });
+
+  portfolioFilters.forEach(link => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      let filterValue = this.getAttribute("data-filter");
+
+      // 切换 Isotope
+      iso.arrange({ filter: filterValue });
+
+      // 切换 active class
+      document.querySelectorAll('.portfolio-flters li').forEach(el => el.classList.remove('filter-active'));
+      document.querySelector(`.portfolio-flters li[data-filter="${filterValue}"]`)?.classList.add('filter-active');
+
+      // 平滑滚动到 Portfolio section
+      document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+});
+
 
 })(); 
 
