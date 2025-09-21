@@ -277,31 +277,31 @@ window.addEventListener('load', () => {
         });
       }, 200); // 延迟 200ms 可视情况调大/调小
     }, true);
-  }
-});
 
-    // * Navigation menu - Portfolio dropdown menu
-    document.querySelectorAll('#navbar .dropdown a[data-filter]').forEach(link => {
-      link.addEventListener('click', function(e) {
-      e.preventDefault();
+        // * Navigation menu - Portfolio dropdown menu
+        document.querySelectorAll('#navbar .dropdown a[data-filter]').forEach(link => {
+          link.addEventListener('click', function(e) {
+          e.preventDefault();
 
-    let filterValue = this.getAttribute('data-filter');
+        let filterValue = this.getAttribute('data-filter');
 
-    // Isotope 过滤
-    portfolioIsotope.arrange({ filter: filterValue });
+        // Isotope 过滤
+        portfolioIsotope.arrange({ filter: filterValue });
 
-    // Tabs highlight 同步
-    const filterItems = document.querySelectorAll('#portfolio-flters li');
-    filterItems.forEach(el => el.classList.remove('filter-active'));
+        // Tabs highlight 同步
+        const filterItems = document.querySelectorAll('#portfolio-flters li');
+        filterItems.forEach(el => el.classList.remove('filter-active'));
 
-    const targetItem = document.querySelector(`#portfolio-flters li[data-filter="${filterValue}"]`);
-    if (targetItem) targetItem.classList.add('filter-active');
+        const targetItem = document.querySelector(`#portfolio-flters li[data-filter="${filterValue}"]`);
+        if (targetItem) targetItem.classList.add('filter-active');
 
-    // 平滑滚动
-    document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
+        // 平滑滚动
+        document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
+      });
+      });
+    }
   });
-});
-
+  
   /**
    * Initiate portfolio lightbox 
    */
