@@ -348,30 +348,27 @@ document.addEventListener("DOMContentLoaded", function () {
  * Navigation menu - Portfolio dropdown menu
  * 点击 dropdown item 时，自动触发 Isotope filter：
  */
-document.querySelectorAll('.dropdown a[data-filter]').forEach(link => {
+document.querySelectorAll('#navbar .dropdown a[data-filter]').forEach(link => {
   link.addEventListener('click', function(e) {
     e.preventDefault();
 
     let filterValue = this.getAttribute('data-filter');
 
-    // 触发 isotope 过滤
-    portfolioIsotope.arrange({
-      filter: filterValue
-    });
+    // Isotope 过滤
+    portfolioIsotope.arrange({ filter: filterValue });
 
-    // 切换 active class
+    // Tabs highlight 同步
     const filterItems = document.querySelectorAll('#portfolio-flters li');
     filterItems.forEach(el => el.classList.remove('filter-active'));
 
     const targetItem = document.querySelector(`#portfolio-flters li[data-filter="${filterValue}"]`);
-    if (targetItem) {
-      targetItem.classList.add('filter-active');
-    }
+    if (targetItem) targetItem.classList.add('filter-active');
 
-    // 滚动到 Portfolio section
+    // 平滑滚动
     document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
   });
 });
+
 
 
 
