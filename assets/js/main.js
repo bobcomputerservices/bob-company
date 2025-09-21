@@ -348,29 +348,31 @@ document.addEventListener("DOMContentLoaded", function () {
  * Navigation menu - Portfolio dropdown menu
  * 点击 dropdown item 时，自动触发 Isotope filter：
  */
-document.addEventListener("DOMContentLoaded", function () {
-  const portfolioFilters = document.querySelectorAll('#navbar .dropdown a[data-filter]');
-  const iso = new Isotope('.portfolio-container', {
-    itemSelector: '.portfolio-item'
-  });
+document.querySelectorAll('.dropdown a[data-filter]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
 
-  portfolioFilters.forEach(link => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      let filterValue = this.getAttribute("data-filter");
+    let filterValue = this.getAttribute('data-filter');
 
-      // 切换 Isotope
-      iso.arrange({ filter: filterValue });
-
-      // 切换 active class
-      document.querySelectorAll('.portfolio-flters li').forEach(el => el.classList.remove('filter-active'));
-      document.querySelector(`.portfolio-flters li[data-filter="${filterValue}"]`)?.classList.add('filter-active');
-
-      // 平滑滚动到 Portfolio section
-      document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
+    // 触发 isotope 过滤
+    portfolioIsotope.arrange({
+      filter: filterValue
     });
+
+    // 切换 active class
+    const filterItems = document.querySelectorAll('#portfolio-flters li');
+    filterItems.forEach(el => el.classList.remove('filter-active'));
+
+    const targetItem = document.querySelector(`#portfolio-flters li[data-filter="${filterValue}"]`);
+    if (targetItem) {
+      targetItem.classList.add('filter-active');
+    }
+
+    // 滚动到 Portfolio section
+    document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
   });
 });
+
 
 
 })(); 
