@@ -449,8 +449,3 @@ window.addEventListener("load", () => {
 });
 
 
-
- 
-
-})(); 
-
