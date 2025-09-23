@@ -390,82 +390,77 @@ window.addEventListener('load', () => {
   });
 
 /**
- * Final Smart Sticky Header + Hash Scroll Fix + Portfolio Tab Handler
+ * Robust Smart Sticky Header — show immediately on entry, enable sticky after load
  */
-document.addEventListener("DOMContentLoaded", function () {
+(function() {
   const header = document.querySelector("#header");
   if (!header) return;
 
+  // 是否已启用 smart sticky（避免重复绑定）
+  let smartEnabled = false;
   let lastScrollY = window.scrollY;
 
-  // ✅ 初始强制显示 header（避免从子页面回来时隐藏）
-  header.classList.remove("hidden");
-
-  function smartStickyHeader() {
-    if (window.scrollY === 0) {
-      header.classList.remove("hidden"); // 顶端永远显示
-    } else if (window.scrollY > lastScrollY) {
-      header.classList.add("hidden");    // 向下滚 -> 隐藏
+  // 核心滚动处理函数（向下隐藏，向上显示）
+  function smartStickyHandler() {
+    const curr = window.scrollY;
+    if (curr === 0) {
+      header.classList.remove("hidden");
+    } else if (curr > lastScrollY) {
+      header.classList.add("hidden");
     } else {
-      header.classList.remove("hidden"); // 向上滚 -> 显示
+      header.classList.remove("hidden");
     }
+    lastScrollY = curr;
+  }
+
+  // 启用 smart sticky（会绑定 scroll 事件），确保只绑定一次
+  function enableSmartStickyOnce(delay = 120) {
+    if (smartEnabled) return;
+    // 在短延迟后启用，确保页面初始跳转/布局稳定
+    setTimeout(() => {
+      // 初始化 lastScrollY 为当前值，避免立刻误判
+      lastScrollY = window.scrollY;
+      window.addEventListener("scroll", smartStickyHandler, { passive: true });
+      smartEnabled = true;
+    }, delay);
+  }
+
+  // 立即强制显示 header，并短暂移除 transition（避免突兀动画）
+  function showHeaderImmediately() {
+    header.classList.remove("hidden");
+
+    // 保留当前 inline transition 值
+    const prevTransition = header.style.transition || "";
+    header.style.transition = "none";
+
+    // restore transition on next frame (double rAF for safety)
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        header.style.transition = prevTransition;
+      });
+    });
+  }
+
+  // 当页面进入（从子页跳回 / 刷新 / 后退缓存）时的处理：
+  function handleEntry() {
+    showHeaderImmediately();
+    // 重设 lastScrollY，避免 smart 判断错误
     lastScrollY = window.scrollY;
+    // 启用 smart sticky（延迟，确保布局稳定）
+    enableSmartStickyOnce(150);
   }
 
-  // ✅ 页面 load 完后才启用 smart sticky
-  window.addEventListener("load", () => {
-    window.addEventListener("scroll", smartStickyHeader);
-  });
+  // 绑定各种入口事件（load/pageshow/hashchange/focus）
+  window.addEventListener("load", handleEntry);
+  window.addEventListener("pageshow", handleEntry);
+  window.addEventListener("hashchange", handleEntry);
+  window.addEventListener("focus", handleEntry);
 
-  // ✅ 自动设置 scroll-padding-top (避免 anchor 被 header 遮挡)
-  const offset = header.offsetHeight;
-  document.documentElement.style.scrollPaddingTop = offset + "px";
-
-  // ✅ 单独为 #contact 增加 scroll-margin-top（更精细）
-  const contactEl = document.querySelector("#contact");
-  if (contactEl) {
-    contactEl.style.scrollMarginTop = (offset + 20) + "px";
+  // 如果页面本身已经处于可操作状态（脚本在 load 后注入），则也立即调用一次
+  if (document.readyState === "complete") {
+    handleEntry();
   }
+})();
 
-  // ✅ 页面加载后，处理 hash 定位
-  window.addEventListener("load", () => {
-    if (window.location.hash) {
-      const id = window.location.hash.split("?")[0];
-      const target = document.querySelector(id);
-      if (target) {
-        setTimeout(() => {
-          const top = target.getBoundingClientRect().top + window.scrollY;
-          window.scrollTo({
-            top: Math.max(0, top - offset - 10),
-            behavior: "smooth"
-          });
-        }, 300);
-      }
-    }
-  });
-
-  // ✅ Portfolio Tab 根据 ?tab= 参数激活
-  window.addEventListener("load", () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const tab = urlParams.get("tab");
-
-    if (tab) {
-      const filterBtn = document.querySelector(
-        `.portfolio-flters li[data-filter=".filter-${tab}"]`
-      );
-      if (filterBtn) {
-        document
-          .querySelectorAll(".portfolio-flters li")
-          .forEach((el) => el.classList.remove("filter-active"));
-        filterBtn.classList.add("filter-active");
-
-        // 触发 Isotope 过滤（如果你在用 Isotope）
-        if (typeof iso !== "undefined") {
-          iso.arrange({ filter: `.filter-${tab}` });
-        }
-      }
-    }
-  });
-});
 
 })(); // 结束 IIFE
