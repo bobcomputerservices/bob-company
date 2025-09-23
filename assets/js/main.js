@@ -127,6 +127,7 @@
 
   /**
    * Scrool with ofset on links with a class name .scrollto
+   * (this is for same-page anchors)
    */
   on('click', '.scrollto', function(e) {
     if (select(this.hash)) {
@@ -173,50 +174,50 @@
 
   
   /* ======= Skills animation (staggered, auto-trigger on scroll, safe) ======= */
-(function() {
-  // wait until DOM parsed
-  document.addEventListener('DOMContentLoaded', function() {
-    const skillSection = document.querySelector('.skills-content');
-    if (!skillSection) return; // 没有 skills section 就退出
+  (function() {
+    // wait until DOM parsed
+    document.addEventListener('DOMContentLoaded', function() {
+      const skillSection = document.querySelector('.skills-content');
+      if (!skillSection) return; // 没有 skills section 就退出
 
-    const progressBars = skillSection.querySelectorAll('.progress-bar');
-    const progressContainers = skillSection.querySelectorAll('.progress');
-    const progressNotes = skillSection.querySelectorAll('.progress-note');
+      const progressBars = skillSection.querySelectorAll('.progress-bar');
+      const progressContainers = skillSection.querySelectorAll('.progress');
+      const progressNotes = skillSection.querySelectorAll('.progress-note');
 
-    let animated = false; // 只动画一次
+      let animated = false; // 只动画一次
 
-    function showProgress() {
-      if (animated) return;
-      animated = true;
+      function showProgress() {
+        if (animated) return;
+        animated = true;
 
-      progressBars.forEach((bar, index) => {
-        const value = bar.getAttribute('aria-valuenow') || bar.dataset.value || 0;
-        setTimeout(() => {
-          if (bar) bar.style.width = value + '%';
-          if (progressContainers[index]) progressContainers[index].classList.add('visible');
-          if (progressNotes[index]) progressNotes[index].classList.add('visible');
-        }, index * 400);
-      });
-    }
-
-    function checkScroll() {
-      const rect = skillSection.getBoundingClientRect();
-      const screenHeight = window.innerHeight || document.documentElement.clientHeight;
-
-      // 当区块有任何部分进入视口时触发
-      if (rect.top < screenHeight - 100) {
-        showProgress();
-        window.removeEventListener('scroll', checkScroll);
-        window.removeEventListener('resize', checkScroll);
+        progressBars.forEach((bar, index) => {
+          const value = bar.getAttribute('aria-valuenow') || bar.dataset.value || 0;
+          setTimeout(() => {
+            if (bar) bar.style.width = value + '%';
+            if (progressContainers[index]) progressContainers[index].classList.add('visible');
+            if (progressNotes[index]) progressNotes[index].classList.add('visible');
+          }, index * 400);
+        });
       }
-    }
 
-    // 绑定监听器并立即检查一次（以防页面初始就处于可见位置）
-    window.addEventListener('scroll', checkScroll, { passive: true });
-    window.addEventListener('resize', checkScroll);
-    checkScroll();
-  });
-})();
+      function checkScroll() {
+        const rect = skillSection.getBoundingClientRect();
+        const screenHeight = window.innerHeight || document.documentElement.clientHeight;
+
+        // 当区块有任何部分进入视口时触发
+        if (rect.top < screenHeight - 100) {
+          showProgress();
+          window.removeEventListener('scroll', checkScroll);
+          window.removeEventListener('resize', checkScroll);
+        }
+      }
+
+      // 绑定监听器并立即检查一次（以防页面初始就处于可见位置）
+      window.addEventListener('scroll', checkScroll, { passive: true });
+      window.addEventListener('resize', checkScroll);
+      checkScroll();
+    });
+  })();
 
 
 /**
@@ -263,7 +264,7 @@ window.addEventListener('load', () => {
           try {
             instance.to(0);
           } catch (err) {
-            console.warn('Carousel reset failed:', err);
+            // ignore
           }
         });
 
@@ -278,10 +279,10 @@ window.addEventListener('load', () => {
       }, 200); // 延迟 200ms 可视情况调大/调小
     }, true);
 
-        // * Navigation menu - Portfolio dropdown menu
-        document.querySelectorAll('#navbar .dropdown a[data-filter]').forEach(link => {
-          link.addEventListener('click', function(e) {
-          e.preventDefault();
+    // * Navigation menu - Portfolio dropdown menu (放在同一作用域，portfolioIsotope 可用)
+    document.querySelectorAll('#navbar .dropdown a[data-filter]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
 
         let filterValue = this.getAttribute('data-filter');
 
@@ -298,55 +299,52 @@ window.addEventListener('load', () => {
         // 平滑滚动
         document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
       });
-      });
+    });
 
-    
-        // 读取 tab 的函数（支持 query string 或 hash 中的 ?tab=...）
-        function getTabFromUrl() {
-          // 1) 优先读取 ?tab=...（search）
-          const params = new URLSearchParams(window.location.search);
-          if (params.has('tab')) return params.get('tab');
+    // 读取 tab 的函数（支持 query string 或 hash 中的 ?tab=...）
+    function getTabFromUrl() {
+      // 1) 优先读取 ?tab=...（search）
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('tab')) return params.get('tab');
 
-          // 2) 如果没有，从 hash 中解析（例如 "#portfolio?tab=training" 或 "#?tab=training"）
-          if (window.location.hash) {
-          const hash = window.location.hash; // e.g. "#portfolio?tab=training"
-          const qIndex = hash.indexOf('?');
-          if (qIndex !== -1) {
-            const queryString = hash.slice(qIndex + 1); // "tab=training"
-            const p = new URLSearchParams(queryString);
-            if (p.has('tab')) return p.get('tab');
-          }
-        }
-
-        return null;
-      }
-
-      const tab = getTabFromUrl();
-      if (tab) {
-        const targetFilter = `.filter-${tab}`;
-        const targetItem = document.querySelector(`#portfolio-flters li[data-filter="${targetFilter}"]`);
-        if (targetItem) {
-          // 切换高亮
-          document.querySelectorAll('#portfolio-flters li').forEach(el => el.classList.remove('filter-active'));
-          targetItem.classList.add('filter-active');
-
-          // 先安排 isotope 过滤，然后等待图片加载再 layout
-          portfolioIsotope.arrange({ filter: targetFilter });
-          imagesLoaded(portfolioContainer, function() {
-            portfolioIsotope.layout();
-            AOS.refresh();
-            // 平滑滚动到 portfolio
-            document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
-          });
+      // 2) 如果没有，从 hash 中解析（例如 "#portfolio?tab=training" 或 "#?tab=training"）
+      if (window.location.hash) {
+        const hash = window.location.hash; // e.g. "#portfolio?tab=training"
+        const qIndex = hash.indexOf('?');
+        if (qIndex !== -1) {
+          const queryString = hash.slice(qIndex + 1); // "tab=training"
+          const p = new URLSearchParams(queryString);
+          if (p.has('tab')) return p.get('tab');
         }
       }
 
-
-    
+      return null;
     }
-  });
 
-  
+    const tab = getTabFromUrl();
+    if (tab) {
+      const targetFilter = `.filter-${tab}`;
+      const targetItem = document.querySelector(`#portfolio-flters li[data-filter="${targetFilter}"]`);
+      if (targetItem) {
+        // 切换高亮
+        document.querySelectorAll('#portfolio-flters li').forEach(el => el.classList.remove('filter-active'));
+        targetItem.classList.add('filter-active');
+
+        // 先安排 isotope 过滤，然后等待图片加载再 layout
+        portfolioIsotope.arrange({ filter: targetFilter });
+        imagesLoaded(portfolioContainer, function() {
+          portfolioIsotope.layout();
+          AOS.refresh();
+          // 平滑滚动到 portfolio
+          document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+    }
+
+  }
+});
+
+
   /**
    * Initiate portfolio lightbox 
    */
@@ -383,65 +381,71 @@ window.addEventListener('load', () => {
     });
   });
 
-  
-/**
- * Smart Sticky Header + Anchor Scroll Fix (Clean Version)
- */
-document.addEventListener("DOMContentLoaded", function () {
-  const header = document.querySelector("#header");
-  if (!header) return;
+  /**
+   * Smart Sticky Header + Anchor Scroll Fix (Clean & Robust)
+   */
+  document.addEventListener("DOMContentLoaded", function () {
+    const header = document.querySelector("#header");
+    if (!header) return;
 
-  let lastScrollY = window.scrollY;
+    let lastScrollY = window.scrollY;
 
-  // 初始强制显示 header
-  header.classList.remove("hidden");
+    // 初始强制显示 header（无论当前 scrollY）
+    header.classList.remove("hidden");
 
-  function smartStickyHeader() {
-    if (window.scrollY === 0) {
-      header.classList.remove("hidden"); // 顶端永远显示
-    } else if (window.scrollY > lastScrollY) {
-      header.classList.add("hidden");    // 向下滚 -> 隐藏
-    } else {
-      header.classList.remove("hidden"); // 向上滚 -> 显示
+    function smartStickyHeader() {
+      if (window.scrollY === 0) {
+        header.classList.remove("hidden"); // 顶端永远显示
+      } else if (window.scrollY > lastScrollY) {
+        header.classList.add("hidden");    // 向下滚 -> 隐藏
+      } else {
+        header.classList.remove("hidden"); // 向上滚 -> 显示
+      }
+      lastScrollY = window.scrollY;
     }
-    lastScrollY = window.scrollY;
-  }
 
-  window.addEventListener("scroll", smartStickyHeader);
+    window.addEventListener("scroll", smartStickyHeader);
 
-  // 自动设置 scroll-padding-top (避免被 header 遮挡)
-  const offset = header.offsetHeight;
-  document.documentElement.style.scrollPaddingTop = offset + "px";
+    // 自动设置 scroll-padding-top (避免被 header 遮挡)
+    const offset = header.offsetHeight;
+    document.documentElement.style.scrollPaddingTop = offset + "px";
 
-  // 单独为 #contact 增加 scroll-margin-top
-  const contactEl = document.querySelector("#contact");
-  if (contactEl) {
-    contactEl.style.scrollMarginTop = (offset + 20) + "px";
-  }
+    // 单独为 #contact 增加 scroll-margin-top
+    const contactEl = document.querySelector("#contact");
+    if (contactEl) {
+      contactEl.style.scrollMarginTop = (offset + 20) + "px";
+    }
 
-  // 统一的锚点修正函数
-  function fixHashScroll() {
-    if (window.location.hash) {
-      const id = window.location.hash.split("?")[0];
-      const target = document.querySelector(id);
-      if (target) {
-        setTimeout(() => {
-          const top = target.getBoundingClientRect().top + window.scrollY;
-          window.scrollTo({
-            top: Math.max(0, top - offset - 10),
-            behavior: "instant"
-          });
-        }, 50);
+    // 统一的锚点修正函数（在 load/hashchange/pageshow 时调用）
+    function fixHashScroll() {
+      if (window.location.hash) {
+        const id = window.location.hash.split("?")[0];
+        const target = document.querySelector(id);
+        if (target) {
+          // 延迟一点点，等待图片/布局/第三方库完成（兼容 Isotope/AOS）
+          setTimeout(() => {
+            const top = target.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+              top: Math.max(0, top - offset - 10),
+              behavior: 'instant'
+            });
+          }, 120);
+        }
       }
     }
-  }
 
-  // 页面初次加载 & hash 改变时都执行
-  window.addEventListener("load", () => {
-    header.classList.remove("hidden"); // 默认显示
-    fixHashScroll();
+    // 页面完全加载时确保 header 显示并修正 hash（load 和 pageshow 都监听，兼容后退缓存）
+    window.addEventListener("load", () => {
+      header.classList.remove("hidden");
+      fixHashScroll();
+    });
+    window.addEventListener("pageshow", () => {
+      header.classList.remove("hidden");
+      fixHashScroll();
+    });
+
+    // 监听 hash 变化
+    window.addEventListener("hashchange", fixHashScroll);
   });
-  window.addEventListener("hashchange", fixHashScroll);
-});
 
 })(); // 结束 IIFE
