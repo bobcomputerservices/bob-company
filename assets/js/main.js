@@ -419,32 +419,32 @@ document.addEventListener("DOMContentLoaded", function () {
     contactEl.style.scrollMarginTop = (offset + 20) + "px";
   }
 
- // ✅ 页面加载完后，检查是否带 hash (#contact 等)
-window.addEventListener("load", () => {
-  if (window.location.hash) {
-    const id = window.location.hash.split("?")[0];
-    const target = document.querySelector(id);
-    const header = document.querySelector("#header");
-    if (target && header) {
-      const offset = header.offsetHeight;
+  // ✅ 页面加载完后，检查是否带 hash (#contact 等)
+  window.addEventListener("load", () => {
+    if (window.location.hash) {
+      const id = window.location.hash.split("?")[0];
+      const target = document.querySelector(id);
+      const header = document.querySelector("#header");
+      if (target && header) {
+        const offset = header.offsetHeight;
 
-      // 打印日志，方便确认是否执行
-      console.log("scroll fix applied for:", id, "offset =", offset);
+        // 打印日志，方便确认是否执行
+        console.log("scroll fix applied for:", id, "offset =", offset);
 
-      // 延迟一点点，确保 Isotope / AOS / CSS 都完成渲染
-      setTimeout(() => {
-        const top = target.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({
-          top: Math.max(0, top - offset - 10), // 10 是缓冲
-          behavior: "smooth"
-        });
-        console.log("scroll moved to:", top - offset - 10);
-      }, 300);
+        // 延迟一点点，确保 Isotope / AOS / CSS 都完成渲染
+        setTimeout(() => {
+          const top = target.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({
+            top: Math.max(0, top - offset - 10), // 10 是缓冲
+            behavior: "smooth"
+          });
+          console.log("scroll moved to:", top - offset - 10);
+        }, 300);
+      } else {
+        console.log("scroll fix skipped: target or header not found");
+      }
     } else {
-      console.log("scroll fix skipped: target or header not found");
+      console.log("no hash detected, skip scroll fix");
     }
-  } else {
-    console.log("no hash detected, skip scroll fix");
-  }
-});
-
+  });
+});   // 👈👈 这里必须加，结束 DOMContentLoaded
