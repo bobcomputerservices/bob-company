@@ -419,26 +419,26 @@ document.addEventListener("DOMContentLoaded", function () {
     contactEl.style.scrollMarginTop = (offset + 20) + "px";
   }
 
-  // ✅ 修正带 hash 的跳转位置
+   // ✅ 页面加载完后，检查是否带 hash (#contact 等)
+  window.addEventListener("load", () => {
   if (window.location.hash) {
     const id = window.location.hash.split("?")[0];
     const target = document.querySelector(id);
-    if (target) {
+    const header = document.querySelector("#header");
+    if (target && header) {
+      const offset = header.offsetHeight;
+      // 延迟一点点，确保 Isotope / AOS / CSS 都完成渲染
       setTimeout(() => {
         const top = target.getBoundingClientRect().top + window.scrollY;
         window.scrollTo({
-          top: Math.max(0, top - offset - 10),
+          top: Math.max(0, top - offset - 10), // 10 是缓冲
           behavior: "smooth"
         });
-      }, 120);
+      }, 300);
     }
   }
-
-   // ✅ 页面一加载就强制显示 header
-  window.addEventListener("load", () => {
-    header.classList.remove("hidden");
-  });
 });
+
 
 
   
