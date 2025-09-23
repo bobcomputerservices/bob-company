@@ -448,3 +448,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });   // 👈👈 这里必须加，结束 DOMContentLoaded
+
+})(); // 结束 IIFE
