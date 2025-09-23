@@ -299,8 +299,31 @@ window.addEventListener('load', () => {
         document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
       });
       });
+
+        // 🔹 根据 URL 参数 (tab=xxx) 来自动切换 Portfolio tab
+        const urlParams = new URLSearchParams(window.location.search);
+        const tab = urlParams.get("tab");
+
+        if (tab) {
+        const targetFilter = `.filter-${tab}`;
+        const targetItem = document.querySelector(`#portfolio-flters li[data-filter="${targetFilter}"]`);
+        if (targetItem) {
+        // 切换高亮
+        document.querySelectorAll('#portfolio-flters li').forEach(el => el.classList.remove('filter-active'));
+        targetItem.classList.add('filter-active');
+
+        // Isotope 过滤
+        portfolioIsotope.arrange({ filter: targetFilter });
+
+        // 平滑滚动到 portfolio
+        document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    
     }
   });
+
   
   /**
    * Initiate portfolio lightbox 
