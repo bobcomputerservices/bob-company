@@ -321,25 +321,33 @@ window.addEventListener('load', () => {
       return null;
     }
 
+    // ====== 支持 ?tab=... 参数 ======
     const tab = getTabFromUrl();
     if (tab) {
       const targetFilter = `.filter-${tab}`;
       const targetItem = document.querySelector(`#portfolio-flters li[data-filter="${targetFilter}"]`);
-      if (targetItem) {
-        // 切换高亮
-        document.querySelectorAll('#portfolio-flters li').forEach(el => el.classList.remove('filter-active'));
-        targetItem.classList.add('filter-active');
 
-        // 先安排 isotope 过滤，然后等待图片加载再 layout
-        portfolioIsotope.arrange({ filter: targetFilter });
-        imagesLoaded(portfolioContainer, function() {
-          portfolioIsotope.layout();
-          AOS.refresh();
-          // 平滑滚动到 portfolio
-          document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
-        });
+      if (targetItem) {
+        // 延迟执行，确保 isotope 初始化和图片加载完成
+        setTimeout(() => {
+          // 切换高亮
+          document.querySelectorAll('#portfolio-flters li').forEach(el => el.classList.remove('filter-active'));
+          targetItem.classList.add('filter-active');
+
+          // 切换 Isotope filter
+          portfolioIsotope.arrange({ filter: targetFilter });
+
+          // 等图片加载完成，再强制 layout
+          imagesLoaded(portfolioContainer, function() {
+            portfolioIsotope.layout();
+            AOS.refresh();
+            // 平滑滚动到 portfolio
+            document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
+          });
+        }, 400); // 延迟 400ms，可以按需调大/调小
       }
     }
+
 
   }
 });
