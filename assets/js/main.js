@@ -381,71 +381,68 @@ window.addEventListener('load', () => {
     });
   });
 
-  /**
-   * Smart Sticky Header + Anchor Scroll Fix (Clean & Robust)
-   */
-  document.addEventListener("DOMContentLoaded", function () {
-    const header = document.querySelector("#header");
-    if (!header) return;
+ /**
+ * Smart Sticky Header + Anchor Scroll Fix
+ */
+document.addEventListener("DOMContentLoaded", function () {
+  const header = document.querySelector("#header");
+  if (!header) return;
 
-    let lastScrollY = window.scrollY;
+  let lastScrollY = window.scrollY;
 
-    // 初始强制显示 header（无论当前 scrollY）
-    header.classList.remove("hidden");
+  // ✅ 初始时强制显示 header
+  header.classList.remove("hidden");
 
-    function smartStickyHeader() {
-      if (window.scrollY === 0) {
-        header.classList.remove("hidden"); // 顶端永远显示
-      } else if (window.scrollY > lastScrollY) {
-        header.classList.add("hidden");    // 向下滚 -> 隐藏
-      } else {
-        header.classList.remove("hidden"); // 向上滚 -> 显示
+  function smartStickyHeader() {
+    if (window.scrollY === 0) {
+      header.classList.remove("hidden"); // 顶端永远显示
+    } else if (window.scrollY > lastScrollY) {
+      header.classList.add("hidden");    // 向下滚 -> 隐藏
+    } else {
+      header.classList.remove("hidden"); // 向上滚 -> 显示
+    }
+    lastScrollY = window.scrollY;
+  }
+
+  window.addEventListener("scroll", smartStickyHeader);
+
+  // ✅ 自动设置 scroll-padding-top (避免锚点被 header 遮挡)
+  const offset = header.offsetHeight;
+  document.documentElement.style.scrollPaddingTop = offset + "px";
+
+  // ✅ 为 #contact 单独设置 scroll-margin-top
+  const contactEl = document.querySelector("#contact");
+  if (contactEl) {
+    contactEl.style.scrollMarginTop = (offset + 20) + "px";
+  }
+
+  // ✅ 页面加载完后，检查是否带 hash (#contact 等)
+  window.addEventListener("load", () => {
+    if (window.location.hash) {
+      const id = window.location.hash.split("?")[0];
+      const target = document.querySelector(id);
+      if (target) {
+        const offset = header.offsetHeight;
+        console.log("scroll fix applied for:", id, "offset =", offset);
+
+        // 延迟一点，确保 AOS / Isotope 等布局完成
+        setTimeout(() => {
+          const top = target.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({
+            top: Math.max(0, top - offset - 10),
+            behavior: "smooth"
+          });
+          console.log("scroll moved to:", top - offset - 10);
+        }, 300);
       }
-      lastScrollY = window.scrollY;
     }
-
-    window.addEventListener("scroll", smartStickyHeader);
-
-    // 自动设置 scroll-padding-top (避免被 header 遮挡)
-    const offset = header.offsetHeight;
-    document.documentElement.style.scrollPaddingTop = offset + "px";
-
-    // 单独为 #contact 增加 scroll-margin-top
-    const contactEl = document.querySelector("#contact");
-    if (contactEl) {
-      contactEl.style.scrollMarginTop = (offset + 20) + "px";
-    }
-
-    // 统一的锚点修正函数（在 load/hashchange/pageshow 时调用）
-    function fixHashScroll() {
-      if (window.location.hash) {
-        const id = window.location.hash.split("?")[0];
-        const target = document.querySelector(id);
-        if (target) {
-          // 延迟一点点，等待图片/布局/第三方库完成（兼容 Isotope/AOS）
-          setTimeout(() => {
-            const top = target.getBoundingClientRect().top + window.scrollY;
-            window.scrollTo({
-              top: Math.max(0, top - offset - 10),
-              behavior: 'instant'
-            });
-          }, 120);
-        }
-      }
-    }
-
-    // 页面完全加载时确保 header 显示并修正 hash（load 和 pageshow 都监听，兼容后退缓存）
-    window.addEventListener("load", () => {
-      header.classList.remove("hidden");
-      fixHashScroll();
-    });
-    window.addEventListener("pageshow", () => {
-      header.classList.remove("hidden");
-      fixHashScroll();
-    });
-
-    // 监听 hash 变化
-    window.addEventListener("hashchange", fixHashScroll);
   });
+
+  // ✅ 无论从哪里跳转回来，强制 header 默认显示
+  window.addEventListener("pageshow", () => {
+    header.classList.remove("hidden");
+    console.log("Header forced visible on page load");
+  });
+});
 
 })(); // 结束 IIFE
