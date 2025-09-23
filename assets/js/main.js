@@ -300,25 +300,47 @@ window.addEventListener('load', () => {
       });
       });
 
-        // 🔹 根据 URL 参数 (tab=xxx) 来自动切换 Portfolio tab
-        const urlParams = new URLSearchParams(window.location.search);
-        const tab = urlParams.get("tab");
+    
+        // 读取 tab 的函数（支持 query string 或 hash 中的 ?tab=...）
+        function getTabFromUrl() {
+          // 1) 优先读取 ?tab=...（search）
+          const params = new URLSearchParams(window.location.search);
+          if (params.has('tab')) return params.get('tab');
 
-        if (tab) {
+          // 2) 如果没有，从 hash 中解析（例如 "#portfolio?tab=training" 或 "#?tab=training"）
+          if (window.location.hash) {
+          const hash = window.location.hash; // e.g. "#portfolio?tab=training"
+          const qIndex = hash.indexOf('?');
+          if (qIndex !== -1) {
+            const queryString = hash.slice(qIndex + 1); // "tab=training"
+            const p = new URLSearchParams(queryString);
+            if (p.has('tab')) return p.get('tab');
+          }
+        }
+
+        return null;
+      }
+
+      const tab = getTabFromUrl();
+      if (tab) {
         const targetFilter = `.filter-${tab}`;
         const targetItem = document.querySelector(`#portfolio-flters li[data-filter="${targetFilter}"]`);
         if (targetItem) {
-        // 切换高亮
-        document.querySelectorAll('#portfolio-flters li').forEach(el => el.classList.remove('filter-active'));
-        targetItem.classList.add('filter-active');
+          // 切换高亮
+          document.querySelectorAll('#portfolio-flters li').forEach(el => el.classList.remove('filter-active'));
+          targetItem.classList.add('filter-active');
 
-        // Isotope 过滤
-        portfolioIsotope.arrange({ filter: targetFilter });
-
-        // 平滑滚动到 portfolio
-        document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
+          // 先安排 isotope 过滤，然后等待图片加载再 layout
+          portfolioIsotope.arrange({ filter: targetFilter });
+          imagesLoaded(portfolioContainer, function() {
+            portfolioIsotope.layout();
+            AOS.refresh();
+            // 平滑滚动到 portfolio
+            document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' });
+          });
+        }
       }
-    }
+
 
     
     }
