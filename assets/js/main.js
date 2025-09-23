@@ -433,6 +433,11 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 120);
     }
   }
+
+   // ✅ 页面一加载就强制显示 header
+  window.addEventListener("load", () => {
+    header.classList.remove("hidden");
+  });
 });
 
 
