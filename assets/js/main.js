@@ -385,8 +385,7 @@ window.addEventListener('load', () => {
 
   
 /**
- * Smart Sticky Header
- * Hide on scroll down, show on scroll up
+ * Smart Sticky Header + Anchor Scroll Fix
  */
 document.addEventListener("DOMContentLoaded", function () {
   const header = document.querySelector("#header");
@@ -394,56 +393,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let lastScrollY = window.scrollY;
 
+  // ✅ 强制初始显示 header
+  header.classList.remove("hidden");
+
   function smartStickyHeader() {
     if (window.scrollY === 0) {
-      // 页面在最顶端 -> 永远显示
-      header.classList.remove("hidden");
+      header.classList.remove("hidden"); // 顶端永远显示
     } else if (window.scrollY > lastScrollY) {
-      // 向下滚动 -> 隐藏
-      header.classList.add("hidden");
+      header.classList.add("hidden");    // 向下滚 -> 隐藏
     } else {
-      // 向上滚动 -> 显示
-      header.classList.remove("hidden");
+      header.classList.remove("hidden"); // 向上滚 -> 显示
     }
     lastScrollY = window.scrollY;
   }
 
   window.addEventListener("scroll", smartStickyHeader);
-});
 
-  
-// ===== Fix cross-page anchor jump (especially #contact) =====
-function fixAnchorScrollOnLoad() {
-  const header = document.querySelector('#header');
-  const offset = header ? header.offsetHeight : 0;
+  // ✅ 自动设置 scroll-padding-top (避免被 header 遮挡)
+  const offset = header.offsetHeight;
+  document.documentElement.style.scrollPaddingTop = offset + "px";
 
-  // 全局设置 scroll-padding-top（现代浏览器会尊重）
-  document.documentElement.style.scrollPaddingTop = offset + 'px';
-
-  // 为 #contact 单独设置 scroll-margin-top（更兼容的方式）
-  const contactEl = document.querySelector('#contact');
+  // ✅ 单独为 #contact 增加 scroll-margin-top
+  const contactEl = document.querySelector("#contact");
   if (contactEl) {
-    contactEl.style.scrollMarginTop = (offset + 20) + 'px'; // +20 作为额外缓冲
+    contactEl.style.scrollMarginTop = (offset + 20) + "px";
   }
 
-  // 如果页面带有 hash（从子页跳回），强制在 DOM 稳定后修正滚动位置
+  // ✅ 修正带 hash 的跳转位置
   if (window.location.hash) {
-    const id = window.location.hash.split('?')[0]; // 例如 "#contact"
+    const id = window.location.hash.split("?")[0];
     const target = document.querySelector(id);
     if (target) {
-      // 等一小会儿让浏览器完成默认跳转与资源渲染（可根据需要把 50 -> 300）
       setTimeout(() => {
         const top = target.getBoundingClientRect().top + window.scrollY;
-        // 精确滚动到目标并扣掉 header 高度与少量缓冲
-        window.scrollTo({ top: Math.max(0, top - offset - 10), behavior: 'smooth' });
+        window.scrollTo({
+          top: Math.max(0, top - offset - 10),
+          behavior: "smooth"
+        });
       }, 120);
     }
   }
-}
+});
 
-// 执行：在 load 时、resize 时调用
-window.addEventListener('load', fixAnchorScrollOnLoad);
-window.addEventListener('resize', fixAnchorScrollOnLoad);
 
   
 
