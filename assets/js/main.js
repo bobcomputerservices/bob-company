@@ -423,6 +423,39 @@ window.addEventListener('load', () => {
 });
 
 
+// ===== Fix cross-page anchor jump (especially #contact) =====
+function fixAnchorScrollOnLoad() {
+  const header = document.querySelector('#header');
+  const offset = header ? header.offsetHeight : 0;
+
+  // 全局设置 scroll-padding-top（现代浏览器会尊重）
+  document.documentElement.style.scrollPaddingTop = offset + 'px';
+
+  // 为 #contact 单独设置 scroll-margin-top（更兼容的方式）
+  const contactEl = document.querySelector('#contact');
+  if (contactEl) {
+    contactEl.style.scrollMarginTop = (offset + 20) + 'px'; // +20 作为额外缓冲
+  }
+
+  // 如果页面带有 hash（从子页跳回），强制在 DOM 稳定后修正滚动位置
+  if (window.location.hash) {
+    const id = window.location.hash.split('?')[0]; // 例如 "#contact"
+    const target = document.querySelector(id);
+    if (target) {
+      // 等一小会儿让浏览器完成默认跳转与资源渲染（可根据需要把 50 -> 300）
+      setTimeout(() => {
+        const top = target.getBoundingClientRect().top + window.scrollY;
+        // 精确滚动到目标并扣掉 header 高度与少量缓冲
+        window.scrollTo({ top: Math.max(0, top - offset - 10), behavior: 'smooth' });
+      }, 120);
+    }
+  }
+}
+
+// 执行：在 load 时、resize 时调用
+window.addEventListener('load', fixAnchorScrollOnLoad);
+window.addEventListener('resize', fixAnchorScrollOnLoad);
+
   
 
 })(); 
