@@ -388,21 +388,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const header = document.querySelector("#header");
   if (!header) return;
 
-  let lastScrollY = window.scrollY;
+  // 使用全局变量保存上一次滚动位置，便于外部强制重置
+window._lastScrollY = window.scrollY;
 
-  // ✅ 初始时强制显示 header
-  header.classList.remove("hidden");
-
-  function smartStickyHeader() {
-    if (window.scrollY === 0) {
-      header.classList.remove("hidden"); // 顶端永远显示
-    } else if (window.scrollY > lastScrollY) {
-      header.classList.add("hidden");    // 向下滚 -> 隐藏
-    } else {
-      header.classList.remove("hidden"); // 向上滚 -> 显示
-    }
-    lastScrollY = window.scrollY;
+function smartStickyHeader() {
+  if (window.scrollY === 0) {
+    header.classList.remove("hidden");
+  } else if (window.scrollY > window._lastScrollY) {
+    header.classList.add("hidden");
+  } else {
+    header.classList.remove("hidden");
   }
+  window._lastScrollY = window.scrollY;
+}
 
   window.addEventListener("scroll", smartStickyHeader);
 
@@ -444,5 +442,36 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Header forced visible on page load");
   });
 });
+  
+  // ===== 强化：在 load/pageshow/hashchange/focus 时强制显示 header 并短暂取消 transition =====
+  (function() {
+    function forceShowHeaderImmediate() {
+      const header = document.querySelector('#header') || document.querySelector('header');
+      if (!header) return;
+
+      // 取消任何隐藏 class，并用 inline 样式确保可见（覆盖 .hidden 的 transform/opacity）
+      header.classList.remove('hidden');
+      header.style.transition = 'none';
+      header.style.transform = 'translateY(0)';
+      header.style.opacity = '1';
+      header.style.display = header.style.display || '';
+
+      // 同步重置全局滚动记录，避免 smartStickyHeader 误判
+      if (typeof window._lastScrollY !== 'undefined') {
+        window._lastScrollY = window.scrollY;
+      }
+
+      // 恢复 transition（短延迟以避免闪烁）
+      setTimeout(() => {
+        header.style.transition = '';
+      }, 120);
+    }
+
+    // 在这些时机都强制显示 header（load/pageshow/hashchange/focus）
+    window.addEventListener('load', forceShowHeaderImmediate);
+    window.addEventListener('pageshow', forceShowHeaderImmediate);
+    window.addEventListener('hashchange', forceShowHeaderImmediate);
+    window.addEventListener('focus', forceShowHeaderImmediate);
+  })();
 
 })(); // 结束 IIFE
