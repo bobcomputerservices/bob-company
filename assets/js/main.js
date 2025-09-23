@@ -411,7 +411,19 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("scroll", smartStickyHeader);
 });
 
+/**
+ * 用 JS 自动计算 header 的实际高度
+ * 设置成全局的 scroll-padding-top
+ */
+window.addEventListener('load', () => {
+  let header = document.querySelector('#header');
+  if (header) {
+    document.documentElement.style.scrollPaddingTop = header.offsetHeight + 'px';
+  }
+});
 
+
+  
 
 })(); 
 
