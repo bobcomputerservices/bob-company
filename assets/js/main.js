@@ -385,7 +385,7 @@ window.addEventListener('load', () => {
 
   
 /**
- * Smart Sticky Header + Anchor Scroll Fix
+ * Smart Sticky Header + Anchor Scroll Fix (Clean Version)
  */
 document.addEventListener("DOMContentLoaded", function () {
   const header = document.querySelector("#header");
@@ -393,7 +393,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let lastScrollY = window.scrollY;
 
-  // ✅ 强制初始显示 header
+  // 初始强制显示 header
   header.classList.remove("hidden");
 
   function smartStickyHeader() {
@@ -409,44 +409,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addEventListener("scroll", smartStickyHeader);
 
-  // ✅ 自动设置 scroll-padding-top (避免被 header 遮挡)
+  // 自动设置 scroll-padding-top (避免被 header 遮挡)
   const offset = header.offsetHeight;
   document.documentElement.style.scrollPaddingTop = offset + "px";
 
-  // ✅ 单独为 #contact 增加 scroll-margin-top
+  // 单独为 #contact 增加 scroll-margin-top
   const contactEl = document.querySelector("#contact");
   if (contactEl) {
     contactEl.style.scrollMarginTop = (offset + 20) + "px";
   }
 
-  // ✅ 页面加载完后，检查是否带 hash (#contact 等)
-  window.addEventListener("load", () => {
+  // 统一的锚点修正函数
+  function fixHashScroll() {
     if (window.location.hash) {
       const id = window.location.hash.split("?")[0];
       const target = document.querySelector(id);
-      const header = document.querySelector("#header");
-      if (target && header) {
-        const offset = header.offsetHeight;
-
-        // 打印日志，方便确认是否执行
-        console.log("scroll fix applied for:", id, "offset =", offset);
-
-        // 延迟一点点，确保 Isotope / AOS / CSS 都完成渲染
+      if (target) {
         setTimeout(() => {
           const top = target.getBoundingClientRect().top + window.scrollY;
           window.scrollTo({
-            top: Math.max(0, top - offset - 10), // 10 是缓冲
-            behavior: "smooth"
+            top: Math.max(0, top - offset - 10),
+            behavior: "instant"
           });
-          console.log("scroll moved to:", top - offset - 10);
-        }, 300);
-      } else {
-        console.log("scroll fix skipped: target or header not found");
+        }, 50);
       }
-    } else {
-      console.log("no hash detected, skip scroll fix");
     }
+  }
+
+  // 页面初次加载 & hash 改变时都执行
+  window.addEventListener("load", () => {
+    header.classList.remove("hidden"); // 默认显示
+    fixHashScroll();
   });
-});   // 👈👈 这里必须加，结束 DOMContentLoaded
+  window.addEventListener("hashchange", fixHashScroll);
+});
 
 })(); // 结束 IIFE
