@@ -436,7 +436,7 @@ function fixAnchorScrollOnLoad() {
         const top = target.getBoundingClientRect().top + window.scrollY;
         // 精确滚动到目标并扣掉 header 高度与少量缓冲
         window.scrollTo({ top: Math.max(0, top - offset - 10), behavior: 'smooth' });
-      }, 120);
+      }, 300);
     }
   }
 }
