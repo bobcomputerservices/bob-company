@@ -390,77 +390,149 @@ window.addEventListener('load', () => {
   });
 
 /**
- * Robust Smart Sticky Header — show immediately on entry, enable sticky after load
+ * Smart Sticky Header + Anchor Scroll Fix
  */
-(function() {
+document.addEventListener("DOMContentLoaded", function () {
   const header = document.querySelector("#header");
   if (!header) return;
 
-  // 是否已启用 smart sticky（避免重复绑定）
-  let smartEnabled = false;
-  let lastScrollY = window.scrollY;
+  // 使用全局变量保存上一次滚动位置，便于外部强制重置
+  window._lastScrollY = window.scrollY;
+  
+  // 标记是否正在执行智能隐藏/显示逻辑
+  let isStickyEnabled = true;
 
-  // 核心滚动处理函数（向下隐藏，向上显示）
-  function smartStickyHandler() {
-    const curr = window.scrollY;
-    if (curr === 0) {
+  function smartStickyHeader() {
+    if (!isStickyEnabled) return;
+    
+    if (window.scrollY === 0) {
       header.classList.remove("hidden");
-    } else if (curr > lastScrollY) {
+    } else if (window.scrollY > window._lastScrollY) {
       header.classList.add("hidden");
     } else {
       header.classList.remove("hidden");
     }
-    lastScrollY = curr;
+    window._lastScrollY = window.scrollY;
   }
 
-  // 启用 smart sticky（会绑定 scroll 事件），确保只绑定一次
-  function enableSmartStickyOnce(delay = 120) {
-    if (smartEnabled) return;
-    // 在短延迟后启用，确保页面初始跳转/布局稳定
+  // 重新初始化滚动监听
+  function initStickyHeader() {
+    // 移除旧的监听器（避免重复）
+    window.removeEventListener("scroll", smartStickyHeader);
+    // 添加新的监听器
+    window.addEventListener("scroll", smartStickyHeader, { passive: true });
+    
+    // 重置状态
+    isStickyEnabled = true;
+    window._lastScrollY = window.scrollY;
+    
+    // 根据当前滚动位置设置初始状态
+    if (window.scrollY === 0) {
+      header.classList.remove("hidden");
+    } else {
+      header.classList.add("hidden");
+    }
+    
+    console.log("Sticky header reinitialized");
+  }
+
+  // 初始初始化
+  initStickyHeader();
+
+  // ✅ 自动设置 scroll-padding-top (避免锚点被 header 遮挡)
+  const offset = header.offsetHeight;
+  document.documentElement.style.scrollPaddingTop = offset + "px";
+
+  // ✅ 为 #contact 单独设置 scroll-margin-top
+  const contactEl = document.querySelector("#contact");
+  if (contactEl) {
+    contactEl.style.scrollMarginTop = (offset + 20) + "px";
+  }
+
+  // ✅ 页面加载完后，检查是否带 hash (#contact 等)
+  window.addEventListener("load", () => {
+    if (window.location.hash) {
+      const id = window.location.hash.split("?")[0];
+      const target = document.querySelector(id);
+      if (target) {
+        const offset = header.offsetHeight;
+        console.log("scroll fix applied for:", id, "offset =", offset);
+
+        // 延迟一点，确保 AOS / Isotope 等布局完成
+        setTimeout(() => {
+          const top = target.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({
+            top: Math.max(0, top - offset - 10),
+            behavior: "smooth"
+          });
+          console.log("scroll moved to:", top - offset - 10);
+        }, 300);
+      }
+    }
+  });
+
+  // ✅ 页面显示时重新初始化 sticky header
+  window.addEventListener("pageshow", (e) => {
+    if (e.persisted) { // 如果页面是从缓存中加载的
+      console.log("Page loaded from cache, reinitializing sticky header");
+      // 短暂禁用智能隐藏，确保header显示
+      isStickyEnabled = false;
+      header.classList.remove("hidden");
+      
+      // 重新启用智能隐藏
+      setTimeout(() => {
+        initStickyHeader();
+      }, 100);
+    }
+  });
+
+  // ✅ 监听页面可见性变化（处理浏览器标签切换）
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) {
+      // 页面重新变为可见时，重新初始化
+      setTimeout(initStickyHeader, 50);
+    }
+  });
+});
+
+// ===== 强化：在 load/pageshow/hashchange/focus 时强制显示 header 并短暂取消 transition =====
+(function() {
+  function forceShowHeaderImmediate() {
+    const header = document.querySelector('#header') || document.querySelector('header');
+    if (!header) return;
+
+    // 取消任何隐藏 class，并用 inline 样式确保可见（覆盖 .hidden 的 transform/opacity）
+    header.classList.remove('hidden');
+    header.style.transition = 'none';
+    header.style.transform = 'translateY(0)';
+    header.style.opacity = '1';
+    header.style.display = header.style.display || '';
+
+    // 同步重置全局滚动记录，避免 smartStickyHeader 误判
+    if (typeof window._lastScrollY !== 'undefined') {
+      window._lastScrollY = window.scrollY;
+    }
+
+    // 恢复 transition（短延迟以避免闪烁）
     setTimeout(() => {
-      // 初始化 lastScrollY 为当前值，避免立刻误判
-      lastScrollY = window.scrollY;
-      window.addEventListener("scroll", smartStickyHandler, { passive: true });
-      smartEnabled = true;
-    }, delay);
+      header.style.transition = '';
+    }, 120);
   }
 
-  // 立即强制显示 header，并短暂移除 transition（避免突兀动画）
-  function showHeaderImmediately() {
-    header.classList.remove("hidden");
-
-    // 保留当前 inline transition 值
-    const prevTransition = header.style.transition || "";
-    header.style.transition = "none";
-
-    // restore transition on next frame (double rAF for safety)
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        header.style.transition = prevTransition;
-      });
-    });
-  }
-
-  // 当页面进入（从子页跳回 / 刷新 / 后退缓存）时的处理：
-  function handleEntry() {
-    showHeaderImmediately();
-    // 重设 lastScrollY，避免 smart 判断错误
-    lastScrollY = window.scrollY;
-    // 启用 smart sticky（延迟，确保布局稳定）
-    enableSmartStickyOnce(150);
-  }
-
-  // 绑定各种入口事件（load/pageshow/hashchange/focus）
-  window.addEventListener("load", handleEntry);
-  window.addEventListener("pageshow", handleEntry);
-  window.addEventListener("hashchange", handleEntry);
-  window.addEventListener("focus", handleEntry);
-
-  // 如果页面本身已经处于可操作状态（脚本在 load 后注入），则也立即调用一次
-  if (document.readyState === "complete") {
-    handleEntry();
-  }
+  // 在这些时机都强制显示 header（load/pageshow/hashchange/focus）
+  window.addEventListener('load', forceShowHeaderImmediate);
+  window.addEventListener('pageshow', forceShowHeaderImmediate);
+  window.addEventListener('hashchange', forceShowHeaderImmediate);
+  window.addEventListener('focus', forceShowHeaderImmediate);
 })();
 
+// ===== 新增：监听页面跳转事件 =====
+window.addEventListener('beforeunload', function() {
+  // 在离开页面时，确保header是可见的
+  const header = document.querySelector('#header') || document.querySelector('header');
+  if (header) {
+    header.classList.remove('hidden');
+  }
+});
 
 })(); // 结束 IIFE
