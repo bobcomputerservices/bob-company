@@ -390,47 +390,67 @@ window.addEventListener('load', () => {
   });
 
 /**
- * Smart Sticky Header + Anchor Scroll Fix (兼容返回页面)
+ * Smart Sticky Header + Anchor Scroll Fix
  */
 (function() {
-  function initSmartStickyHeader() {
-    const header = document.querySelector("#header");
-    if (!header) return;
+  const header = document.querySelector("#header");
+  if (!header) return;
 
-    // 记录全局滚动位置
-    if (typeof window._lastScrollY === 'undefined') {
-      window._lastScrollY = window.scrollY;
+  // 初始化全局滚动位置
+  window._lastScrollY = window.scrollY;
+
+  // 滑动隐藏/显示逻辑
+  function smartStickyHeader() {
+    if (window.scrollY === 0) {
+      header.classList.remove("hidden");
+    } else if (window.scrollY > window._lastScrollY) {
+      header.classList.add("hidden");
+    } else {
+      header.classList.remove("hidden");
     }
+    window._lastScrollY = window.scrollY;
+  }
 
-    // 滑动隐藏/显示逻辑
-    function smartStickyHeader() {
-      if (window.scrollY === 0) {
-        header.classList.remove("hidden");
-      } else if (window.scrollY > window._lastScrollY) {
-        header.classList.add("hidden");
-      } else {
-        header.classList.remove("hidden");
-      }
-      window._lastScrollY = window.scrollY;
-    }
+  // 绑定 scroll listener
+  window.addEventListener("scroll", smartStickyHeader, { passive: true });
 
-    // 防止重复绑定
-    if (!header._stickyListenerBound) {
-      window.addEventListener("scroll", smartStickyHeader, { passive: true });
-      header._stickyListenerBound = true;
-    }
+  // scroll-padding-top 避免锚点被 header 遮挡
+  const offset = header.offsetHeight;
+  document.documentElement.style.scrollPaddingTop = offset + "px";
 
-    // 自动设置 scroll-padding-top 避免锚点被 header 遮挡
-    const offset = header.offsetHeight;
-    document.documentElement.style.scrollPaddingTop = offset + "px";
+  // #contact 单独设置 scroll-margin-top
+  const contactEl = document.querySelector("#contact");
+  if (contactEl) {
+    contactEl.style.scrollMarginTop = (offset + 20) + "px";
+  }
 
-    // #contact 单独设置 scroll-margin-top
-    const contactEl = document.querySelector("#contact");
-    if (contactEl) {
-      contactEl.style.scrollMarginTop = (offset + 20) + "px";
-    }
+  // 强制显示 header 并同步滚动位置
+  function forceShowHeader() {
+    header.classList.remove("hidden");
+    header.style.transition = "none"; // 避免闪烁
+    header.style.transform = "translateY(0)";
+    header.style.opacity = "1";
 
-    // 页面加载/返回时，如果 URL 带 hash，滚动到对应位置
+    // 同步滚动位置
+    window._lastScrollY = window.scrollY;
+
+    setTimeout(() => {
+      header.style.transition = "";
+    }, 50);
+  }
+
+  // 页面首次加载 DOMContentLoaded
+  document.addEventListener("DOMContentLoaded", forceShowHeader);
+
+  // bfcache 返回/页面显示
+  window.addEventListener("pageshow", forceShowHeader);
+  window.addEventListener("focus", forceShowHeader);
+
+  // hashchange 时也保证 header 可见
+  window.addEventListener("hashchange", forceShowHeader);
+
+  // 页面加载完如果带 hash，平滑滚动修正
+  window.addEventListener("load", () => {
     if (window.location.hash) {
       const id = window.location.hash.split("?")[0];
       const target = document.querySelector(id);
@@ -441,23 +461,12 @@ window.addEventListener('load', () => {
             top: Math.max(0, top - offset - 10),
             behavior: "smooth"
           });
-        }, 300); // 延迟确保布局完成
+        }, 300);
       }
     }
-
-    // 页面显示时，强制 header 可见
-    header.classList.remove("hidden");
-  }
-
-  // 首次加载
-  document.addEventListener("DOMContentLoaded", initSmartStickyHeader);
-
-  // 返回/恢复页面时
-  window.addEventListener("pageshow", initSmartStickyHeader);
-  window.addEventListener("hashchange", initSmartStickyHeader);
-  window.addEventListener("focus", initSmartStickyHeader);
-
+  });
 })();
+
 
 
 })(); // 结束 IIFE
