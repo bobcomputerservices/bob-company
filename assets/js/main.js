@@ -390,83 +390,98 @@ window.addEventListener('load', () => {
   });
 
 /**
- * Smart Sticky Header + Anchor Scroll Fix
+ * Robust Smart Sticky Header (replace previous smart-sticky block)
+ * - Always (re)attach a named scroll handler (safe for bfcache)
+ * - Show header immediately on pageshow/load, and init lastScrollY so subsequent scrolls work
  */
 (function() {
-  const header = document.querySelector("#header");
+  const header = document.querySelector('#header');
   if (!header) return;
 
-  // 初始化全局滚动位置
-  window._lastScrollY = window.scrollY;
+  // helper: set scroll padding / margins based on header height
+  function applyHeaderOffsets() {
+    try {
+      const offset = header.offsetHeight || 0;
+      document.documentElement.style.scrollPaddingTop = offset + 'px';
+      const contact = document.querySelector('#contact');
+      if (contact) contact.style.scrollMarginTop = (offset + 20) + 'px';
+      return offset;
+    } catch (e) { return 0; }
+  }
 
-  // smart sticky scroll handler
-  function smartStickyHeader() {
-    if (window.scrollY === 0) {
-      header.classList.remove("hidden");
-    } else if (window.scrollY > window._lastScrollY) {
-      header.classList.add("hidden");
+  // named handler so we can remove/re-add reliably
+  function __smartStickyHandler() {
+    const y = window.scrollY || window.pageYOffset || 0;
+
+    // initialize last value if undefined
+    if (typeof window.__lastScrollY === 'undefined') {
+      window.__lastScrollY = y;
+      // do not hide immediately on first call
+      return;
+    }
+
+    if (y <= 0) {
+      header.classList.remove('hidden');
+    } else if (y > window.__lastScrollY) {
+      header.classList.add('hidden');
     } else {
-      header.classList.remove("hidden");
+      header.classList.remove('hidden');
     }
-    window._lastScrollY = window.scrollY;
+
+    window.__lastScrollY = y;
   }
 
-  // 绑定 scroll listener
-  window.addEventListener("scroll", smartStickyHeader, { passive: true });
-
-  // scroll-padding-top 避免锚点被 header 遮挡
-  const offset = header.offsetHeight;
-  document.documentElement.style.scrollPaddingTop = offset + "px";
-
-  // #contact 单独设置 scroll-margin-top
-  const contactEl = document.querySelector("#contact");
-  if (contactEl) {
-    contactEl.style.scrollMarginTop = (offset + 20) + "px";
-  }
-
-  // ✅ 在 load/pageshow/focus/hashchange 时立即显示 header，并保证 smart sticky 正常
-  function showHeaderAndInitScroll() {
-    // 显示 header
-    header.classList.remove("hidden");
-    header.style.transition = "none"; // 避免闪烁
-    header.style.transform = "translateY(0)";
-    header.style.opacity = "1";
-
-    // 初始化 lastScrollY
-    window._lastScrollY = window.scrollY;
-
-    // 确保下一次 scroll 触发 smartStickyHeader
-    setTimeout(() => {
-      header.style.transition = "";
-      smartStickyHeader(); // 调一次，确保状态正确
-    }, 50);
-  }
-
-  // 页面首次 DOMContentLoaded
-  document.addEventListener("DOMContentLoaded", showHeaderAndInitScroll);
-
-  // bfcache 返回/页面显示
-  window.addEventListener("pageshow", showHeaderAndInitScroll);
-  window.addEventListener("focus", showHeaderAndInitScroll);
-  window.addEventListener("hashchange", showHeaderAndInitScroll);
-
-  // 页面加载完如果带 hash，平滑滚动修正
-  window.addEventListener("load", () => {
-    if (window.location.hash) {
-      const id = window.location.hash.split("?")[0];
-      const target = document.querySelector(id);
-      if (target) {
-        setTimeout(() => {
-          const top = target.getBoundingClientRect().top + window.scrollY;
-          window.scrollTo({
-            top: Math.max(0, top - offset - 10),
-            behavior: "smooth"
-          });
-        }, 300);
+  // attach (remove old then add)
+  function attachSmartSticky() {
+    try {
+      // remove previous (if any)
+      if (window.__smartStickyAttached) {
+        window.removeEventListener('scroll', window.__smartStickyHandlerRef, { passive: true });
       }
-    }
+    } catch (e) { /* ignore */ }
+
+    // create an assignable reference so removal works across pageshow
+    window.__smartStickyHandlerRef = __smartStickyHandler;
+    window.addEventListener('scroll', window.__smartStickyHandlerRef, { passive: true });
+    window.__smartStickyAttached = true;
+  }
+
+  // show header immediately and init last scroll value so future scrolls behave
+  function showHeaderNow() {
+    header.classList.remove('hidden');
+
+    // sync last scroll position so the next scroll determines hide/show properly
+    window.__lastScrollY = window.scrollY || window.pageYOffset || 0;
+
+    // ensure handler runs once to normalize state (no visual flicker intended)
+    setTimeout(() => {
+      try { __smartStickyHandler(); } catch (e) {}
+    }, 20);
+  }
+
+  // init on load/pageshow/hashchange/focus, and update offsets on resize
+  function initSmartStickyFlow(evt) {
+    applyHeaderOffsets();
+    attachSmartSticky();
+    showHeaderNow();
+  }
+
+  // Run on initial DOM ready and on pageshow (bfcache resume)
+  document.addEventListener('DOMContentLoaded', initSmartStickyFlow);
+  window.addEventListener('pageshow', initSmartStickyFlow);
+  window.addEventListener('load', initSmartStickyFlow);
+  window.addEventListener('hashchange', initSmartStickyFlow);
+  window.addEventListener('focus', initSmartStickyFlow);
+  window.addEventListener('resize', () => {
+    applyHeaderOffsets();
   });
+
+  // ---------- Optional dev/debug helpers (uncomment to debug)
+  // console.log('smart-sticky installed');
+  // window.addEventListener('scroll', () => { console.debug('scrollY', window.scrollY, 'last', window.__lastScrollY); }, { passive: true });
+
 })();
+
 
 
 
