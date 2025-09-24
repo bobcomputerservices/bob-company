@@ -1683,14 +1683,12 @@ section {
   background-color: #000;
 }
 
-#header {
-  transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.3s ease;
-  opacity: 1; /* 初始完全不透明 */
+/* 只给非 hero section 加补偿，避免 hero 被压下去 */
+#about,
+#why-us,
+#skills,
+#services,
+#portfolio,
+#contact {
+  scroll-margin-top: 100px; /* header = 80px，加一点余量 */
 }
-
-#header.hidden {
-  transform: translateY(-100%); /* 向上滑走 */
-  opacity: 0.8; /* 渐变到半透明 */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 阴影效果 */
-}
-
