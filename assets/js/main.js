@@ -399,7 +399,7 @@ window.addEventListener('load', () => {
   // 初始化全局滚动位置
   window._lastScrollY = window.scrollY;
 
-  // 滑动隐藏/显示逻辑
+  // smart sticky scroll handler
   function smartStickyHeader() {
     if (window.scrollY === 0) {
       header.classList.remove("hidden");
@@ -424,30 +424,31 @@ window.addEventListener('load', () => {
     contactEl.style.scrollMarginTop = (offset + 20) + "px";
   }
 
-  // 强制显示 header 并同步滚动位置
-  function forceShowHeader() {
+  // ✅ 在 load/pageshow/focus/hashchange 时立即显示 header，并保证 smart sticky 正常
+  function showHeaderAndInitScroll() {
+    // 显示 header
     header.classList.remove("hidden");
     header.style.transition = "none"; // 避免闪烁
     header.style.transform = "translateY(0)";
     header.style.opacity = "1";
 
-    // 同步滚动位置
+    // 初始化 lastScrollY
     window._lastScrollY = window.scrollY;
 
+    // 确保下一次 scroll 触发 smartStickyHeader
     setTimeout(() => {
       header.style.transition = "";
+      smartStickyHeader(); // 调一次，确保状态正确
     }, 50);
   }
 
-  // 页面首次加载 DOMContentLoaded
-  document.addEventListener("DOMContentLoaded", forceShowHeader);
+  // 页面首次 DOMContentLoaded
+  document.addEventListener("DOMContentLoaded", showHeaderAndInitScroll);
 
   // bfcache 返回/页面显示
-  window.addEventListener("pageshow", forceShowHeader);
-  window.addEventListener("focus", forceShowHeader);
-
-  // hashchange 时也保证 header 可见
-  window.addEventListener("hashchange", forceShowHeader);
+  window.addEventListener("pageshow", showHeaderAndInitScroll);
+  window.addEventListener("focus", showHeaderAndInitScroll);
+  window.addEventListener("hashchange", showHeaderAndInitScroll);
 
   // 页面加载完如果带 hash，平滑滚动修正
   window.addEventListener("load", () => {
@@ -466,6 +467,7 @@ window.addEventListener('load', () => {
     }
   });
 })();
+
 
 
 
