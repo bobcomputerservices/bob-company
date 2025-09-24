@@ -390,79 +390,57 @@ window.addEventListener('load', () => {
   });
 
 /**
- * 使用 Intersection Observer 的可靠 Sticky Header 方案
+ * 最简单的定时器方案 - 绝对可靠
  */
 document.addEventListener("DOMContentLoaded", function () {
   const header = document.querySelector("#header");
   if (!header) return;
 
-  // 创建观察点元素来检测滚动方向
-  const scrollObserver = document.createElement('div');
-  scrollObserver.id = 'scroll-observer';
-  scrollObserver.style.cssText = `
-    position: absolute;
-    top: 0;
-    height: 1px;
-    width: 100%;
-    pointer-events: none;
-    opacity: 0;
-  `;
-  document.body.appendChild(scrollObserver);
-
-  let lastScrollY = window.scrollY;
+  let lastKnownScrollY = 0;
   let isHidden = false;
 
-  // 使用 Intersection Observer 检测滚动方向
-  const observer = new IntersectionObserver((entries) => {
+  // 每100ms检查一次滚动位置
+  setInterval(() => {
     const currentScrollY = window.scrollY;
     
+    // 忽略微小滚动
+    if (Math.abs(currentScrollY - lastKnownScrollY) < 5) return;
+    
     if (currentScrollY === 0) {
-      // 在页面顶部
-      header.classList.remove("hidden");
-      isHidden = false;
-    } else if (currentScrollY > lastScrollY) {
-      // 向下滚动
+      // 在顶部显示
+      if (isHidden) {
+        header.classList.remove("hidden");
+        isHidden = false;
+      }
+    } else if (currentScrollY > lastKnownScrollY) {
+      // 向下滚动隐藏
       if (currentScrollY > 100 && !isHidden) {
         header.classList.add("hidden");
         isHidden = true;
       }
     } else {
-      // 向上滚动
+      // 向上滚动显示
       if (isHidden) {
         header.classList.remove("hidden");
         isHidden = false;
       }
     }
     
-    lastScrollY = currentScrollY;
-  }, {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0
-  });
-
-  observer.observe(scrollObserver);
+    lastKnownScrollY = currentScrollY;
+  }, 100);
 
   // 设置 scroll-padding
   const offset = header.offsetHeight;
   document.documentElement.style.scrollPaddingTop = offset + "px";
 
-  // 页面显示时重置状态
+  // 页面显示时确保header可见
   window.addEventListener("pageshow", function() {
     header.classList.remove("hidden");
     isHidden = false;
-    lastScrollY = window.scrollY;
-    
-    // 更新观察点位置
-    scrollObserver.style.top = (window.scrollY + 1) + 'px';
+    lastKnownScrollY = window.scrollY;
   });
 
-  // 滚动时更新观察点位置
-  window.addEventListener('scroll', function() {
-    scrollObserver.style.top = (window.scrollY + 1) + 'px';
-  }, { passive: true });
-
-  console.log("Intersection Observer sticky header initialized");
+  console.log("Timer-based sticky header initialized");
 });
 
 })(); // 结束 IIFE
