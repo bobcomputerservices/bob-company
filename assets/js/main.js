@@ -389,82 +389,76 @@ window.addEventListener('load', () => {
     });
   });
 
-  /**
-   * Smart Sticky Header + Anchor Scroll Fix
-   */
-  document.addEventListener("DOMContentLoaded", function () {
-    const header = document.querySelector("#header");
-    if (!header) return;
-
-    window._lastScrollY = window.scrollY;
-
-    function smartStickyHeader() {
-      if (window.scrollY <= 0) {
-        header.classList.remove("hidden");
-      } else {
-        if (window.scrollY > window._lastScrollY) {
-          header.classList.add("hidden");
-        } else if (window.scrollY < window._lastScrollY) {
-          header.classList.remove("hidden");
-        }
-      }
-      window._lastScrollY = window.scrollY;
-    }
-
-    window.addEventListener("scroll", smartStickyHeader);
-
-    const offset = header.offsetHeight;
-    document.documentElement.style.scrollPaddingTop = offset + "px";
-
-    const contactEl = document.querySelector("#contact");
-    if (contactEl) contactEl.style.scrollMarginTop = (offset + 20) + "px";
-
-    window.addEventListener("load", () => {
-      if (window.location.hash) {
-        const id = window.location.hash.split("?")[0];
-        const target = document.querySelector(id);
-        if (target) {
-          const offset = header.offsetHeight;
-          setTimeout(() => {
-            const top = target.getBoundingClientRect().top + window.scrollY;
-            window.scrollTo({
-              top: Math.max(0, top - offset - 10),
-              behavior: "smooth"
-            });
-          }, 300);
-        }
-      }
-    });
-
-    window.addEventListener("pageshow", () => {
-      header.classList.remove("hidden");
-    });
-  });
-
 /**
- * Ensure header shows after returning from subpage,
- * then re-enable smart sticky immediately
+ * Robust Smart Sticky Header (global handler) + show-on-entry fix
+ *
+ * Usage:
+ * - Replaces previous "Smart Sticky Header + Anchor Scroll Fix" block.
+ * - Ensures header is visible when arriving from other pages,
+ *   but still hides/shows smartly on subsequent scroll.
  */
-(function() {
-  function forceShowHeaderAndSync() {
+(function(){
+  'use strict';
+
+  // Ensure global baseline exists
+  window._lastScrollY = typeof window._lastScrollY !== 'undefined' ? window._lastScrollY : window.scrollY || 0;
+
+  // Global smart sticky handler (attached to window so other code can call it)
+  window.smartStickyHandler = function() {
     const header = document.querySelector('#header');
     if (!header) return;
 
-    // Step 1: 永远强制显示 header
+    // If at very top -> always show
+    if (window.scrollY === 0) {
+      header.classList.remove('hidden');
+    } else if (window.scrollY > window._lastScrollY) {
+      // scrolling down -> hide
+      header.classList.add('hidden');
+    } else {
+      // scrolling up -> show
+      header.classList.remove('hidden');
+    }
+
+    // update baseline
+    window._lastScrollY = window.scrollY;
+  };
+
+  // Attach scroll listener once (passive to avoid perf penalty)
+  window.addEventListener('scroll', window.smartStickyHandler, { passive: true });
+
+  // Utility: force show header now and sync baseline, then re-run handler after optional delay
+  function showHeaderOnEntry(delayAfterMs = 50) {
+    const header = document.querySelector('#header');
+    if (!header) return;
+
+    // immediately make visible
     header.classList.remove('hidden');
 
-    // Step 2: 修正 scroll baseline
+    // sync baseline to current scroll position so handler has correct reference
     window._lastScrollY = window.scrollY;
 
-    // Step 3: 立即执行一次 smartStickyHeader 的逻辑
-    if (typeof smartStickyHeader === 'function') {
-      smartStickyHeader();
-    }
+    // call handler after a short delay (in case the browser or other code triggers an anchor scroll)
+    setTimeout(() => {
+      if (typeof window.smartStickyHandler === 'function') window.smartStickyHandler();
+    }, delayAfterMs);
   }
 
-  window.addEventListener('load', forceShowHeaderAndSync);
-  window.addEventListener('pageshow', forceShowHeaderAndSync);
-  window.addEventListener('hashchange', forceShowHeaderAndSync);
+  // WHEN to force-show:
+  // - pageshow: when user navigates back / forward or lands here
+  // - hashchange: when URL hash changes (e.g., clicking anchor links)
+  // - focus: when the tab/window regains focus
+  // - load: after load, but allow extra time (in case you run anchor scroll adjustments later)
+  window.addEventListener('pageshow', () => showHeaderOnEntry(60));
+  window.addEventListener('hashchange', () => showHeaderOnEntry(60));
+  window.addEventListener('focus', () => showHeaderOnEntry(60));
+  window.addEventListener('load', () => {
+    // If your code does a scrollTo(offset) on load, we want to wait a bit longer to ensure the final scroll has happened.
+    // 350ms works well in most cases — 调整该值如果你有更慢的 layout 操作（Isotope/AOS）。
+    showHeaderOnEntry(350);
+  });
+
+  // small helper for debugging — 可在 console 查看是否触发（上线后可删）
+  // console.log('SmartSticky initialised, baseline =', window._lastScrollY);
 })();
 
 })(); // 结束 IIFE
