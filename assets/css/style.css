@@ -144,12 +144,17 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 80px;
 }
 
-/* 主页面 - header透明，借用hero背景 */
+/* 主页面 - hero 区header透明，借用hero背景 */
 body:not(.subpage) #header {
+  background: transparent;
+}
+
+/* 滚动过 hero 时自动变蓝底 */
+body:not(.subpage) #header.header-scrolled {
   background: #37517e;
 }
 
-/* 子页面 - header白底，文字可见 */
+/* 子页面 - header蓝底，文字可见 */
 body.subpage #header {
   background: #37517e;
 }
