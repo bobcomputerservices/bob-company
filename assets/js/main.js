@@ -449,22 +449,16 @@ window.addEventListener('load', () => {
       const header = document.querySelector('#header');
       if (!header) return;
 
+      // 确保 header 可见（避免子页面回来时消失）
       header.classList.remove('hidden');
-      header.style.transition = 'none';
-      header.style.transform = 'translateY(0)';
-      header.style.opacity = '1';
 
-      if (typeof window._lastScrollY !== 'undefined') {
-        window._lastScrollY = window.scrollY;
-      }
-
-      setTimeout(() => { header.style.transition = ''; }, 120);
+      // 修正 scrollY 基准，避免 smartSticky 卡死
+      window._lastScrollY = window.scrollY;
     }
 
     window.addEventListener('load', forceShowHeaderImmediate);
     window.addEventListener('pageshow', forceShowHeaderImmediate);
     window.addEventListener('hashchange', forceShowHeaderImmediate);
-    window.addEventListener('focus', forceShowHeaderImmediate);
   })();
 
 })(); // 结束 IIFE
