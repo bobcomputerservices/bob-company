@@ -146,7 +146,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* 主页面 - header透明，借用hero背景 */
 body:not(.subpage) #header {
-  background: transparent;
+  background: #37517e;
 }
 
 /* 子页面 - header白底，文字可见 */
