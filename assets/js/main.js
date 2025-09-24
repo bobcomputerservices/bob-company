@@ -390,7 +390,7 @@ window.addEventListener('load', () => {
   });
 
 /**
- * Smart Sticky Header + Anchor Scroll Fix - 修复版
+ * Smart Sticky Header + Anchor Scroll Fix - 安全修复版
  */
 
 // 全局初始化函数
@@ -430,9 +430,12 @@ window.initStickyHeader = function() {
   // 🔥 关键修复：根据当前滚动位置立即设置header状态
   if (window.scrollY === 0) {
     header.classList.remove("hidden");
+    console.log("Header shown (at top)");
   } else {
-    // 如果不在顶部，根据滚动方向决定显示/隐藏
-    header.classList.add("hidden"); // 默认先隐藏
+    // 如果不在顶部，根据逻辑决定显示/隐藏
+    // 这里我们显示header，因为用户刚进入页面
+    header.classList.remove("hidden");
+    console.log("Header shown (initial page load)");
   }
 
   console.log("Sticky header initialized, scrollY:", window.scrollY);
@@ -462,55 +465,84 @@ document.addEventListener("DOMContentLoaded", function() {
   if (contactEl) {
     contactEl.style.scrollMarginTop = (offset + 20) + "px";
   }
+
+  // ✅ 处理锚点链接
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        // 显示header
+        window.forceShowHeader();
+        
+        const offset = header.offsetHeight;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        
+        window.scrollTo({
+          top: targetPosition - offset - 10,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
 });
 
-// 🔥 关键修复：处理页面跳转回来的情况
+// 🔥 安全修复：处理页面跳转回来的情况
 window.addEventListener("pageshow", function(e) {
   console.log("pageshow event, persisted:", e.persisted, "scrollY:", window.scrollY);
   
   // 立即强制显示header
   window.forceShowHeader();
   
-  // 短暂延迟后重新初始化并模拟滚动事件
+  // 重新初始化sticky header
   setTimeout(() => {
     window.initStickyHeader();
     
-    // 🔥 关键：手动触发滚动事件来激活sticky逻辑
-    if (window.scrollY > 0) {
+    // 🔥 安全的方法：不实际滚动，而是直接调用滚动处理函数
+    if (window._stickyScrollHandler) {
       // 保存当前滚动位置
-      const currentScroll = window.scrollY;
+      const savedScrollY = window.scrollY;
       
-      // 轻微滚动1像素来触发事件
-      window.scrollTo(window.scrollX, currentScroll + 1);
+      // 临时修改_lastScrollY来触发显示逻辑
+      window._lastScrollY = savedScrollY + 10; // 假装之前滚动更多
       
-      // 立即滚回原位置（用户不会察觉）
-      setTimeout(() => {
-        window.scrollTo(window.scrollX, currentScroll);
-        console.log("Scroll event simulated");
-      }, 10);
+      // 手动调用滚动处理函数
+      window._stickyScrollHandler();
+      
+      console.log("Sticky logic manually triggered");
     }
-  }, 100);
+  }, 150);
 });
 
-// 其他事件监听
-window.addEventListener("focus", function() {
-  setTimeout(() => {
-    window.initStickyHeader();
-  }, 30);
-});
-
+// 简单的popstate处理
 window.addEventListener("popstate", function() {
+  console.log("popstate event");
   window.forceShowHeader();
   setTimeout(() => {
     window.initStickyHeader();
   }, 100);
 });
 
-// 添加手动重置函数（用于调试）
-window.resetStickyHeader = function() {
-  window.forceShowHeader();
-  window.initStickyHeader();
-  console.log("Sticky header manually reset");
+// 页面加载完成后也重新初始化
+window.addEventListener("load", function() {
+  setTimeout(() => {
+    window.initStickyHeader();
+  }, 200);
+});
+
+// 添加调试函数
+window.debugStickyHeader = function() {
+  const header = document.querySelector("#header");
+  console.log("=== Sticky Header Debug ===");
+  console.log("Header exists:", !!header);
+  console.log("Has 'hidden' class:", header?.classList.contains('hidden'));
+  console.log("Window scrollY:", window.scrollY);
+  console.log("LastScrollY:", window._lastScrollY);
+  console.log("Scroll handler:", window._stickyScrollHandler ? "Exists" : "Missing");
 };
 
 })(); // 结束 IIFE
