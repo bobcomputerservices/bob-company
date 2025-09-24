@@ -378,4 +378,97 @@ window.addEventListener('load', () => {
     });
   });
 
+/**
+ * Smart Sticky Header + Anchor Scroll Fix
+ */
+document.addEventListener("DOMContentLoaded", function () {
+  const header = document.querySelector("#header");
+  if (!header) return;
+
+  // 使用全局变量保存上一次滚动位置，便于外部强制重置
+window._lastScrollY = window.scrollY;
+
+function smartStickyHeader() {
+  if (window.scrollY === 0) {
+    header.classList.remove("hidden");
+  } else if (window.scrollY > window._lastScrollY) {
+    header.classList.add("hidden");
+  } else {
+    header.classList.remove("hidden");
+  }
+  window._lastScrollY = window.scrollY;
+}
+
+  window.addEventListener("scroll", smartStickyHeader);
+
+  // ✅ 自动设置 scroll-padding-top (避免锚点被 header 遮挡)
+  const offset = header.offsetHeight;
+  document.documentElement.style.scrollPaddingTop = offset + "px";
+
+  // ✅ 为 #contact 单独设置 scroll-margin-top
+  const contactEl = document.querySelector("#contact");
+  if (contactEl) {
+    contactEl.style.scrollMarginTop = (offset + 20) + "px";
+  }
+
+  // ✅ 页面加载完后，检查是否带 hash (#contact 等)
+  window.addEventListener("load", () => {
+    if (window.location.hash) {
+      const id = window.location.hash.split("?")[0];
+      const target = document.querySelector(id);
+      if (target) {
+        const offset = header.offsetHeight;
+        console.log("scroll fix applied for:", id, "offset =", offset);
+
+        // 延迟一点，确保 AOS / Isotope 等布局完成
+        setTimeout(() => {
+          const top = target.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({
+            top: Math.max(0, top - offset - 10),
+            behavior: "smooth"
+          });
+          console.log("scroll moved to:", top - offset - 10);
+        }, 300);
+      }
+    }
+  });
+
+  // ✅ 无论从哪里跳转回来，强制 header 默认显示
+  window.addEventListener("pageshow", () => {
+    header.classList.remove("hidden");
+    console.log("Header forced visible on page load");
+  });
+});
+  
+  // ===== 强化：在 load/pageshow/hashchange/focus 时强制显示 header 并短暂取消 transition =====
+  (function() {
+    function forceShowHeaderImmediate() {
+      const header = document.querySelector('#header') || document.querySelector('header');
+      if (!header) return;
+
+      // 取消任何隐藏 class，并用 inline 样式确保可见（覆盖 .hidden 的 transform/opacity）
+      header.classList.remove('hidden');
+      header.style.transition = 'none';
+      header.style.transform = 'translateY(0)';
+      header.style.opacity = '1';
+      header.style.display = header.style.display || '';
+
+      // 同步重置全局滚动记录，避免 smartStickyHeader 误判
+      if (typeof window._lastScrollY !== 'undefined') {
+        window._lastScrollY = window.scrollY;
+      }
+
+      // 恢复 transition（短延迟以避免闪烁）
+      setTimeout(() => {
+        header.style.transition = '';
+      }, 120);
+    }
+
+    // 在这些时机都强制显示 header（load/pageshow/hashchange/focus）
+    window.addEventListener('load', forceShowHeaderImmediate);
+    window.addEventListener('pageshow', forceShowHeaderImmediate);
+    window.addEventListener('hashchange', forceShowHeaderImmediate);
+    window.addEventListener('focus', forceShowHeaderImmediate);
+  })();  
+  
 })(); // 结束 IIFE
