@@ -420,5 +420,27 @@ window.addEventListener('load', () => {
       mirror: false
     });
   });
+
+   /**
+   * 浏览器在 scrollIntoView() 或 anchor (#id) 定位时，会自动考虑 scroll-margin-top
+   * 这样即使 header 是 fixed-top，也不会遮住 section title
+   */
+  document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector("#header");
+
+    if (header) {
+      const headerHeight = header.offsetHeight + 20; // 额外多 20px buffer
+
+      // 给目标 sections 动态设置 scroll-margin-top
+      const sections = ["about", "why-us", "skills", "services", "portfolio", "contact"];
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.style.scrollMarginTop = headerHeight + "px";
+        }
+      });
+    }
+  });
+
   
 })(); // 结束 IIFE
