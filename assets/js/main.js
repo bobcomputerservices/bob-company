@@ -441,24 +441,30 @@ window.addEventListener('load', () => {
     });
   });
 
-  /**
-   * Force show header on load/pageshow/hashchange/focus
-   */
-  (function() {
-    function forceShowHeaderImmediate() {
-      const header = document.querySelector('#header');
-      if (!header) return;
+/**
+ * Ensure header shows after returning from subpage,
+ * then re-enable smart sticky immediately
+ */
+(function() {
+  function forceShowHeaderAndSync() {
+    const header = document.querySelector('#header');
+    if (!header) return;
 
-      // 确保 header 可见（避免子页面回来时消失）
-      header.classList.remove('hidden');
+    // Step 1: 永远强制显示 header
+    header.classList.remove('hidden');
 
-      // 修正 scrollY 基准，避免 smartSticky 卡死
-      window._lastScrollY = window.scrollY;
+    // Step 2: 修正 scroll baseline
+    window._lastScrollY = window.scrollY;
+
+    // Step 3: 立即执行一次 smartStickyHeader 的逻辑
+    if (typeof smartStickyHeader === 'function') {
+      smartStickyHeader();
     }
+  }
 
-    window.addEventListener('load', forceShowHeaderImmediate);
-    window.addEventListener('pageshow', forceShowHeaderImmediate);
-    window.addEventListener('hashchange', forceShowHeaderImmediate);
-  })();
+  window.addEventListener('load', forceShowHeaderAndSync);
+  window.addEventListener('pageshow', forceShowHeaderAndSync);
+  window.addEventListener('hashchange', forceShowHeaderAndSync);
+})();
 
 })(); // 结束 IIFE
