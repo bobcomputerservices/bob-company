@@ -477,6 +477,33 @@ window.addEventListener('load', () => {
     performAnchorFixOnce(msDelay);
   };
 
+  // Robust Anchor Hash Fix + Force Header Visible
+window.addEventListener('load', () => {
+  if (location.hash) {
+    const target = document.querySelector(location.hash);
+    if (target) {
+      setTimeout(() => {
+        const header = document.querySelector('#header');
+        const headerHeight = header ? header.offsetHeight : 0;
+        const targetTop = target.getBoundingClientRect().top + window.scrollY;
+
+        // 平滑修正
+        window.scrollTo({
+          top: targetTop - headerHeight,
+          behavior: "auto"
+        });
+
+        // ✅ 如果不是在页面最顶部，强制显示 header
+        if (window.scrollY > 50 && header) {
+          header.classList.add('header-scrolled');
+          header.classList.add('fixed-top');
+          header.style.transform = "translateY(0)"; // 确保可见
+        }
+      }, 100); // 等待浏览器完成 hash 定位再修正
+    }
+  }
+});
+
 })(); // end local scope
 
 })(); // 结束 IIFE
