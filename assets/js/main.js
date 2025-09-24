@@ -390,54 +390,79 @@ window.addEventListener('load', () => {
   });
 
 /**
- * 超简单Sticky Header方案
+ * 使用 Intersection Observer 的可靠 Sticky Header 方案
  */
 document.addEventListener("DOMContentLoaded", function () {
   const header = document.querySelector("#header");
   if (!header) return;
 
+  // 创建观察点元素来检测滚动方向
+  const scrollObserver = document.createElement('div');
+  scrollObserver.id = 'scroll-observer';
+  scrollObserver.style.cssText = `
+    position: absolute;
+    top: 0;
+    height: 1px;
+    width: 100%;
+    pointer-events: none;
+    opacity: 0;
+  `;
+  document.body.appendChild(scrollObserver);
+
   let lastScrollY = window.scrollY;
+  let isHidden = false;
 
-  function smartStickyHeader() {
-    // 如果滚动距离很小，忽略
-    if (Math.abs(window.scrollY - lastScrollY) < 5) return;
+  // 使用 Intersection Observer 检测滚动方向
+  const observer = new IntersectionObserver((entries) => {
+    const currentScrollY = window.scrollY;
     
-    if (window.scrollY === 0) {
+    if (currentScrollY === 0) {
+      // 在页面顶部
       header.classList.remove("hidden");
-    } else if (window.scrollY > lastScrollY && window.scrollY > 100) {
-      header.classList.add("hidden");
+      isHidden = false;
+    } else if (currentScrollY > lastScrollY) {
+      // 向下滚动
+      if (currentScrollY > 100 && !isHidden) {
+        header.classList.add("hidden");
+        isHidden = true;
+      }
     } else {
-      header.classList.remove("hidden");
+      // 向上滚动
+      if (isHidden) {
+        header.classList.remove("hidden");
+        isHidden = false;
+      }
     }
     
-    lastScrollY = window.scrollY;
-  }
-
-  // 监听滚动
-  window.addEventListener("scroll", smartStickyHeader);
-
-  // 🔥 关键：每秒检查一次页面状态（确保header状态正确）
-  setInterval(function() {
-    if (window.scrollY > 100 && window.scrollY === lastScrollY) {
-      // 如果页面在底部且长时间没有滚动，确保header隐藏
-      header.classList.add("hidden");
-    }
-  }, 1000);
-
-  // 页面显示时强制刷新状态
-  window.addEventListener("pageshow", function() {
-    header.classList.remove("hidden");
-    lastScrollY = window.scrollY;
-    
-    // 短暂延迟后触发一次检查
-    setTimeout(() => {
-      smartStickyHeader();
-    }, 50);
+    lastScrollY = currentScrollY;
+  }, {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0
   });
 
-  // 设置scroll-padding
+  observer.observe(scrollObserver);
+
+  // 设置 scroll-padding
   const offset = header.offsetHeight;
   document.documentElement.style.scrollPaddingTop = offset + "px";
+
+  // 页面显示时重置状态
+  window.addEventListener("pageshow", function() {
+    header.classList.remove("hidden");
+    isHidden = false;
+    lastScrollY = window.scrollY;
+    
+    // 更新观察点位置
+    scrollObserver.style.top = (window.scrollY + 1) + 'px';
+  });
+
+  // 滚动时更新观察点位置
+  window.addEventListener('scroll', function() {
+    scrollObserver.style.top = (window.scrollY + 1) + 'px';
+  }, { passive: true });
+
+  console.log("Intersection Observer sticky header initialized");
 });
 
 })(); // 结束 IIFE
