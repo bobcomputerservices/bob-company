@@ -145,17 +145,6 @@
   }, true)
 
   /**
-   * Scroll with ofset on page load with hash links in the url
-   */
-  window.addEventListener('load', () => {
-    if (window.location.hash) {
-      if (select(window.location.hash)) {
-        scrollto(window.location.hash)
-      }
-    }
-  });
-
-  /**
    * Preloader
    */
   let preloader = select('#preloader');
@@ -390,75 +379,104 @@ window.addEventListener('load', () => {
   });
 
 /**
- * Robust Smart Sticky Header (global handler) + show-on-entry fix
- *
- * Usage:
- * - Replaces previous "Smart Sticky Header + Anchor Scroll Fix" block.
- * - Ensures header is visible when arriving from other pages,
- *   but still hides/shows smartly on subsequent scroll.
+ * Unified Smart Sticky Header + Robust Anchor Hash Fix
+ * Replace any prior "smart sticky" / anchor-fix blocks with this one.
+ * This:
+ *  - ensures header is shown when arriving from other pages,
+ *  - performs ONE single, delayed, reliable anchor scroll fix,
+ *  - preserves smart hide/show on subsequent scrolling.
  */
 (function(){
-  'use strict';
+  // use existing `select` helper if available, else fallback
+  const header = (typeof select === 'function') ? select('#header') : document.querySelector('#header');
+  if (!header) return;
 
-  // Ensure global baseline exists
-  window._lastScrollY = typeof window._lastScrollY !== 'undefined' ? window._lastScrollY : window.scrollY || 0;
+  // keep a global baseline for last scroll Y so handler behaves consistently
+  window._lastScrollY = (typeof window._lastScrollY !== 'undefined') ? window._lastScrollY : window.scrollY || 0;
+  window._didAnchorFix = false; // ensure we only fix anchor once per page load/navigation
 
-  // Global smart sticky handler (attached to window so other code can call it)
+  // smart sticky handler (exposed globally so can be triggered if needed)
   window.smartStickyHandler = function() {
-    const header = document.querySelector('#header');
     if (!header) return;
-
-    // If at very top -> always show
     if (window.scrollY === 0) {
       header.classList.remove('hidden');
     } else if (window.scrollY > window._lastScrollY) {
-      // scrolling down -> hide
       header.classList.add('hidden');
     } else {
-      // scrolling up -> show
       header.classList.remove('hidden');
     }
-
-    // update baseline
     window._lastScrollY = window.scrollY;
   };
 
-  // Attach scroll listener once (passive to avoid perf penalty)
+  // attach scroll listener once (passive for performance)
   window.addEventListener('scroll', window.smartStickyHandler, { passive: true });
 
-  // Utility: force show header now and sync baseline, then re-run handler after optional delay
-  function showHeaderOnEntry(delayAfterMs = 50) {
-    const header = document.querySelector('#header');
-    if (!header) return;
-
-    // immediately make visible
+  // force-show header now and sync baseline
+  function showHeaderNow() {
     header.classList.remove('hidden');
-
-    // sync baseline to current scroll position so handler has correct reference
+    // temporarily remove transition to avoid visible jump (then restore)
+    const prevTransition = header.style.transition;
+    header.style.transition = 'none';
+    // sync baseline
     window._lastScrollY = window.scrollY;
-
-    // call handler after a short delay (in case the browser or other code triggers an anchor scroll)
+    // restore transition slightly later
     setTimeout(() => {
-      if (typeof window.smartStickyHandler === 'function') window.smartStickyHandler();
-    }, delayAfterMs);
+      header.style.transition = prevTransition || '';
+    }, 120);
   }
 
-  // WHEN to force-show:
-  // - pageshow: when user navigates back / forward or lands here
-  // - hashchange: when URL hash changes (e.g., clicking anchor links)
-  // - focus: when the tab/window regains focus
-  // - load: after load, but allow extra time (in case you run anchor scroll adjustments later)
-  window.addEventListener('pageshow', () => showHeaderOnEntry(60));
-  window.addEventListener('hashchange', () => showHeaderOnEntry(60));
-  window.addEventListener('focus', () => showHeaderOnEntry(60));
-  window.addEventListener('load', () => {
-    // If your code does a scrollTo(offset) on load, we want to wait a bit longer to ensure the final scroll has happened.
-    // 350ms works well in most cases — 调整该值如果你有更慢的 layout 操作（Isotope/AOS）。
-    showHeaderOnEntry(350);
+  // this function performs ONE reliable anchor scroll fix (if hash present)
+  function performAnchorFixOnce(delayMs = 350) {
+    if (window._didAnchorFix) return;
+    if (!window.location.hash) return;
+    const id = window.location.hash.split('?')[0]; // handle cases like #portfolio?tab=...
+    const target = document.querySelector(id);
+    if (!target) return;
+    window._didAnchorFix = true;
+
+    // wait so that Isotope/AOS/layout have finished; then scroll to target - headerHeight
+    setTimeout(() => {
+      const rectTop = target.getBoundingClientRect().top + window.scrollY;
+      const offset = header.offsetHeight || 0;
+      const finalTop = Math.max(0, rectTop - offset - 8); // small buffer
+      window.scrollTo({ top: finalTop, behavior: 'smooth' });
+      // sync baseline after scroll
+      setTimeout(() => { window._lastScrollY = window.scrollY; }, 300);
+    }, delayMs);
+  }
+
+  // WHEN to force-show header + do anchor fix:
+  // - pageshow (back/forward navigation)
+  // - load
+  // - hashchange
+  // - focus (tab switch)
+  window.addEventListener('pageshow', () => {
+    showHeaderNow();
+    performAnchorFixOnce(200);
   });
 
-  // small helper for debugging — 可在 console 查看是否触发（上线后可删）
-  // console.log('SmartSticky initialised, baseline =', window._lastScrollY);
-})();
+  window.addEventListener('load', () => {
+    showHeaderNow();
+    // give heavy layout scripts (Isotope/AOS) a bit more time on load
+    performAnchorFixOnce(450);
+  });
+
+  window.addEventListener('hashchange', () => {
+    showHeaderNow();
+    performAnchorFixOnce(150);
+  });
+
+  window.addEventListener('focus', () => {
+    // user switched back to tab -> ensure header visible and baseline synced
+    showHeaderNow();
+  });
+
+  // optional: if you ever need to trigger fix manually elsewhere:
+  window.fixAnchorAndShowHeader = function(msDelay = 350) {
+    showHeaderNow();
+    performAnchorFixOnce(msDelay);
+  };
+
+})(); // end local scope
 
 })(); // 结束 IIFE
