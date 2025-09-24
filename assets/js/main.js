@@ -60,19 +60,62 @@
   window.addEventListener('load', navbarlinksActive)
   onscroll(document, navbarlinksActive)
 
-  /**
-   * Scrolls to an element with header offset
-   */
-  const scrollto = (el) => {
-    let header = select('#header')
-    let offset = header.offsetHeight
+/**
+ * Scrolls to an element with header offset
+ */
+const scrollto = (el) => {
+  let header = select('#header');
+  let offset = header.offsetHeight;
 
-    let elementPos = select(el).offsetTop
-    window.scrollTo({
-      top: elementPos - offset,
-      behavior: 'smooth'
-    })
+  let elementPos = select(el).offsetTop;
+  window.scrollTo({
+    top: elementPos - offset,
+    behavior: 'smooth'
+  });
+};
+
+/**
+ * Scroll with offset on links with a class name .scrollto
+ * Works for both "#section" and "index.html#section"
+ */
+on('click', '.scrollto', function(e) {
+  let targetHash = this.hash;
+
+  // 如果 this.hash 为空，就尝试从 href 解析
+  if (!targetHash && this.getAttribute('href')) {
+    let href = this.getAttribute('href');
+    let parts = href.split('#');
+    if (parts.length > 1) {
+      targetHash = '#' + parts[1];
+    }
   }
+
+  if (targetHash && select(targetHash)) {
+    e.preventDefault();
+
+    // 移动端菜单收起
+    let navbar = select('#navbar');
+    if (navbar.classList.contains('navbar-mobile')) {
+      navbar.classList.remove('navbar-mobile');
+      let navbarToggle = select('.mobile-nav-toggle');
+      navbarToggle.classList.toggle('bi-list');
+      navbarToggle.classList.toggle('bi-x');
+    }
+
+    // 平滑滚动
+    scrollto(targetHash);
+  }
+}, true);
+
+/**
+ * Scroll with offset on page load with hash links in the url
+ */
+window.addEventListener('load', () => {
+  if (window.location.hash && select(window.location.hash)) {
+    scrollto(window.location.hash);
+  }
+});
+
 
   /**
    * Toggle .header-scrolled class to #header when page is scrolled
