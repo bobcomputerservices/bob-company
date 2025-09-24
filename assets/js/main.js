@@ -390,69 +390,61 @@ window.addEventListener('load', () => {
   });
 
 /**
- * Smart Sticky Header + Anchor Scroll Fix - 增强版
+ * Smart Sticky Header + Anchor Scroll Fix - 修复版
  */
 
-// 使用全局函数确保可以重新初始化
+// 全局初始化函数
 window.initStickyHeader = function() {
   const header = document.querySelector("#header");
   if (!header) return;
 
-  // 清除现有的滚动监听
+  // 清除旧的监听器
   if (window._stickyScrollHandler) {
     window.removeEventListener("scroll", window._stickyScrollHandler);
   }
 
-  // 初始化全局变量
+  // 重置滚动记录
   window._lastScrollY = window.scrollY;
-  window._headerInitialized = true;
 
-  // 定义滚动处理函数
+  // 新的滚动处理函数
   window._stickyScrollHandler = function() {
-    if (window.scrollY === 0) {
+    const currentScrollY = window.scrollY;
+    
+    if (currentScrollY === 0) {
       // 在顶部时显示header
       header.classList.remove("hidden");
-    } else if (window.scrollY > window._lastScrollY && window.scrollY > 100) {
+    } else if (currentScrollY > window._lastScrollY && currentScrollY > 100) {
       // 向下滚动超过100px时隐藏
       header.classList.add("hidden");
-    } else if (window.scrollY < window._lastScrollY) {
+    } else if (currentScrollY < window._lastScrollY) {
       // 向上滚动时显示
       header.classList.remove("hidden");
     }
-    window._lastScrollY = window.scrollY;
+    
+    window._lastScrollY = currentScrollY;
   };
 
   // 添加滚动监听
   window.addEventListener("scroll", window._stickyScrollHandler, { passive: true });
 
-  // 立即根据当前滚动位置设置状态
+  // 🔥 关键修复：根据当前滚动位置立即设置header状态
   if (window.scrollY === 0) {
     header.classList.remove("hidden");
-  } else if (window.scrollY > 100) {
-    header.classList.add("hidden");
   } else {
-    header.classList.remove("hidden");
+    // 如果不在顶部，根据滚动方向决定显示/隐藏
+    header.classList.add("hidden"); // 默认先隐藏
   }
 
   console.log("Sticky header initialized, scrollY:", window.scrollY);
 };
 
-// 强制显示header的函数
+// 强制显示header
 window.forceShowHeader = function() {
   const header = document.querySelector("#header");
   if (!header) return;
 
   header.classList.remove("hidden");
-  header.style.transition = 'none';
-  header.style.transform = 'translateY(0)';
-  header.style.opacity = '1';
-
-  // 重置滚动记录
-  window._lastScrollY = window.scrollY;
-
-  setTimeout(() => {
-    header.style.transition = '';
-  }, 100);
+  console.log("Header forced to show");
 };
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -462,106 +454,63 @@ document.addEventListener("DOMContentLoaded", function() {
   const header = document.querySelector("#header");
   if (!header) return;
 
-  // ✅ 自动设置 scroll-padding-top
+  // 设置scroll-padding
   const offset = header.offsetHeight;
   document.documentElement.style.scrollPaddingTop = offset + "px";
 
-  // ✅ 为 #contact 单独设置 scroll-margin-top
   const contactEl = document.querySelector("#contact");
   if (contactEl) {
     contactEl.style.scrollMarginTop = (offset + 20) + "px";
   }
-
-  // ✅ 页面加载后处理hash锚点
-  window.addEventListener("load", () => {
-    if (window.location.hash) {
-      const id = window.location.hash.split("?")[0];
-      const target = document.querySelector(id);
-      if (target) {
-        setTimeout(() => {
-          const top = target.getBoundingClientRect().top + window.scrollY;
-          window.scrollTo({
-            top: Math.max(0, top - offset - 10),
-            behavior: "smooth"
-          });
-        }, 300);
-      }
-    }
-  });
 });
 
-// ===== 增强的事件监听 =====
+// 🔥 关键修复：处理页面跳转回来的情况
 window.addEventListener("pageshow", function(e) {
-  console.log("pageshow event, persisted:", e.persisted);
+  console.log("pageshow event, persisted:", e.persisted, "scrollY:", window.scrollY);
   
-  // 强制显示header
+  // 立即强制显示header
   window.forceShowHeader();
   
-  // 重新初始化sticky header
+  // 短暂延迟后重新初始化并模拟滚动事件
   setTimeout(() => {
     window.initStickyHeader();
-  }, 50);
+    
+    // 🔥 关键：手动触发滚动事件来激活sticky逻辑
+    if (window.scrollY > 0) {
+      // 保存当前滚动位置
+      const currentScroll = window.scrollY;
+      
+      // 轻微滚动1像素来触发事件
+      window.scrollTo(window.scrollX, currentScroll + 1);
+      
+      // 立即滚回原位置（用户不会察觉）
+      setTimeout(() => {
+        window.scrollTo(window.scrollX, currentScroll);
+        console.log("Scroll event simulated");
+      }, 10);
+    }
+  }, 100);
 });
 
+// 其他事件监听
 window.addEventListener("focus", function() {
-  console.log("focus event - reinitializing sticky header");
   setTimeout(() => {
     window.initStickyHeader();
   }, 30);
 });
 
-// 监听popstate事件（浏览器前进/后退）
 window.addEventListener("popstate", function() {
-  console.log("popstate event - reinitializing sticky header");
   window.forceShowHeader();
   setTimeout(() => {
     window.initStickyHeader();
   }, 100);
 });
 
-// 监听hashchange
-window.addEventListener("hashchange", function() {
-  console.log("hashchange event");
+// 添加手动重置函数（用于调试）
+window.resetStickyHeader = function() {
   window.forceShowHeader();
-});
-
-// 页面可见性变化
-document.addEventListener("visibilitychange", function() {
-  if (!document.hidden) {
-    console.log("page visible - reinitializing sticky header");
-    setTimeout(() => {
-      window.initStickyHeader();
-      window.forceShowHeader();
-    }, 50);
-  }
-});
-
-// 确保页面卸载前header可见
-window.addEventListener("beforeunload", function() {
-  window.forceShowHeader();
-});
-
-// 添加一个重置按钮用于测试（可选）
-document.addEventListener("DOMContentLoaded", function() {
-  // 添加调试按钮（生产环境可移除）
-  const debugBtn = document.createElement('button');
-  debugBtn.textContent = '重置Sticky Header';
-  debugBtn.style.position = 'fixed';
-  debugBtn.style.bottom = '10px';
-  debugBtn.style.right = '10px';
-  debugBtn.style.zIndex = '10000';
-  debugBtn.style.padding = '10px';
-  debugBtn.style.background = '#007acc';
-  debugBtn.style.color = 'white';
-  debugBtn.style.border = 'none';
-  debugBtn.style.borderRadius = '5px';
-  debugBtn.style.cursor = 'pointer';
-  debugBtn.addEventListener('click', function() {
-    window.initStickyHeader();
-    window.forceShowHeader();
-    console.log('Manual reset triggered');
-  });
-  document.body.appendChild(debugBtn);
-});
+  window.initStickyHeader();
+  console.log("Sticky header manually reset");
+};
 
 })(); // 结束 IIFE
