@@ -116,8 +116,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.5s;
   z-index: 997;
   padding: 5px 0;
-  background: transparent;   /* 改成透明 */
-  box-shadow: none;          /* 透明时建议取消阴影 */
+ 
   display: flex;                
   align-items: center;         
   justify-content: space-between; 
