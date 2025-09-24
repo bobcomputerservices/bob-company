@@ -1670,7 +1670,6 @@ section {
 #header.hidden {
   transform: translateY(-100%); /* 向上滑走 */
   opacity: 0.8; /* 渐变到半透明 */
-  pointer-events: none; /* 添加这个防止交互 */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 阴影效果 */
 }
 
