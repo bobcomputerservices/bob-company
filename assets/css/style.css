@@ -1024,10 +1024,6 @@ section {
   right: 10px;
 }
 
-.portfolio .portfolio-item:hover .portfolio-img img {
-  transform: scale(1.15);
-}
-
 .portfolio .portfolio-item:hover .portfolio-info {
   opacity: 1;
 }
