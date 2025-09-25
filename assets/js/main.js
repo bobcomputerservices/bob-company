@@ -541,6 +541,20 @@ eventsSwipers.forEach(function(swiperEl) {
   });
 });
   
-  
+// Clients Swipers
+var clientsSwipers = document.querySelectorAll(".clients-swiper");
+clientsSwipers.forEach(function(swiperEl) {
+  new Swiper(swiperEl, {
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: swiperEl.querySelector(".swiper-pagination"),
+      clickable: true,
+    },
+  });
+});  
 
 })(); // 结束 IIFE
