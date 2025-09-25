@@ -508,38 +508,5 @@ document.querySelectorAll('.portfolio-slider').forEach(function (sliderEl) {
     }
   });
 });
-
-// Training Swipers
-var trainingSwipers = document.querySelectorAll(".training-swiper");
-trainingSwipers.forEach(function(swiperEl) {
-  new Swiper(swiperEl, {
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: swiperEl.querySelector(".swiper-pagination"),
-      clickable: true,
-    },
-  });
-});
-
-// Events Swipers
-var eventsSwipers = document.querySelectorAll(".events-swiper");
-eventsSwipers.forEach(function(swiperEl) {
-  new Swiper(swiperEl, {
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: swiperEl.querySelector(".swiper-pagination"),
-      clickable: true,
-    },
-  });
-});
-
-  
+ 
 })(); // 结束 IIFE
