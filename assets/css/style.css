@@ -1032,25 +1032,34 @@ section {
   opacity: 1;
 }
 
-/* ✅ Portfolio 网格里的 swiper 分页 */
-.portfolio .portfolio-item .swiper-pagination {
-  position: relative;       /* 不要 absolute，避免挤到 info 里 */
-  margin-top: 10px;         /* 图片和圆点之间留点空隙 */
-  text-align: center;       /* 圆点居中 */
+/* ✅ 网格里的 swiper 图片 */
+.portfolio .portfolio-item .portfolio-slider img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;   /* 不会被拉长 */
+  border-radius: 6px;
 }
 
-.portfolio .portfolio-item .swiper-pagination .swiper-pagination-bullet {
-  width: 10px;
-  height: 10px;
-  background-color: #fff;
-  opacity: 1;
+/* ✅ 分页点在图片下方 */
+.portfolio .portfolio-item .portfolio-slider .swiper-pagination {
+  position: relative;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.portfolio .portfolio-item .portfolio-slider .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: #fff;
   border: 1px solid #47b2e4;
-  margin: 0 4px;
+  opacity: 1;
+  margin: 0 3px;
 }
 
-.portfolio .portfolio-item .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #47b2e4;
+.portfolio .portfolio-item .portfolio-slider .swiper-pagination-bullet-active {
+  background: #47b2e4;
 }
+
 
 /*--------------------------------------------------------------
 # Portfolio Details
