@@ -402,22 +402,6 @@ window.addEventListener('load', () => {
     selector: '.portfolio-lightbox'
   });
 
-  /**
-   * Portfolio details slider
-   */
-  new Swiper('.portfolio-details-slider', {
-  speed: 800,
-  loop: true,
-  autoplay: {
-    delay: 4000,
-    disableOnInteraction: false
-  },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true
-  }
-});
-
 
   /**
    * Animation on scroll
@@ -489,24 +473,5 @@ window.addEventListener('load', () => {
   // Optional: expose for manual debugging
   window.__doAnchorFix = handleAnchorFix;
 })();
-
-/**
- * Portfolio grid sliders
- * 让每个 .portfolio-slider 独立运作
- */
-document.querySelectorAll('.portfolio-slider').forEach(function (sliderEl) {
-  new Swiper(sliderEl, {
-    speed: 800,
-    loop: true,
-    autoplay: {
-      delay: 4000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: sliderEl.querySelector('.swiper-pagination'),
-      clickable: true
-    }
-  });
-});
   
 })(); // 结束 IIFE
