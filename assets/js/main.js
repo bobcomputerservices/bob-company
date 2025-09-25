@@ -474,6 +474,19 @@ window.addEventListener('load', () => {
   window.__doAnchorFix = handleAnchorFix;
 })();
 
+new Swiper('.portfolio-details-slider', {
+  speed: 800,
+  loop: true,
+  autoplay: {
+    delay: 4000,
+    disableOnInteraction: false
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true
+  }
+});
+
 /**
  * Portfolio grid sliders
  * 让每个 .portfolio-slider 独立运作
