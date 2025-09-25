@@ -116,7 +116,17 @@ window.addEventListener('load', () => {
   }
 });
 
+// 动态给 section 设置 scroll-margin-top
+window.addEventListener('load', () => {
+  const header = document.querySelector('#header');
+  if (!header) return;
 
+  const offset = header.offsetHeight;
+  document.querySelectorAll('section[id]').forEach(section => {
+    section.style.scrollMarginTop = offset + 'px';
+  });
+});
+  
   /**
    * Toggle .header-scrolled class to #header when page is scrolled
    */
