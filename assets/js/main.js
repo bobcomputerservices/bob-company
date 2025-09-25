@@ -508,21 +508,5 @@ document.querySelectorAll('.portfolio-slider').forEach(function (sliderEl) {
     }
   });
 });
-
-// Training Swipers
-document.querySelectorAll('.portfolio-slider').forEach(function (sliderEl) {
-  new Swiper(sliderEl, {
-    speed: 800,
-    loop: true,
-    autoplay: {
-      delay: 4000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: sliderEl.querySelector('.swiper-pagination'),
-      clickable: true
-    }
-  });
-});
   
 })(); // 结束 IIFE
