@@ -1692,3 +1692,8 @@ section {
 #contact {
   scroll-margin-top: 100px; /* header = 80px，加一点余量 */
 }
+
+/* fallback - reserve space for fixed header when jumping via anchors */
+@supports (scroll-margin-top: 0px) {
+  section[id] { scroll-margin-top: 90px; } /* 用你 header 的实际高度调整（例如 80px -> 写 90px 给 buffer） */
+}
