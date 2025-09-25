@@ -524,5 +524,22 @@ trainingSwipers.forEach(function(swiperEl) {
     },
   });
 });
-    
+
+// Events Swipers
+var eventsSwipers = document.querySelectorAll(".events-swiper");
+eventsSwipers.forEach(function(swiperEl) {
+  new Swiper(swiperEl, {
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: swiperEl.querySelector(".swiper-pagination"),
+      clickable: true,
+    },
+  });
+});
+
+  
 })(); // 结束 IIFE
