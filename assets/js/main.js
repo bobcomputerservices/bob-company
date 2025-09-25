@@ -406,18 +406,18 @@ window.addEventListener('load', () => {
    * Portfolio details slider
    */
   new Swiper('.portfolio-details-slider', {
-    speed: 1000,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
+  speed: 800,
+  loop: true,
+  autoplay: {
+    delay: 4000,
+    disableOnInteraction: false
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true
+  }
+});
+
 
   /**
    * Animation on scroll
