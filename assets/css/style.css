@@ -1754,3 +1754,18 @@ section {
   text-align: center;
 }
 
+/* 保持图片比例 */
+.portfolio-img {
+  position: relative;
+  overflow: hidden;
+}
+.portfolio-img img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* 去掉 hover 放大 */
+.portfolio-img:hover img {
+  transform: none !important;
+}
