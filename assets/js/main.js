@@ -473,5 +473,17 @@ window.addEventListener('load', () => {
   // Optional: expose for manual debugging
   window.__doAnchorFix = handleAnchorFix;
 })();
+
+new Swiper(".portfolio-img", {
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  loop: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+});
   
 })(); // 结束 IIFE
