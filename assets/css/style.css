@@ -1739,33 +1739,22 @@ section {
   background: #47b2e4;
 }
 
-/* ✅ 保持 Portfolio 首页的 Swiper 图片比例 */
-.portfolio .portfolio-details-slider img {
-  width: 100%;
-  height: auto;
-  object-fit: contain; /* 或 cover，看你要铺满还是保持比例 */
-  border-radius: 8px;
-}
+/**
+ * Portfolio grid sliders
+ * 让每个 .portfolio-slider 独立运作
+ */
+document.querySelectorAll('.portfolio-slider').forEach(function (sliderEl) {
+  new Swiper(sliderEl, {
+    speed: 800,
+    loop: true,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false
+    },
+    pagination: {
+      el: sliderEl.querySelector('.swiper-pagination'),
+      clickable: true
+    }
+  });
+});
 
-/* ✅ 确保分页点在下方 */
-.portfolio .portfolio-details-slider .swiper-pagination {
-  margin-top: 10px;
-  position: relative;
-  text-align: center;
-}
-
-/* 保持图片比例 */
-.portfolio-img {
-  position: relative;
-  overflow: hidden;
-}
-.portfolio-img img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-/* 去掉 hover 放大 */
-.portfolio-img:hover img {
-  transform: none !important;
-}
