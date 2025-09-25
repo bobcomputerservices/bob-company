@@ -343,8 +343,8 @@
 </section><!-- End Services Section -->
 
    
-   <!-- ======= Portfolio Section ======= -->
-<section id="portfolio" class="portfolio section-bg">
+<!-- ======= Portfolio Section ======= -->
+<section id="portfolio" class="portfolio">
   <div class="container" data-aos="fade-up">
 
     <div class="section-title">
@@ -352,352 +352,225 @@
       <p>Showcasing AutoCount solutions, training, events, and our valued clients from different industries and regions.</p>
     </div>
 
-    <!-- Tabs -->
-    <ul id="portfolio-flters" class="d-flex justify-content-center">
-      <li data-filter=".filter-autocount" class="filter-active">AutoCount</li>
+    <!-- Filters -->
+    <ul id="portfolio-flters" class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+      <li data-filter="*" class="filter-active">All</li>
+      <li data-filter=".filter-autocount">AutoCount</li>
       <li data-filter=".filter-training">Training</li>
       <li data-filter=".filter-events">Events</li>
       <li data-filter=".filter-clients">Our Clients</li>
     </ul>
 
-    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
-<!-- AutoCount (放在网格 col 里) -->
-<div class="col-lg-4 col-md-6 portfolio-item filter-autocount">
-  <div class="portfolio-img">
-    <div class="portfolio-slider swiper"> <!-- ✅ 和详情页一样的写法 -->
-      <div class="swiper-wrapper">
-
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-1a.png" alt="">
-        </div>
-
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-1b.png" alt="">
-        </div>
-
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-2.jpg" alt="">
-        </div>
-
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-3.png" alt="">
-        </div>
-
-      </div>
-      <!-- ✅ 分页点放这里 -->
-      <div class="swiper-pagination"></div>
-    </div>
-  </div>
-
-  <div class="portfolio-info">
-    <h4>Products</h4>
-    <p>AutoCount</p>
-    <a href="autocount-products.html" class="details-link" title="More Details">More Details</a>
-  </div>
-</div>
-
-     
-<!-- AutoCount POS Solutions -->
-<div class="col-lg-4 col-md-6 portfolio-item filter-autocount">
-  <div class="portfolio-img">
-    <div class="portfolio-details-slider swiper">
-      <div class="swiper-wrapper">
-
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-10.jpg" alt="POS Solutions - Pic 10">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-11.jpg" alt="POS Solutions - Pic 11">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-12.jpg" alt="POS Solutions - Pic 12">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-13.jpg" alt="POS Solutions - Pic 13">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-14.jpg" alt="POS Solutions - Pic 14">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-15.jpg" alt="POS Solutions - Pic 15">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-16.jpg" alt="POS Solutions - Pic 16">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-20.jpg" alt="POS Solutions - Pic 20">
-        </div>
-
-      </div>
-      <!-- ✅ 分页点 -->
-      <div class="swiper-pagination"></div>
-    </div>
-  </div>
-
-  <div class="portfolio-info">
-    <h4>POS Solutions</h4>
-    <p>AutoCount</p>
-    <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
-  </div>
-</div>
-
-
-<!-- AutoCount Customized Plugins -->
-<div class="col-lg-4 col-md-6 portfolio-item filter-autocount">
-  <div class="portfolio-img">
-    <div class="portfolio-details-slider swiper">
-      <div class="swiper-wrapper">
-
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-4.png" alt="Customized Plugins - Pic 4">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-5.png" alt="Customized Plugins - Pic 5">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-6.png" alt="Customized Plugins - Pic 6">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-7.png" alt="Customized Plugins - Pic 7">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-8.png" alt="Customized Plugins - Pic 8">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/autocount-9.png" alt="Customized Plugins - Pic 9">
-        </div>
-
-      </div>
-      <!-- ✅ 分页点 -->
-      <div class="swiper-pagination"></div>
-    </div>
-  </div>
-
-  <div class="portfolio-info">
-    <h4>Customized Plugins</h4>
-    <p>AutoCount</p>
-    <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
-  </div>
-</div>
-
-     
-<!-- Training -->
-<div class="col-lg-4 col-md-6 portfolio-item filter-training">
-  <div class="portfolio-img">
-    <div class="swiper training-swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/events - wo2.jpg" class="d-block w-100" alt="Workshops & Seminars - Pic 2">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/events - wo3.jpg" class="d-block w-100" alt="Workshops & Seminars - Pic 3">
-        </div>
-      </div>
-      <!-- Pagination -->
-      <div class="swiper-pagination"></div>
-    </div>
-  </div>
-  <div class="portfolio-info">
-    <h4>Workshops & Seminars</h4>
-    <p>Training</p>
-    <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
-  </div>
-</div>
-
-<div class="col-lg-4 col-md-6 portfolio-item filter-training">
-  <div class="portfolio-img">
-    <div class="swiper training-swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/training-pre1.jpg" class="d-block w-100" alt="Past Sessions - Pic 1">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/training-pre2.jpg" class="d-block w-100" alt="Past Sessions - Pic 2">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/training-pre3.jpg" class="d-block w-100" alt="Past Sessions - Pic 3">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/training-pre4.jpg" class="d-block w-100" alt="Past Sessions - Pic 4">
-        </div>
-      </div>
-      <!-- Pagination -->
-      <div class="swiper-pagination"></div>
-    </div>
-  </div>
-  <div class="portfolio-info">
-    <h4>Previous Sessions</h4>
-    <p>Training</p>
-    <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
-  </div>
-</div>
-
-<div class="col-lg-4 col-md-6 portfolio-item filter-training">
-  <div class="portfolio-img">
-    <div class="swiper training-swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/training-up1.png" class="d-block w-100" alt="Upcoming Sessions - Pic 1">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/training-up2.png" class="d-block w-100" alt="Upcoming Sessions - Pic 2">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/training-up3.png" class="d-block w-100" alt="Upcoming Sessions - Pic 3">
-        </div>
-      </div>
-      <!-- Pagination -->
-      <div class="swiper-pagination"></div>
-    </div>
-  </div>
-  <div class="portfolio-info">
-    <h4>Upcoming Sessions</h4>
-    <p>Training</p>
-    <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
-  </div>
-</div>
-
-<!-- Events -->
-<div class="col-lg-4 col-md-6 portfolio-item filter-events">
-  <div class="portfolio-img">
-    <div class="swiper events-swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/events - ex1.jpg" class="d-block w-100" alt="Exhibitions - Pic 1">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/events - ex2.jpg" class="d-block w-100" alt="Exhibitions - Pic 2">
-        </div>
-      </div>
-      <!-- Pagination -->
-      <div class="swiper-pagination"></div>
-    </div>
-  </div>
-  <div class="portfolio-info">
-    <h4>Exhibitions</h4>
-    <p>Events</p>
-    <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
-  </div>
-</div>
-
-<div class="col-lg-4 col-md-6 portfolio-item filter-events">
-  <div class="portfolio-img">
-    <div class="swiper events-swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/events - con1.jpg" class="d-block w-100" alt="Conferences - Pic 1">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/events - con2.jpg" class="d-block w-100" alt="Conferences - Pic 2">
-        </div>
-      </div>
-      <!-- Pagination -->
-      <div class="swiper-pagination"></div>
-    </div>
-  </div>
-  <div class="portfolio-info">
-    <h4>Conferences</h4>
-    <p>Events</p>
-    <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
-  </div>
-</div>
-
-<div class="col-lg-4 col-md-6 portfolio-item filter-events">
-  <div class="portfolio-img">
-    <div class="swiper events-swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/events - .jpg" class="d-block w-100" alt="News - Pic 1">
-        </div>
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/events - .jpg" class="d-block w-100" alt="News - Pic 2">
-        </div>
-      </div>
-      <!-- Pagination -->
-      <div class="swiper-pagination"></div>
-    </div>
-  </div>
-  <div class="portfolio-info">
-    <h4>News</h4>
-    <p>Events</p>
-    <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
-  </div>
-</div>
-
-
-  <!-- Picture Box 1 -->
-  <div class="col-lg-4 col-md-6 portfolio-item filter-clients">
-    <div class="portfolio-box">
-      <div class="portfolio-img">
-        <img src="assets/img/portfolio/ourclients-map.gif" class="img-fluid" alt="Clients - Pic 1">
-      </div>
-      <div class="portfolio-info">
-        <h4>Diverse Clientele</h4>
-        <p>Our Clients</p>
-        <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Picture Box 2 -->
-  <div class="col-lg-4 col-md-6 portfolio-item filter-clients">
-    <div class="portfolio-box">
-      <div class="portfolio-img">
-        <img src="assets/img/portfolio/ourclients-industries.png" class="img-fluid" alt="Clients - Pic 2">
-      </div>
-      <div class="portfolio-info">
-        <h4>Diverse Clientele</h4>
-        <p>Our Clients</p>
-        <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Picture Box 3 (Carousel) -->
-  <div class="col-lg-4 col-md-6 portfolio-item filter-clients">
-    <div class="portfolio-box">
-      <div id="clientsCarousel1" class="carousel slide" data-bs-ride="carousel" data-bs-interval="10000">
-
-        <!-- Indicators -->
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#clientsCarousel1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#clientsCarousel1" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#clientsCarousel1" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          <button type="button" data-bs-target="#clientsCarousel1" data-bs-slide-to="3" aria-label="Slide 4"></button>
-        </div>
-
-        <!-- Carousel Inner -->
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="assets/img/portfolio/ourclients-logo1.png" class="d-block w-100" alt="Clients - Pic 3">
-          </div>
-          <div class="carousel-item">
-            <img src="assets/img/portfolio/ourclients-logo2.png" class="d-block w-100" alt="Clients - Pic 4">
-          </div>
-          <div class="carousel-item">
-            <img src="assets/img/portfolio/ourclients-logo3.png" class="d-block w-100" alt="Clients - Pic 5">
-          </div>
-          <div class="carousel-item">
-            <img src="assets/img/portfolio/ourclients-logo4.png" class="d-block w-100" alt="Clients - Pic 6">
+      <!-- ================== AutoCount ================== -->
+      <div class="col-lg-4 col-md-6 portfolio-item filter-autocount">
+        <div class="portfolio-img">
+          <div class="swiper autocount-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="assets/img/portfolio/autocount-1a.png" alt="AutoCount 1a"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/autocount-1b.png" alt="AutoCount 1b"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/autocount-2.jpg" alt="AutoCount 2"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/autocount-3.png" alt="AutoCount 3"></div>
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
         </div>
+        <div class="portfolio-info">
+          <h4>Products</h4>
+          <p>AutoCount</p>
+          <a href="autocount-products.html" class="details-link" title="More Details">More Details</a>
+        </div>
+      </div>
 
+      <div class="col-lg-4 col-md-6 portfolio-item filter-autocount">
+        <div class="portfolio-img">
+          <div class="swiper autocount-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="assets/img/portfolio/pos-1.png" alt="POS 1"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/pos-2.png" alt="POS 2"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h4>POS Solutions</h4>
+          <p>AutoCount</p>
+          <a href="autocount-pos.html" class="details-link" title="More Details">More Details</a>
+        </div>
       </div>
-      <div class="portfolio-info">
-        <h4>Diverse Clientele</h4>
-        <p>Our Clients</p>
-        <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
+
+      <div class="col-lg-4 col-md-6 portfolio-item filter-autocount">
+        <div class="portfolio-img">
+          <div class="swiper autocount-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="assets/img/portfolio/plugin-1.png" alt="Plugin 1"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/plugin-2.png" alt="Plugin 2"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h4>Customized Plugins</h4>
+          <p>AutoCount</p>
+          <a href="autocount-plugins.html" class="details-link" title="More Details">More Details</a>
+        </div>
       </div>
+
+      <!-- ================== Training ================== -->
+      <div class="col-lg-4 col-md-6 portfolio-item filter-training">
+        <div class="portfolio-img">
+          <div class="swiper training-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="assets/img/portfolio/events - wo2.jpg" alt="Workshop Pic 1"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/events - wo3.jpg" alt="Workshop Pic 2"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h4>Workshops & Seminars</h4>
+          <p>Training</p>
+          <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 portfolio-item filter-training">
+        <div class="portfolio-img">
+          <div class="swiper training-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="assets/img/portfolio/training-pre1.jpg" alt="Past Session 1"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/training-pre2.jpg" alt="Past Session 2"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/training-pre3.jpg" alt="Past Session 3"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/training-pre4.jpg" alt="Past Session 4"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h4>Previous Sessions</h4>
+          <p>Training</p>
+          <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 portfolio-item filter-training">
+        <div class="portfolio-img">
+          <div class="swiper training-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="assets/img/portfolio/training-up1.png" alt="Upcoming 1"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/training-up2.png" alt="Upcoming 2"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/training-up3.png" alt="Upcoming 3"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h4>Upcoming Sessions</h4>
+          <p>Training</p>
+          <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
+        </div>
+      </div>
+
+      <!-- ================== Events ================== -->
+      <div class="col-lg-4 col-md-6 portfolio-item filter-events">
+        <div class="portfolio-img">
+          <div class="swiper events-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="assets/img/portfolio/events - ex1.jpg" alt="Exhibition 1"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/events - ex2.jpg" alt="Exhibition 2"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h4>Exhibitions</h4>
+          <p>Events</p>
+          <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 portfolio-item filter-events">
+        <div class="portfolio-img">
+          <div class="swiper events-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="assets/img/portfolio/events - con1.jpg" alt="Conference 1"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/events - con2.jpg" alt="Conference 2"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h4>Conferences</h4>
+          <p>Events</p>
+          <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 portfolio-item filter-events">
+        <div class="portfolio-img">
+          <div class="swiper events-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="assets/img/portfolio/events - news1.jpg" alt="News 1"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/events - news2.jpg" alt="News 2"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h4>News</h4>
+          <p>Events</p>
+          <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
+        </div>
+      </div>
+
+      <!-- ================== Our Clients ================== -->
+      <div class="col-lg-4 col-md-6 portfolio-item filter-clients">
+        <div class="portfolio-img">
+          <img src="assets/img/portfolio/ourclients-map.gif" class="img-fluid" alt="Clients Map">
+        </div>
+        <div class="portfolio-info">
+          <h4>Diverse Clientele</h4>
+          <p>Our Clients</p>
+          <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 portfolio-item filter-clients">
+        <div class="portfolio-img">
+          <img src="assets/img/portfolio/ourclients-industries.png" class="img-fluid" alt="Clients Industries">
+        </div>
+        <div class="portfolio-info">
+          <h4>Diverse Clientele</h4>
+          <p>Our Clients</p>
+          <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 portfolio-item filter-clients">
+        <div class="portfolio-img">
+          <div class="swiper clients-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="assets/img/portfolio/ourclients-logo1.png" alt="Logo 1"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/ourclients-logo2.png" alt="Logo 2"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/ourclients-logo3.png" alt="Logo 3"></div>
+              <div class="swiper-slide"><img src="assets/img/portfolio/ourclients-logo4.png" alt="Logo 4"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h4>Diverse Clientele</h4>
+          <p>Our Clients</p>
+          <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
+        </div>
+      </div>
+
     </div>
   </div>
-
-</div>
-
 </section><!-- End Portfolio Section -->
 
-   
-   
+
     <!-- ======= Cta Section ======= -->
   <section id="cta" class="cta">
   <div class="container" data-aos="zoom-in">
