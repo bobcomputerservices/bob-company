@@ -516,7 +516,7 @@ document.querySelectorAll('.portfolio-slider').forEach(function (sliderEl) {
  */
 function restartAllPortfolioSwipers() {
   // 单个 details swiper
-  if (portfolioDetailsSwiper) {
+  if (portfolioDetailsSwiper && portfolioDetailsSwiper.slides && portfolioDetailsSwiper.slides.length > 0) {
     portfolioDetailsSwiper.update();
     if (portfolioDetailsSwiper.autoplay) {
       portfolioDetailsSwiper.autoplay.start();
@@ -525,9 +525,11 @@ function restartAllPortfolioSwipers() {
 
   // 所有 grid swipers
   portfolioSliders.forEach(swiper => {
-    swiper.update();
-    if (swiper.autoplay) {
-      swiper.autoplay.start();
+    if (swiper && swiper.slides && swiper.slides.length > 0) {
+      swiper.update();
+      if (swiper.autoplay) {
+        swiper.autoplay.start();
+      }
     }
   });
 }
@@ -539,7 +541,7 @@ document.querySelectorAll('#portfolio-flters li').forEach(el => {
   el.addEventListener('click', function () {
     setTimeout(() => {
       restartAllPortfolioSwipers();
-    }, 400); // 留一点缓冲，避免动画没完成
+    }, 500); // 延迟多一点，等动画完成
   });
 });
 
@@ -548,7 +550,9 @@ document.querySelectorAll('#portfolio-flters li').forEach(el => {
  */
 document.querySelectorAll('[data-bs-toggle="tab"]').forEach(el => {
   el.addEventListener('shown.bs.tab', function () {
-    restartAllPortfolioSwipers();
+    setTimeout(() => {
+      restartAllPortfolioSwipers();
+    }, 300); // 等 tab 完全显示后再重启
   });
 });
 
