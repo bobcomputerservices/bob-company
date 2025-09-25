@@ -1725,3 +1725,18 @@ section {
 @supports (scroll-margin-top: 0px) {
   section[id] { scroll-margin-top: 90px; } /* 用你 header 的实际高度调整（例如 80px -> 写 90px 给 buffer） */
 }
+
+/* ✅ 保持 Portfolio 首页的 Swiper 图片比例 */
+.portfolio .portfolio-details-slider img {
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* 或 cover，看你要铺满还是保持比例 */
+  border-radius: 8px;
+}
+
+/* ✅ 确保分页点在下方 */
+.portfolio .portfolio-details-slider .swiper-pagination {
+  margin-top: 10px;
+  position: relative;
+  text-align: center;
+}
