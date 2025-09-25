@@ -510,7 +510,7 @@ document.querySelectorAll('.portfolio-slider').forEach(function (sliderEl) {
 });
 
 // Training Swipers
-document.querySelectorAll('.training-swiper').forEach(function (sliderEl) {
+document.querySelectorAll('.portfolio-slider').forEach(function (sliderEl) {
   new Swiper(sliderEl, {
     speed: 800,
     loop: true,
