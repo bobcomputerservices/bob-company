@@ -490,6 +490,18 @@ window.addEventListener('load', () => {
   window.__doAnchorFix = handleAnchorFix;
 })();
 
+new Swiper(".portfolio-img", {
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  loop: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+});
+ 
 // AutoCount
 document.querySelectorAll(".autocount-swiper").forEach(swiperEl => {
   new Swiper(swiperEl, {
