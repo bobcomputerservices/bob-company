@@ -490,71 +490,40 @@ window.addEventListener('load', () => {
   window.__doAnchorFix = handleAnchorFix;
 })();
 
-  /**
- * Portfolio grid sliders
- * 让每个 .portfolio-slider 独立运作
- */
-document.querySelectorAll('.portfolio-slider').forEach(function (sliderEl) {
-  new Swiper(sliderEl, {
-    speed: 800,
+// AutoCount
+document.querySelectorAll(".autocount-swiper").forEach(swiperEl => {
+  new Swiper(swiperEl, {
     loop: true,
-    autoplay: {
-      delay: 4000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: sliderEl.querySelector('.swiper-pagination'),
-      clickable: true
-    }
+    autoplay: { delay: 5000, disableOnInteraction: false },
+    pagination: { el: swiperEl.querySelector(".swiper-pagination"), clickable: true }
   });
 });
 
-// Training Swipers
-var trainingSwipers = document.querySelectorAll(".training-swiper");
-trainingSwipers.forEach(function(swiperEl) {
+// Training
+document.querySelectorAll(".training-swiper").forEach(swiperEl => {
   new Swiper(swiperEl, {
     loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: swiperEl.querySelector(".swiper-pagination"),
-      clickable: true,
-    },
+    autoplay: { delay: 5000, disableOnInteraction: false },
+    pagination: { el: swiperEl.querySelector(".swiper-pagination"), clickable: true }
   });
 });
 
-// Events Swipers
-var eventsSwipers = document.querySelectorAll(".events-swiper");
-eventsSwipers.forEach(function(swiperEl) {
+// Events
+document.querySelectorAll(".events-swiper").forEach(swiperEl => {
   new Swiper(swiperEl, {
     loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: swiperEl.querySelector(".swiper-pagination"),
-      clickable: true,
-    },
+    autoplay: { delay: 5000, disableOnInteraction: false },
+    pagination: { el: swiperEl.querySelector(".swiper-pagination"), clickable: true }
   });
 });
-  
-// Clients Swipers
-var clientsSwipers = document.querySelectorAll(".clients-swiper");
-clientsSwipers.forEach(function(swiperEl) {
+
+// Clients
+document.querySelectorAll(".clients-swiper").forEach(swiperEl => {
   new Swiper(swiperEl, {
     loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: swiperEl.querySelector(".swiper-pagination"),
-      clickable: true,
-    },
+    autoplay: { delay: 5000, disableOnInteraction: false },
+    pagination: { el: swiperEl.querySelector(".swiper-pagination"), clickable: true }
   });
-});  
+});
 
 })(); // 结束 IIFE
