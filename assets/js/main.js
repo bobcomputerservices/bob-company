@@ -474,7 +474,10 @@ window.addEventListener('load', () => {
   window.__doAnchorFix = handleAnchorFix;
 })();
 
-new Swiper('.portfolio-details-slider', {
+/**
+ * Portfolio details Swiper
+ */
+const portfolioDetailsSwiper = new Swiper('.portfolio-details-slider', {
   speed: 800,
   loop: true,
   autoplay: {
@@ -491,8 +494,9 @@ new Swiper('.portfolio-details-slider', {
  * Portfolio grid sliders
  * 让每个 .portfolio-slider 独立运作
  */
+const portfolioSliders = [];
 document.querySelectorAll('.portfolio-slider').forEach(function (sliderEl) {
-  new Swiper(sliderEl, {
+  const swiperInstance = new Swiper(sliderEl, {
     speed: 800,
     loop: true,
     autoplay: {
@@ -504,7 +508,48 @@ document.querySelectorAll('.portfolio-slider').forEach(function (sliderEl) {
       clickable: true
     }
   });
+  portfolioSliders.push(swiperInstance);
 });
 
-  
+/**
+ * 🔁 保证在任何情况下 autoplay & loop 都不会停
+ */
+function restartAllPortfolioSwipers() {
+  // 单个 details swiper
+  if (portfolioDetailsSwiper) {
+    portfolioDetailsSwiper.update();
+    if (portfolioDetailsSwiper.autoplay) {
+      portfolioDetailsSwiper.autoplay.start();
+    }
+  }
+
+  // 所有 grid swipers
+  portfolioSliders.forEach(swiper => {
+    swiper.update();
+    if (swiper.autoplay) {
+      swiper.autoplay.start();
+    }
+  });
+}
+
+/**
+ * 监听 Portfolio filter 点击（Isotope）
+ */
+document.querySelectorAll('#portfolio-flters li').forEach(el => {
+  el.addEventListener('click', function () {
+    setTimeout(() => {
+      restartAllPortfolioSwipers();
+    }, 400); // 留一点缓冲，避免动画没完成
+  });
+});
+
+/**
+ * 监听 tab 切换（Bootstrap）
+ */
+document.querySelectorAll('[data-bs-toggle="tab"]').forEach(el => {
+  el.addEventListener('shown.bs.tab', function () {
+    restartAllPortfolioSwipers();
+  });
+});
+
 })(); // 结束 IIFE
