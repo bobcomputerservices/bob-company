@@ -1032,6 +1032,26 @@ section {
   opacity: 1;
 }
 
+/* ✅ Portfolio 网格里的 swiper 分页 */
+.portfolio .portfolio-item .swiper-pagination {
+  position: relative;       /* 不要 absolute，避免挤到 info 里 */
+  margin-top: 10px;         /* 图片和圆点之间留点空隙 */
+  text-align: center;       /* 圆点居中 */
+}
+
+.portfolio .portfolio-item .swiper-pagination .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  opacity: 1;
+  border: 1px solid #47b2e4;
+  margin: 0 4px;
+}
+
+.portfolio .portfolio-item .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #47b2e4;
+}
+
 /*--------------------------------------------------------------
 # Portfolio Details
 --------------------------------------------------------------*/
