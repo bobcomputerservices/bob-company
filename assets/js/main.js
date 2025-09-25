@@ -551,9 +551,26 @@ document.querySelectorAll('#portfolio-flters li').forEach(el => {
 document.querySelectorAll('[data-bs-toggle="tab"]').forEach(el => {
   el.addEventListener('shown.bs.tab', function () {
     setTimeout(() => {
-      restartAllPortfolioSwipers();
-    }, 300); // 等 tab 完全显示后再重启
+      // 单个 details swiper
+      if (portfolioDetailsSwiper && portfolioDetailsSwiper.autoplay) {
+        portfolioDetailsSwiper.update();
+        portfolioDetailsSwiper.autoplay.stop();
+        portfolioDetailsSwiper.autoplay.start();
+      }
+
+      // 所有 grid swipers
+      portfolioSliders.forEach(swiper => {
+        if (swiper && swiper.autoplay) {
+          swiper.update();
+          swiper.autoplay.stop();
+          swiper.autoplay.start();
+        }
+      });
+
+      console.log("🔄 Swipers restarted after tab switch");
+    }, 300); // 确保 tab 动画完成后执行
   });
 });
+
 
 })(); // 结束 IIFE
