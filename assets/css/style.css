@@ -1041,6 +1041,9 @@ section {
 
 .portfolio-details .portfolio-details-slider img {
   width: 100%;
+  height: auto;   /* ✅ 保持比例，不拉长 */
+  object-fit: contain; /* 或 cover (图片会铺满容器，但可能裁掉一点边缘)，根据你要的效果 */
+  border-radius: 8px;
 }
 
 .portfolio-details .portfolio-details-slider .swiper-pagination {
