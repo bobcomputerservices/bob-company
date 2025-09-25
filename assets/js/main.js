@@ -490,51 +490,22 @@ window.addEventListener('load', () => {
   window.__doAnchorFix = handleAnchorFix;
 })();
 
-new Swiper(".portfolio-img", {
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-  loop: true,
-  autoplay: {
-    delay: 5000,
-    disableOnInteraction: false,
-  },
-});
- 
-// AutoCount
-document.querySelectorAll(".autocount-swiper").forEach(swiperEl => {
-  new Swiper(swiperEl, {
+/**
+ * Portfolio grid sliders
+ * 让每个 .portfolio-slider 独立运作
+ */
+document.querySelectorAll('.portfolio-slider').forEach(function (sliderEl) {
+  new Swiper(sliderEl, {
+    speed: 800,
     loop: true,
-    autoplay: { delay: 5000, disableOnInteraction: false },
-    pagination: { el: swiperEl.querySelector(".swiper-pagination"), clickable: true }
-  });
-});
-
-// Training
-document.querySelectorAll(".training-swiper").forEach(swiperEl => {
-  new Swiper(swiperEl, {
-    loop: true,
-    autoplay: { delay: 5000, disableOnInteraction: false },
-    pagination: { el: swiperEl.querySelector(".swiper-pagination"), clickable: true }
-  });
-});
-
-// Events
-document.querySelectorAll(".events-swiper").forEach(swiperEl => {
-  new Swiper(swiperEl, {
-    loop: true,
-    autoplay: { delay: 5000, disableOnInteraction: false },
-    pagination: { el: swiperEl.querySelector(".swiper-pagination"), clickable: true }
-  });
-});
-
-// Clients
-document.querySelectorAll(".clients-swiper").forEach(swiperEl => {
-  new Swiper(swiperEl, {
-    loop: true,
-    autoplay: { delay: 5000, disableOnInteraction: false },
-    pagination: { el: swiperEl.querySelector(".swiper-pagination"), clickable: true }
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false
+    },
+    pagination: {
+      el: sliderEl.querySelector('.swiper-pagination'),
+      clickable: true
+    }
   });
 });
 
