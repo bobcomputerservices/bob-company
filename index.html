@@ -344,40 +344,59 @@
 
    
 <!-- ======= Portfolio Section ======= -->
-<section id="portfolio" class="portfolio">
-  <div class="container">
+<section id="portfolio" class="portfolio section-bg">
+  <div class="container" data-aos="fade-up">
 
     <div class="section-title">
       <h2>Portfolio</h2>
       <p>Showcasing AutoCount solutions, training, events, and our valued clients from different industries and regions.</p>
     </div>
 
+    <!-- Tabs -->
     <ul id="portfolio-flters" class="d-flex justify-content-center">
-      <li data-filter="*" class="filter-active">All</li>
-      <li data-filter=".filter-autocount">AutoCount</li>
+      <li data-filter=".filter-autocount" class="filter-active">AutoCount</li>
       <li data-filter=".filter-training">Training</li>
       <li data-filter=".filter-events">Events</li>
       <li data-filter=".filter-clients">Our Clients</li>
     </ul>
 
-    <div class="row portfolio-container">
+    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
 
-      <!-- ================= AutoCount ================= -->
-      <div class="col-lg-4 col-md-6 portfolio-item filter-autocount">
-        <div class="portfolio-img swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="assets/img/portfolio/autocount-1a.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/portfolio/autocount-1b.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/portfolio/autocount-2.jpg" class="img-fluid" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
+<!-- AutoCount (放在网格 col 里) -->
+<div class="col-lg-4 col-md-6 portfolio-item filter-autocount">
+  <div class="portfolio-img">
+    <div class="portfolio-slider swiper"> <!-- ✅ 和详情页一样的写法 -->
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+          <img src="assets/img/portfolio/autocount-1a.png" alt="">
         </div>
-        <div class="portfolio-info">
-          <h4>Products</h4>
-          <p>AutoCount</p>
-          <a href="autocount-products.html" class="details-link" title="More Details">More Details</a>
+
+        <div class="swiper-slide">
+          <img src="assets/img/portfolio/autocount-1b.png" alt="">
         </div>
+
+        <div class="swiper-slide">
+          <img src="assets/img/portfolio/autocount-2.jpg" alt="">
+        </div>
+
+        <div class="swiper-slide">
+          <img src="assets/img/portfolio/autocount-3.png" alt="">
+        </div>
+
       </div>
+      <!-- ✅ 分页点放这里 -->
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+
+  <div class="portfolio-info">
+    <h4>Products</h4>
+    <p>AutoCount</p>
+    <a href="autocount-products.html" class="details-link" title="More Details">More Details</a>
+  </div>
+</div>
+
 
       <!-- ================= Training ================= -->
       <div class="col-lg-4 col-md-6 portfolio-item filter-training">
