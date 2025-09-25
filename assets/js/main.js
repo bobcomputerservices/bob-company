@@ -431,26 +431,64 @@ window.addEventListener('load', () => {
     });
   });
 
-   /**
-   * 浏览器在 scrollIntoView() 或 anchor (#id) 定位时，会自动考虑 scroll-margin-top
-   * 这样即使 header 是 fixed-top，也不会遮住 section title
-   */
-  document.addEventListener("DOMContentLoaded", () => {
-    const header = document.querySelector("#header");
+  /* ====== Reliable anchor fix that waits for layout/images (works for child->index hash navigation) ====== */
+(function(){
+  // use select helper if available
+  const $header = (typeof select === 'function') ? select('#header') : document.querySelector('#header');
+  if (!$header) return;
 
-    if (header) {
-      const headerHeight = header.offsetHeight + 20; // 额外多 20px buffer
+  function doScrollToTarget(hash) {
+    if (!hash) return;
+    const id = hash.split('?')[0];
+    const target = document.querySelector(id);
+    if (!target) return;
 
-      // 给目标 sections 动态设置 scroll-margin-top
-      const sections = ["about", "why-us", "skills", "services", "portfolio", "contact"];
-      sections.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.style.scrollMarginTop = headerHeight + "px";
-        }
+    const offset = $header.offsetHeight || 0;
+    const computeAndScroll = () => {
+      const rectTop = target.getBoundingClientRect().top + window.scrollY;
+      const finalTop = Math.max(0, rectTop - offset - 8); // small buffer
+      // use instant jump first to avoid browser auto-anchor glitches, then smooth
+      window.scrollTo({ top: finalTop, behavior: 'smooth' });
+      console && console.log('Anchor fix -> scrolled to', id, 'finalTop:', finalTop);
+    };
+
+    // If imagesLoaded available, wait for body images to finish then scroll
+    if (typeof imagesLoaded === 'function') {
+      imagesLoaded(document.querySelector('body'), { background: true }, function() {
+        // give Isotope/AOS a moment
+        setTimeout(computeAndScroll, 120);
       });
+    } else {
+      // fallback: retry loop until layout stabilizes (max attempts)
+      let tries = 0;
+      const retry = () => {
+        tries++;
+        // if body height looks reasonable or we've tried enough times, proceed
+        if (document.body.clientHeight > 200 || tries > 12) {
+          setTimeout(computeAndScroll, 80);
+        } else {
+          setTimeout(retry, 150);
+        }
+      };
+      retry();
     }
-  });
+  }
 
-  
+  // Single entry that we call on load/pageshow/hashchange
+  function handleAnchorFix() {
+    // only if there is a hash
+    if (!window.location.hash) return;
+    doScrollToTarget(window.location.hash);
+  }
+
+  // Run on load/pageshow/hashchange -- these cover child->index navigation, back/forward and manual hash changes
+  window.addEventListener('load', handleAnchorFix);
+  window.addEventListener('pageshow', handleAnchorFix);
+  window.addEventListener('hashchange', handleAnchorFix);
+
+  // Optional: expose for manual debugging
+  window.__doAnchorFix = handleAnchorFix;
+})();
+
+
 })(); // 结束 IIFE
