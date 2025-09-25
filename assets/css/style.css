@@ -1726,33 +1726,31 @@ section {
   section[id] { scroll-margin-top: 90px; } /* 用你 header 的实际高度调整（例如 80px -> 写 90px 给 buffer） */
 }
 
-/* ✅ 保持 Portfolio 首页的 Swiper 图片比例 */
-.portfolio .portfolio-details-slider img {
+/* ✅ 网格里的 swiper 图片 */
+.portfolio .portfolio-item .portfolio-slider img {
   width: 100%;
   height: auto;
-  object-fit: contain; /* 或 cover，看你要铺满还是保持比例 */
-  border-radius: 8px;
+  object-fit: cover;   /* 不会被拉长 */
+  border-radius: 6px;
 }
 
-/* ✅ 确保分页点在下方 */
-.portfolio .portfolio-details-slider .swiper-pagination {
-  margin-top: 10px;
+/* ✅ 分页点在图片下方 */
+.portfolio .portfolio-item .portfolio-slider .swiper-pagination {
   position: relative;
+  margin-top: 8px;
   text-align: center;
 }
 
-/* 固定图片比例，避免被拉长 */
-.portfolio-img {
-  position: relative;
-  overflow: hidden;
-}
-.portfolio-img img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+.portfolio .portfolio-item .portfolio-slider .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border: 1px solid #47b2e4;
+  opacity: 1;
+  margin: 0 3px;
 }
 
-/* 移除 hover 放大效果 */
-.portfolio-img:hover img {
-  transform: none !important;
+.portfolio .portfolio-item .portfolio-slider .swiper-pagination-bullet-active {
+  background: #47b2e4;
 }
+
