@@ -1750,7 +1750,6 @@ section {
   transition: opacity 0.3s ease;
   width: 20px;
   height: 20px;
-  background-size: 100% 100%;
   filter: invert(1); /* 白色箭头，适配黑底 */
 }
 
@@ -1758,6 +1757,7 @@ section {
 .portfolio-img:hover .carousel-control-next {
   opacity: 1;
   background-color: rgba(0,0,0,0.5); /* 半透明黑底 */
+  background-size: 50% 50%;
   border-radius: 50%;
   padding: 10px; /* 控制圆的大小 */
   width: auto;   /* 不要继承默认的 15% */
