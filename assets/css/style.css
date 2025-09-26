@@ -1748,6 +1748,7 @@ section {
 .carousel-control-next {
   opacity: 0;
   transition: opacity 0.3s ease;
+  background-color: rgba(0,0,0,0.5); /* 半透明黑底 */
 }
 
 .portfolio-img:hover .carousel-control-prev,
