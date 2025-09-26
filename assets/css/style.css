@@ -1722,7 +1722,7 @@ section {
 /* ✅ 分页点在图片下方 */
 .portfolio .portfolio-item .swiper-slide .swiper-pagination {
   position: relative;
-  margin-top: 8px;
+  margin-top: 10px;
   text-align: center;
 }
 
