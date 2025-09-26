@@ -1748,13 +1748,18 @@ section {
 .carousel-control-next {
   opacity: 0;
   transition: opacity 0.3s ease;
+  width: 20px;
+  height: 20px;
+  background-size: 100% 100%;
+  filter: invert(1); /* 白色箭头，适配黑底 */
 }
 
 .portfolio-img:hover .carousel-control-prev,
 .portfolio-img:hover .carousel-control-next {
   opacity: 1;
-  background-size: 10%, 10%;
   background-color: rgba(0,0,0,0.5); /* 半透明黑底 */
-  border-radius: 90%;
-  padding: 15px;
+  border-radius: 50%;
+  padding: 10px; /* 控制圆的大小 */
+  width: auto;   /* 不要继承默认的 15% */
+  height: auto;  /* 不要继承默认的 100% */
 }
