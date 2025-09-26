@@ -1743,15 +1743,32 @@ section {
   background-color: #47b2e4;
 }
 
-/* ✅ 左右箭头：默认隐藏，hover 才出现 */
+/* 隐藏默认整块长方形背景 */
 .carousel-control-prev,
 .carousel-control-next {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  filter: invert(1); /* 白色箭头，适配黑底 */
+  width: auto;   /* 不再占 15% */
+  height: auto;  /* 不再占满高度 */
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;    /* 默认隐藏 */
+  transition: opacity 0.3s;
 }
 
+/* hover 时显示 */
 .portfolio-img:hover .carousel-control-prev,
 .portfolio-img:hover .carousel-control-next {
   opacity: 1;
+}
+
+/* 给箭头加圆形黑底 */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(0,0,0,0.5); /* 半透明黑底 */
+  background-size: 60% 60%; /* 缩小箭头 */
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: invert(1); /* 白色箭头 */
 }
