@@ -1724,7 +1724,6 @@ section {
   position: relative;
   margin-top: 8px;
   justify-content: center;
-  cursor: pointer;
 }
 
 /* ✅ 分页点外观 (模仿 swiper) */
@@ -1736,6 +1735,7 @@ section {
   border: 1px solid #47b2e4;
   margin: 0 3px;
   opacity: 1;
+  cursor: pointer;
 }
 
 /* ✅ active 状态 */
