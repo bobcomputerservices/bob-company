@@ -1711,7 +1711,7 @@ section {
   section[id] { scroll-margin-top: 90px; } /* 用你 header 的实际高度调整（例如 80px -> 写 90px 给 buffer） */
 }
 
-/* ✅ 网格里的 swiper 图片 */
+/* ✅ Portfolio > AutoCount tab swiper 图片 */
 .portfolio .portfolio-item .portfolio-slider img {
   width: 100%;
   height: auto;
@@ -1739,5 +1739,87 @@ section {
   background: #47b2e4;
 }
 
+/* ✅ Portfolio > Training tab swiper 图片 */
+.portfolio .portfolio-item .training-swiper img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;   /* 不会被拉长 */
+  border-radius: 6px;
+}
 
+/* ✅ 分页点在图片下方 */
+.portfolio .portfolio-item .training-swiper .swiper-pagination {
+  position: relative;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.portfolio .portfolio-item .training-swiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border: 1px solid #47b2e4;
+  opacity: 1;
+  margin: 0 3px;
+}
+
+.portfolio .portfolio-item .training-swiper .swiper-pagination-bullet-active {
+  background: #47b2e4;
+}
+
+/* ✅ Portfolio > Events tab swiper 图片 */
+.portfolio .portfolio-item .events-swiper img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;   /* 不会被拉长 */
+  border-radius: 6px;
+}
+
+/* ✅ 分页点在图片下方 */
+.portfolio .portfolio-item .events-swiper .swiper-pagination {
+  position: relative;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.portfolio .portfolio-item .events-swiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border: 1px solid #47b2e4;
+  opacity: 1;
+  margin: 0 3px;
+}
+
+.portfolio .portfolio-item .events-swiper .swiper-pagination-bullet-active {
+  background: #47b2e4;
+}
+
+/* ✅ Portfolio > Our Clients tab swiper 图片 */
+.portfolio .portfolio-item .clients-swiper img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;   /* 不会被拉长 */
+  border-radius: 6px;
+}
+
+/* ✅ 分页点在图片下方 */
+.portfolio .portfolio-item .clients-swiper .swiper-pagination {
+  position: relative;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.portfolio .portfolio-item .clients-swiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border: 1px solid #47b2e4;
+  opacity: 1;
+  margin: 0 3px;
+}
+
+.portfolio .portfolio-item .clients-swiper .swiper-pagination-bullet-active {
+  background: #47b2e4;
+}
 
