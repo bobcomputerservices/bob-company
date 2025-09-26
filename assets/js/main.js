@@ -475,102 +475,53 @@ window.addEventListener('load', () => {
 })();
 
 /**
- * Portfolio details Swiper
- */
-const portfolioDetailsSwiper = new Swiper('.portfolio-details-slider', {
-  speed: 800,
-  loop: true,
-  autoplay: {
-    delay: 4000,
-    disableOnInteraction: false
-  },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true
-  }
-});
-
-/**
- * Portfolio grid sliders
+ * 通用 Portfolio section Swiper 初始化函数
  * 让每个 .portfolio-slider 独立运作
  */
-const portfolioSliders = [];
-document.querySelectorAll('.portfolio-slider').forEach(function (sliderEl) {
-  const swiperInstance = new Swiper(sliderEl, {
+function initSwiperGroup(selector, options = {}) {
+  const defaultOptions = {
     speed: 800,
     loop: true,
     autoplay: {
       delay: 4000,
-      disableOnInteraction: false
+      disableOnInteraction: false,
     },
     pagination: {
-      el: sliderEl.querySelector('.swiper-pagination'),
-      clickable: true
-    }
-  });
-  portfolioSliders.push(swiperInstance);
-});
+      clickable: true,
+    },
+  };
 
-/**
- * 🔁 保证在任何情况下 autoplay & loop 都不会停
- */
-function restartAllPortfolioSwipers() {
-  // 单个 details swiper
-  if (portfolioDetailsSwiper && portfolioDetailsSwiper.slides && portfolioDetailsSwiper.slides.length > 0) {
-    portfolioDetailsSwiper.update();
-    if (portfolioDetailsSwiper.autoplay) {
-      portfolioDetailsSwiper.autoplay.start();
-    }
-  }
+  const finalOptions = Object.assign({}, defaultOptions, options);
 
-  // 所有 grid swipers
-  portfolioSliders.forEach(swiper => {
-    if (swiper && swiper.slides && swiper.slides.length > 0) {
-      swiper.update();
-      if (swiper.autoplay) {
-        swiper.autoplay.start();
-      }
+  const swiperEls = document.querySelectorAll(selector);
+  swiperEls.forEach(function (swiperEl) {
+    // 确保每个 slider 用自己的 pagination
+    if (swiperEl.querySelector(".swiper-pagination")) {
+      finalOptions.pagination.el = swiperEl.querySelector(".swiper-pagination");
     }
+    new Swiper(swiperEl, finalOptions);
   });
 }
 
 /**
- * 监听 Portfolio filter 点击（Isotope）
+ * === 各个模块独立 Swiper ===
  */
-document.querySelectorAll('#portfolio-flters li').forEach(el => {
-  el.addEventListener('click', function () {
-    setTimeout(() => {
-      restartAllPortfolioSwipers();
-    }, 500); // 延迟多一点，等动画完成
-  });
-});
 
-/**
- * 监听 tab 切换（Bootstrap）
- */
-document.querySelectorAll('[data-bs-toggle="tab"]').forEach(el => {
-  el.addEventListener('shown.bs.tab', function () {
-    setTimeout(() => {
-      // 单个 details swiper
-      if (portfolioDetailsSwiper && portfolioDetailsSwiper.autoplay) {
-        portfolioDetailsSwiper.update();
-        portfolioDetailsSwiper.autoplay.stop();
-        portfolioDetailsSwiper.autoplay.start();
-      }
+// Portfolio 详情 slider
+initSwiperGroup(".portfolio-details-slider");
 
-      // 所有 grid swipers
-      portfolioSliders.forEach(swiper => {
-        if (swiper && swiper.autoplay) {
-          swiper.update();
-          swiper.autoplay.stop();
-          swiper.autoplay.start();
-        }
-      });
+// Training Swipers
+initSwiperGroup(".training-swiper");
 
-      console.log("🔄 Swipers restarted after tab switch");
-    }, 300); // 确保 tab 动画完成后执行
-  });
-});
+// Events Swipers
+initSwiperGroup(".events-swiper");
+
+// Clients Swipers
+initSwiperGroup(".clients-swiper");
+
+// 如果还有其它分区，比如 portfolio grid
+initSwiperGroup(".portfolio-swiper");
+
 
 
 })(); // 结束 IIFE
