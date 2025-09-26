@@ -1724,6 +1724,7 @@ section {
   position: relative;
   margin-top: 8px;
   justify-content: center;
+  cursor: pointer;
 }
 
 /* ✅ 分页点外观 (模仿 swiper) */
