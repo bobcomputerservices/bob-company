@@ -1735,7 +1735,7 @@ section {
   border: 1px solid #47b2e4;
   margin: 0 3px;
   opacity: 1;
-  cursor: pointer;
+  pointer-events: none;   /* 禁止点击 */
 }
 
 /* ✅ active 状态 */
@@ -1743,4 +1743,14 @@ section {
   background-color: #47b2e4;
 }
 
+/* ✅ 左右箭头：默认隐藏，hover 才出现 */
+.carousel-control-prev,
+.carousel-control-next {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
 
+.portfolio-img:hover .carousel-control-prev,
+.portfolio-img:hover .carousel-control-next {
+  opacity: 1;
+}
