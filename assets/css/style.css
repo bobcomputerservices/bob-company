@@ -1759,7 +1759,5 @@ section {
   background-color: rgba(0,0,0,0.5); /* 半透明黑底 */
   background-size: 50% 50%;
   border-radius: 50%;
-  padding: 0px; /* 控制圆的大小 */
-  width: auto;   /* 不要继承默认的 15% */
-  height: auto;  /* 不要继承默认的 100% */
+  height: auto;  
 }
