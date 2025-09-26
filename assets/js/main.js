@@ -475,53 +475,71 @@ window.addEventListener('load', () => {
 })();
 
 /**
- * 通用 Portfolio section Swiper 初始化函数
+ * Portfolio grid sliders
  * 让每个 .portfolio-slider 独立运作
+ * 这段是针对 Portfolio > AutoCount tab
  */
-function initSwiperGroup(selector, options = {}) {
-  const defaultOptions = {
+document.querySelectorAll('.portfolio-slider').forEach(function (sliderEl) {
+  new Swiper(sliderEl, {
     speed: 800,
     loop: true,
     autoplay: {
       delay: 4000,
+      disableOnInteraction: false
+    },
+    pagination: {
+      el: sliderEl.querySelector('.swiper-pagination'),
+      clickable: true
+    }
+  });
+});
+
+// Training Swipers
+var trainingSwipers = document.querySelectorAll(".training-swiper");
+trainingSwipers.forEach(function(swiperEl) {
+  new Swiper(swiperEl, {
+    loop: true,
+    autoplay: {
+      delay: 5000,
       disableOnInteraction: false,
     },
     pagination: {
+      el: swiperEl.querySelector(".swiper-pagination"),
       clickable: true,
     },
-  };
-
-  const finalOptions = Object.assign({}, defaultOptions, options);
-
-  const swiperEls = document.querySelectorAll(selector);
-  swiperEls.forEach(function (swiperEl) {
-    // 确保每个 slider 用自己的 pagination
-    if (swiperEl.querySelector(".swiper-pagination")) {
-      finalOptions.pagination.el = swiperEl.querySelector(".swiper-pagination");
-    }
-    new Swiper(swiperEl, finalOptions);
   });
-}
-
-/**
- * === 各个模块独立 Swiper ===
- */
-
-// Portfolio 详情 slider
-initSwiperGroup(".portfolio-details-slider");
-
-// Training Swipers
-initSwiperGroup(".training-swiper");
+});
 
 // Events Swipers
-initSwiperGroup(".events-swiper");
+var eventsSwipers = document.querySelectorAll(".events-swiper");
+eventsSwipers.forEach(function(swiperEl) {
+  new Swiper(swiperEl, {
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: swiperEl.querySelector(".swiper-pagination"),
+      clickable: true,
+    },
+  });
+});
 
 // Clients Swipers
-initSwiperGroup(".clients-swiper");
-
-// 如果还有其它分区，比如 portfolio grid
-initSwiperGroup(".portfolio-swiper");
-
-
+var clientsSwipers = document.querySelectorAll(".clients-swiper");
+clientsSwipers.forEach(function(swiperEl) {
+  new Swiper(swiperEl, {
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: swiperEl.querySelector(".swiper-pagination"),
+      clickable: true,
+    },
+  });
+});
 
 })(); // 结束 IIFE
