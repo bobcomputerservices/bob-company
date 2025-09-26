@@ -1749,7 +1749,7 @@ section {
   opacity: 0;
   transition: opacity 0.3s ease;
   background-color: rgba(0,0,0,0.5); /* 半透明黑底 */
-  background-size: 50%
+  background-shape: circle
 }
 
 .portfolio-img:hover .carousel-control-prev,
