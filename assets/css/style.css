@@ -1771,3 +1771,11 @@ section {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+/* 如果你不想在单张图片上显示控制钮，可以用下面规则把它们隐藏（可选） */
+#clientsCarouselMap .carousel-control-prev,
+#clientsCarouselMap .carousel-control-next,
+#clientsCarouselIndustries .carousel-control-prev,
+#clientsCarouselIndustries .carousel-control-next {
+  display: none;
+}
