@@ -1727,8 +1727,8 @@ section {
 }
 
 .portfolio .portfolio-item .portfolio-slider .swiper-pagination-bullet {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   background: #fff;
   border: 1px solid #47b2e4;
   opacity: 1;
