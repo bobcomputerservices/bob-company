@@ -693,9 +693,30 @@
 
      
 <!-- Our Clients -->
+
+<!-- Our Clients 1 (single image, carousel with 1 indicator) -->
 <div class="col-lg-4 col-md-6 portfolio-item filter-clients">
   <div class="portfolio-img">
-    <img src="assets/img/portfolio/ourclients-map.gif" class="img-fluid" alt="">
+    <div id="clientsCarouselMap" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+      <div class="carousel-inner">
+        <div class="carousel-item active"><img src="assets/img/portfolio/ourclients-map.gif" class="d-block w-100" alt="Clients Map"></div>
+      </div>
+
+      <!-- ✅ 分页点 -->
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#clientsCarouselMap" data-bs-slide-to="0" class="active"></button>
+      </div>
+
+      <!-- ✅ 左右箭头 -- (kept for UI consistency; harmless with single slide) -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#clientsCarouselMap" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#clientsCarouselMap" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
   </div>
   <div class="portfolio-info">
     <h4>Diverse Clientele</h4>
@@ -704,52 +725,72 @@
   </div>
 </div>
 
-<!-- Our Clients -->
+<!-- Our Clients 2 (single image) -->
 <div class="col-lg-4 col-md-6 portfolio-item filter-clients">
   <div class="portfolio-img">
-    <img src="assets/img/portfolio/ourclients-industries.png" class="img-fluid" alt="">
-  </div>
-  <div class="portfolio-info">
-    <h4>Diverse Clientele</h4>
-    <p>Our Clients</p>
-    <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
-  </div>
-</div>
-     
-<!-- Our Clients (Swiper) -->
-<div class="col-lg-4 col-md-6 portfolio-item filter-clients">
-  <div class="portfolio-img">
-    <div class="clients-swiper">
-      <div class="swiper-wrapper">
-       
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/ourclients-logo1.png" alt="">
-        </div>
-       
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/ourclients-logo2.png" alt="">
-        </div>
-       
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/ourclients-logo3.png" alt="">
-        </div>
-       
-        <div class="swiper-slide">
-          <img src="assets/img/portfolio/ourclients-logo4.png" alt="">
-        </div>
-       
+    <div id="clientsCarouselIndustries" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+      <div class="carousel-inner">
+        <div class="carousel-item active"><img src="assets/img/portfolio/ourclients-industries.png" class="d-block w-100" alt="Clients Industries"></div>
       </div>
-      <!-- Pagination -->
-      <div class="swiper-pagination"></div>
+
+      <!-- ✅ 分页点 -->
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#clientsCarouselIndustries" data-bs-slide-to="0" class="active"></button>
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#clientsCarouselIndustries" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#clientsCarouselIndustries" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
   </div>
- 
   <div class="portfolio-info">
     <h4>Diverse Clientele</h4>
     <p>Our Clients</p>
     <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
   </div>
 </div>
+
+<!-- Our Clients 3 (carousel with multiple images) -->
+<div class="col-lg-4 col-md-6 portfolio-item filter-clients">
+  <div class="portfolio-img">
+    <div id="clientsCarouselLogos" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+      <div class="carousel-inner">
+        <div class="carousel-item active"><img src="assets/img/portfolio/ourclients-logo1.png" class="d-block w-100" alt="Client Logo 1"></div>
+        <div class="carousel-item"><img src="assets/img/portfolio/ourclients-logo2.png" class="d-block w-100" alt="Client Logo 2"></div>
+        <div class="carousel-item"><img src="assets/img/portfolio/ourclients-logo3.png" class="d-block w-100" alt="Client Logo 3"></div>
+        <div class="carousel-item"><img src="assets/img/portfolio/ourclients-logo4.png" class="d-block w-100" alt="Client Logo 4"></div>
+      </div>
+
+      <!-- ✅ 分页点 -->
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#clientsCarouselLogos" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#clientsCarouselLogos" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#clientsCarouselLogos" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#clientsCarouselLogos" data-bs-slide-to="3"></button>
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#clientsCarouselLogos" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#clientsCarouselLogos" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <div class="portfolio-info">
+    <h4>Diverse Clientele</h4>
+    <p>Our Clients</p>
+    <a href="portfolio-details.html" class="details-link" title="More Details">More Details</a>
+  </div>
+</div>
+
      
     </div>
   </div>
