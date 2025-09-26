@@ -488,4 +488,46 @@ new Swiper('.portfolio-slider', {
   }
 });
 
+// Training Swipers
+new Swiper('.training-swiper', {
+  speed: 800,
+  loop: true,
+  autoplay: {
+    delay: 4000,
+    disableOnInteraction: false
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true
+  }
+});  
+
+// Events Swipers
+new Swiper('.events-swiper', {
+  speed: 800,
+  loop: true,
+  autoplay: {
+    delay: 4000,
+    disableOnInteraction: false
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true
+  }
+}); 
+
+// Our Clients Swipers
+new Swiper('.clients-swiper', {
+  speed: 800,
+  loop: true,
+  autoplay: {
+    delay: 4000,
+    disableOnInteraction: false
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true
+  }
+});   
+  
 })(); // 结束 IIFE
