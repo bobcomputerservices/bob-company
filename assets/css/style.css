@@ -1712,7 +1712,7 @@ section {
 }
 
 /* ✅ 网格里的 swiper 图片 */
-.portfolio .portfolio-item .portfolio-slider img {
+.portfolio .portfolio-item .swiper-slide img {
   width: 100%;
   height: auto;
   object-fit: cover;   /* 不会被拉长 */
@@ -1720,13 +1720,13 @@ section {
 }
 
 /* ✅ 分页点在图片下方 */
-.portfolio .portfolio-item .portfolio-slider .swiper-pagination {
+.portfolio .portfolio-item .swiper-slide .swiper-pagination {
   position: relative;
   margin-top: 8px;
   text-align: center;
 }
 
-.portfolio .portfolio-item .portfolio-slider .swiper-pagination-bullet {
+.portfolio .portfolio-item .swiper-slide .swiper-pagination-bullet {
   width: 10px;
   height: 10px;
   background: #fff;
@@ -1735,7 +1735,7 @@ section {
   margin: 0 3px;
 }
 
-.portfolio .portfolio-item .portfolio-slider .swiper-pagination-bullet-active {
+.portfolio .portfolio-item .swiper-slide .swiper-pagination-bullet-active {
   background: #47b2e4;
 }
 
