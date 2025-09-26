@@ -474,72 +474,18 @@ window.addEventListener('load', () => {
   window.__doAnchorFix = handleAnchorFix;
 })();
 
-/**
- * Portfolio grid sliders
- * 让每个 .portfolio-slider 独立运作
- * 这段是针对 Portfolio > AutoCount tab
- */
-document.querySelectorAll('.portfolio-slider').forEach(function (sliderEl) {
-  new Swiper(sliderEl, {
-    speed: 800,
-    loop: true,
-    autoplay: {
-      delay: 4000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: sliderEl.querySelector('.swiper-pagination'),
-      clickable: true
-    }
-  });
-});
-
-// Training Swipers
-var trainingSwipers = document.querySelectorAll(".training-swiper");
-trainingSwipers.forEach(function(swiperEl) {
-  new Swiper(swiperEl, {
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: swiperEl.querySelector(".swiper-pagination"),
-      clickable: true,
-    },
-  });
-});
-
-// Events Swipers
-var eventsSwipers = document.querySelectorAll(".events-swiper");
-eventsSwipers.forEach(function(swiperEl) {
-  new Swiper(swiperEl, {
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: swiperEl.querySelector(".swiper-pagination"),
-      clickable: true,
-    },
-  });
-});
-
-// Clients Swipers
-var clientsSwipers = document.querySelectorAll(".clients-swiper");
-clientsSwipers.forEach(function(swiperEl) {
-  new Swiper(swiperEl, {
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: swiperEl.querySelector(".swiper-pagination"),
-      clickable: true,
-    },
-  });
+// AutoCount Swipers
+new Swiper('.portfolio-slider', {
+  speed: 800,
+  loop: true,
+  autoplay: {
+    delay: 4000,
+    disableOnInteraction: false
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true
+  }
 });
 
 })(); // 结束 IIFE
