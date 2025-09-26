@@ -1750,7 +1750,7 @@ section {
   transition: opacity 0.3s ease;
   width: 20px;
   height: 20px;
-  background-size: 20% 20%;
+  background-size: 100% 100%;
   filter: invert(1); /* 白色箭头，适配黑底 */
 }
 
