@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+.navbar {
+  margin-top: -10px; 
+}
+</style>
+  
 <head>
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Blog - Arsha Simplified</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <title>Blog - Portfolio Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Jost:300,400,500,600,700|Poppins:300,400,500,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
+  <!-- Vendor CSS (跟 index.html 保持一致) -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -28,32 +31,61 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 </head>
-
-<body>
+<body class="subpage">
 
   <!-- ======= Header ======= -->
-  <!-- 保留原本的 Header -->
-  <header id="header" class="fixed-top">
+  <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center">
-      <h1 class="logo me-auto"><a href="index.html">Arsha</a></h1>
-      <nav id="navbar" class="navbar">
+
+      <a href="index.html" class="logo me-auto">
+        <img src="assets/img/logo.png" 
+          alt="BOB Computer Services" 
+          class="img-fluid" 
+          style="height:70px; vertical-align:middle;">
+  <span class="logo-text">BOB Computer Services</span>
+      </a>
+
+  <!-- Navigation -->
+  <nav id="navbar" class="navbar">
+    <ul>
+      <li><a class="nav-link scrollto" href="index.html#hero">Home</a></li>
+      <li class="dropdown">
+        <a class="scrollto" href="index.html#about"><span>About Us</span> <i class="bi bi-chevron-down"></i></a>
         <ul>
-          <li><a class="nav-link scrollto" href="index.html#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto active" href="blog.html">Blog</a></li>
+          <li><a class="scrollto" href="index.html#why-us">Why Us</a></li>
+          <li><a class="scrollto" href="index.html#skills">Our Skills</a></li>
         </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>
+      </li>
+      <li><a class="nav-link scrollto" href="index.html#services">Services</a></li>
+      <li class="dropdown">
+        <a class="scrollto" href="index.html#portfolio"><span>Portfolio</span> <i class="bi bi-chevron-down"></i></a>
+        <ul>
+          <li><a class="scrollto" href="index.html?tab=autocount#portfolio">AutoCount</a></li>
+          <li><a class="scrollto" href="index.html?tab=training#portfolio">Training</a></li>
+          <li><a class="scrollto" href="index.html?tab=events#portfolio">Events</a></li>
+          <li><a class="scrollto" href="index.html?tab=clients#portfolio">Our Clients</a></li>
+        </ul>
+      </li>
+      <li><a class="nav-link scrollto" href="index.html#contact">Contact</a></li>
+    </ul>
+    <i class="bi bi-list mobile-nav-toggle"></i>
+  </nav><!-- .navbar -->
     </div>
   </header>
-
-  <main id="main">
-
+  <!-- End Header -->
+      
     <!-- ======= Breadcrumbs ======= -->
-    <section class="breadcrumbs">
+    <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
+
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li>Blog</li>
+        </ol>
         <h2>Blog</h2>
+
       </div>
-    </section>
+    </section><!-- End Breadcrumbs -->
 
     <!-- ======= Blog Section ======= -->
     <section id="blog" class="blog">
@@ -102,33 +134,43 @@
           
                 <!-- Sidebar -->
                 <div class="col-lg-4">
-          
+                
                   <div class="sidebar">
-          
-                    <h3 class="sidebar-title">Categories</h3>
-                    <div class="sidebar-content">
+                
+                    <!-- Categories -->
+                    <div class="sidebar-box">
+                      <h3 class="sidebar-title">Categories</h3>
                       <ul>
                         <li><a href="#">AutoCount</a></li>
                         <li><a href="#">Training</a></li>
                         <li><a href="#">Events</a></li>
                         <li><a href="#">Our Clients</a></li>
                       </ul>
-                    </div>
-          
-                    <h3 class="sidebar-title">Recent Posts</h3>
-                    <div class="sidebar-content">
+                    </div><!-- End sidebar-box -->
+                
+                    <!-- Recent Posts -->
+                    <div class="sidebar-box">
+                      <h3 class="sidebar-title">Recent Posts</h3>
+                
                       <div class="post-item clearfix">
                         <img src="assets/img/blog/blog-1.jpg" alt="">
                         <h4><a href="#">AutoCount Training Video</a></h4>
                       </div>
+                
                       <div class="post-item clearfix">
                         <img src="assets/img/blog/blog-2.jpg" alt="">
                         <h4><a href="#">Events Highlight</a></h4>
                       </div>
-                    </div>
-          
+                
+                      <div class="post-item clearfix">
+                        <img src="assets/img/blog/blog-3.jpg" alt="">
+                        <h4><a href="#">New Client Showcase</a></h4>
+                      </div>
+                
+                    </div><!-- End sidebar-box -->
+                
                   </div><!-- End sidebar -->
-          
+                
                 </div><!-- End blog sidebar -->
 
         </div><!-- End row -->
