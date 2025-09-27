@@ -562,5 +562,59 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-  
+
+  // Generate Recent Posts (latest 5 by date)
+    let posts = Array.from(blogContainer.querySelectorAll('.entry'));
+    posts.sort((a, b) => {
+      let dateA = new Date(a.querySelector('time').getAttribute('datetime'));
+      let dateB = new Date(b.querySelector('time').getAttribute('datetime'));
+      return dateB - dateA; // newest first
+    });
+
+    let recentContainer = document.querySelector('.recent-posts');
+    if (recentContainer) {
+      recentContainer.innerHTML = ''; // clear existing
+      posts.slice(0, 5).forEach(post => {
+        let img = post.querySelector('.entry-img img').getAttribute('src');
+        let title = post.querySelector('.entry-title').textContent;
+        let date = post.querySelector('time').textContent;
+
+        let item = document.createElement('div');
+        item.classList.add('post-item', 'clearfix');
+        item.innerHTML = `
+          <img src="${img}" alt="">
+          <h4><a href="#">${title}</a></h4>
+          <time>${date}</time>
+        `;
+        recentContainer.appendChild(item);
+      });
+    }
+  }
+});
+
+// Load More button
+let allPosts = Array.from(blogContainer.querySelectorAll('.entry'));
+let visibleCount = 6; // 默认显示前6篇
+allPosts.forEach((post, index) => {
+  if (index >= visibleCount) {
+    post.style.display = "none";
+  }
+});
+
+let loadMoreBtn = document.getElementById('loadMoreBtn');
+if (loadMoreBtn) {
+  loadMoreBtn.addEventListener('click', () => {
+    let hiddenPosts = allPosts.filter(post => post.style.display === "none");
+    hiddenPosts.slice(0, 6).forEach(post => post.style.display = "block");
+
+    // 触发 Isotope 重新布局
+    iso.arrange();
+
+    // 如果没有更多隐藏文章，隐藏按钮
+    if (allPosts.every(post => post.style.display === "block")) {
+      loadMoreBtn.style.display = "none";
+    }
+  });
+}
+
 })(); // 结束 IIFE
