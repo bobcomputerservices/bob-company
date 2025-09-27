@@ -93,85 +93,69 @@
     <!-- ======= Blog Section ======= -->
     <section id="blog" class="blog">
       <div class="container" data-aos="fade-up">
-    
         <div class="row">
     
           <!-- Blog entries list -->
-          <div class="col-lg-8 entries">
+          <div class="col-lg-8 entries" id="blog-entries">
     
-            <article class="entry">
-    
+            <!-- Example blog entry -->
+            <article class="entry" data-category="autocount" data-date="2025-09-21">
               <div class="entry-img">
                 <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
               </div>
-    
               <div class="entry-content">
-                <p>
-                  This is a simple description for the first post. It sits in a white box under the image.
-                </p>
+                <h2 class="entry-title">AutoCount Training Video</h2>
+                <div class="entry-meta">
+                  <span class="post-date">Sep 21, 2025</span>
+                </div>
+                <p>This is a simple description for the first post. It sits in a white box under the image.</p>
               </div>
-    
             </article><!-- End blog entry -->
     
-            <article class="entry">
-    
+            <article class="entry" data-category="events" data-date="2025-09-19">
               <div class="entry-img">
                 <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
               </div>
-    
               <div class="entry-content">
-                <p>
-                  Second post description goes here. Again, boxed with white background under the image.
-                </p>
+                <h2 class="entry-title">Events Highlight</h2>
+                <div class="entry-meta">
+                  <span class="post-date">Sep 19, 2025</span>
+                </div>
+                <p>Second post description goes here. Again, boxed with white background under the image.</p>
               </div>
-    
             </article><!-- End blog entry -->
     
+            <!-- Load More link -->
+            <div id="load-more-wrapper" class="text-center mt-4">
+              <a href="#" id="load-more">Load More</a>
+            </div>
           </div><!-- End blog entries list -->
     
           <!-- Sidebar -->
           <div class="col-lg-4">
-          
             <div class="sidebar">
-          
+    
               <!-- Categories -->
               <div class="sidebar-box">
                 <h3 class="sidebar-title">Categories</h3>
-                <ul>
-                  <li><a href="#">AutoCount</a></li>
-                  <li><a href="#">Training</a></li>
-                  <li><a href="#">Events</a></li>
-                  <li><a href="#">Our Clients</a></li>
+                <ul id="categories-list">
+                  <li><a href="#" data-filter="autocount">AutoCount <span class="count">(0)</span></a></li>
+                  <li><a href="#" data-filter="training">Training <span class="count">(0)</span></a></li>
+                  <li><a href="#" data-filter="events">Events <span class="count">(0)</span></a></li>
+                  <li><a href="#" data-filter="clients">Our Clients <span class="count">(0)</span></a></li>
                 </ul>
               </div><!-- End sidebar-box -->
-          
+    
               <!-- Recent Posts -->
               <div class="sidebar-box">
                 <h3 class="sidebar-title">Recent Posts</h3>
-          
-                <div class="post-item clearfix">
-                  <img src="assets/img/blog/blog-1.jpg" alt="">
-                  <h4><a href="#">AutoCount Training Video</a></h4>
-                </div>
-          
-                <div class="post-item clearfix">
-                  <img src="assets/img/blog/blog-2.jpg" alt="">
-                  <h4><a href="#">Events Highlight</a></h4>
-                </div>
-          
-                <div class="post-item clearfix">
-                  <img src="assets/img/blog/blog-3.jpg" alt="">
-                  <h4><a href="#">New Client Showcase</a></h4>
-                </div>
-          
+                <div id="recent-posts"></div>
               </div><!-- End sidebar-box -->
-          
-            </div><!-- End sidebar -->
-          
-          </div><!-- End blog sidebar -->
-          
-        </div>
     
+            </div><!-- End sidebar -->
+          </div><!-- End blog sidebar -->
+    
+        </div>
       </div>
     </section><!-- End Blog Section -->
 
