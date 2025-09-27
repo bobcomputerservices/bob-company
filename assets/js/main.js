@@ -529,5 +529,38 @@ new Swiper('.clients-swiper', {
     clickable: true
   }
 });   
+
+document.addEventListener('DOMContentLoaded', () => {
+  let blogContainer = document.querySelector('.entries');
+  if (blogContainer) {
+    let iso = new Isotope(blogContainer, {
+      itemSelector: '.entry',
+      layoutMode: 'vertical'
+    });
+
+    // Categories click
+    let categoryLinks = document.querySelectorAll('.categories a');
+    categoryLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        categoryLinks.forEach(el => el.classList.remove('active'));
+        this.classList.add('active');
+        iso.arrange({ filter: this.getAttribute('data-filter') });
+      });
+    });
+
+    // Count posts per category
+    document.querySelectorAll('.categories li a').forEach(link => {
+      let filter = link.getAttribute('data-filter');
+      let count;
+      if (filter === '*') {
+        count = blogContainer.querySelectorAll('.entry').length;
+      } else {
+        count = blogContainer.querySelectorAll(filter).length;
+      }
+      link.querySelector('.count').textContent = '(' + count + ')';
+    });
+  }
+});
   
 })(); // 结束 IIFE
