@@ -592,7 +592,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Load More button
 let allPosts = Array.from(blogContainer.querySelectorAll('.entry'));
-let visibleCount = 6; // 默认显示前6篇
+let visibleCount = 4; // 默认显示前6篇
 allPosts.forEach((post, index) => {
   if (index >= visibleCount) {
     post.style.display = "none";
