@@ -1557,8 +1557,35 @@ section {
 # Sidebar
 --------------------------------------------------------------*/
 
+/* Blog general */
+.blog .entries {
+  padding-right: 30px;
+}
+
+.blog .entry {
+  margin-bottom: 30px;
+  box-shadow: 0px 2px 20px rgba(55, 81, 126, 0.08);
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.blog .entry-img img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.blog .entry-content {
+  margin-top: 20px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 6px;
+}
+
 /* Sidebar general */
 .blog .sidebar {
+  padding: 30px;
+  box-shadow: 0px 2px 20px rgba(55, 81, 126, 0.08);
+  border-radius: 8px;
   margin-top: 30px;
 }
 
@@ -1573,38 +1600,44 @@ section {
 .blog .sidebar .sidebar-title {
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin: 0 0 15px 0;
+  padding: 0;
   color: #37517e;
+  position: relative;
+}
+
+.blog .sidebar .sidebar-content {
+  margin-bottom: 30px;
 }
 
 /* Categories */
-.blog .sidebar ul {
+.blog .sidebar .categories ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.blog .sidebar ul li+li {
+.blog .sidebar .categories ul li+li {
   margin-top: 10px;
 }
 
-.blog .sidebar ul a {
+.blog .sidebar .categories ul a {
   color: #444;
   transition: 0.3s;
 }
 
-.blog .sidebar ul a:hover {
+.blog .sidebar .categories ul a:hover {
   color: #47b2e4;
 }
 
 /* Recent posts */
-.blog .sidebar .post-item {
+.blog .sidebar .recent-posts .post-item {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
 }
 
-.blog .sidebar .post-item img {
+.blog .sidebar .recent-posts .post-item img {
   width: 80px;
   height: 60px;
   object-fit: cover;
@@ -1612,20 +1645,20 @@ section {
   margin-right: 15px;
 }
 
-.blog .sidebar .post-item h4 {
+.blog .sidebar .recent-posts .post-item h4 {
   font-size: 14px;
   margin: 0;
   line-height: 1.4;
   flex: 1;
 }
 
-.blog .sidebar .post-item h4 a {
+.blog .sidebar .recent-posts .post-item h4 a {
   color: #37517e;
   transition: 0.3s;
   display: inline-block;
 }
 
-.blog .sidebar .post-item h4 a:hover {
+.blog .sidebar .recent-posts .post-item h4 a:hover {
   color: #47b2e4;
 }
 
