@@ -1554,7 +1554,7 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Sidebar
+# Sidebar coded by ChatGPT
 --------------------------------------------------------------*/
 
 /* Blog general */
@@ -1651,6 +1651,13 @@ section {
 
 .blog .sidebar .post-item h4 a:hover {
   color: #47b2e4;
+}
+
+.blog .recent-posts .post-date {
+  display: block;      /* 独立一行 */
+  font-size: 12px;     /* 缩小 */
+  color: #6c757d;      /* 灰色 */
+  margin-top: 2px;
 }
 
 /*--------------------------------------------------------------
