@@ -103,30 +103,71 @@
                 <!-- Blog entries list -->
                 <div class="col-lg-8 entries">
           
-                  <article class="entry">
-          
+                  <!-- Post: AutoCount -->
+                  <article class="entry filter-autocount">
                     <div class="entry-img">
                       <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
                     </div>
-          
-                    <div class="entry-content">
-                      <p>
-                        This is a simple description for the first post. It sits in a white box under the image.
-                      </p>
+                    <h2 class="entry-title">AutoCount New Product Launch</h2>
+                    <div class="entry-meta">
+                      <ul>
+                        <li><i class="bi bi-clock"></i> <time datetime="2025-09-20">Sep 20, 2025</time></li>
+                        <li><i class="bi bi-folder"></i> AutoCount</li>
+                      </ul>
                     </div>
-          
+                    <div class="entry-content">
+                      <p>AutoCount 产品最新发布说明...</p>
+                    </div>
                   </article><!-- End blog entry -->
           
-                  <article class="entry">
-          
+                  <!-- Post: Training -->
+                  <article class="entry filter-training">
                     <div class="entry-img">
                       <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
                     </div>
-          
+                    <h2 class="entry-title">Excel Training Workshop</h2>
+                    <div class="entry-meta">
+                      <ul>
+                        <li><i class="bi bi-clock"></i> <time datetime="2025-09-12">Sep 12, 2025</time></li>
+                        <li><i class="bi bi-folder"></i> Training</li>
+                      </ul>
+                    </div>
                     <div class="entry-content">
-                      <p>
-                        Second post description goes here. Again, boxed with white background under the image.
-                      </p>
+                      <p>我们为会计师举办了 Excel 培训班...</p>
+                    </div>
+                  </article><!-- End blog entry -->
+          
+                  <!-- Post: Events -->
+                  <article class="entry filter-events">
+                    <div class="entry-img">
+                      <img src="assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
+                    </div>
+                    <h2 class="entry-title">Annual Business Conference</h2>
+                    <div class="entry-meta">
+                      <ul>
+                        <li><i class="bi bi-clock"></i> <time datetime="2025-08-30">Aug 30, 2025</time></li>
+                        <li><i class="bi bi-folder"></i> Events</li>
+                      </ul>
+                    </div>
+                    <div class="entry-content">
+                      <p>年度商业会议精彩瞬间...</p>
+                    </div>
+                  </article><!-- End blog entry -->
+          
+                  <!-- Post: Our Clients -->
+                  <article class="entry filter-clients">
+                    <div class="entry-img">
+                      <img src="assets/img/blog/blog-4.jpg" alt="" class="img-fluid">
+                    </div>
+                    <h2 class="entry-title">Client Testimonial</h2>
+                    <div class="entry-meta">
+                      <ul>
+                        <li><i class="bi bi-clock"></i> <time datetime="2025-08-15">Aug 15, 2025</time></li>
+                        <li><i class="bi bi-folder"></i> Our Clients</li>
+                      </ul>
+                    </div>
+                    <div class="entry-content">
+                      <p>客户对我们服务的高度评价...</p>
                     </div>
           
                   </article><!-- End blog entry -->
@@ -136,18 +177,19 @@
                 <!-- Sidebar -->
                 <div class="col-lg-4">
                 
+                  <!-- Categories -->
                   <div class="sidebar">
-                
-                    <!-- Categories -->
-                    <div class="sidebar-box">
-                      <h3 class="sidebar-title">Categories</h3>
+                    <h3 class="sidebar-title">Categories</h3>
+                    <div class="sidebar-content categories">
                       <ul>
-                        <li><a href="#">AutoCount</a></li>
-                        <li><a href="#">Training</a></li>
-                        <li><a href="#">Events</a></li>
-                        <li><a href="#">Our Clients</a></li>
+                        <li><a href="#" data-filter="*">All <span class="count"></span></a></li>
+                        <li><a href="#" data-filter=".filter-autocount">AutoCount <span class="count"></span></a></li>
+                        <li><a href="#" data-filter=".filter-training">Training <span class="count"></span></a></li>
+                        <li><a href="#" data-filter=".filter-events">Events <span class="count"></span></a></li>
+                        <li><a href="#" data-filter=".filter-clients">Our Clients <span class="count"></span></a></li>
                       </ul>
-                    </div><!-- End sidebar-box -->
+                    </div>
+                  </div><!-- End sidebar categories -->
                 
                     <!-- Recent Posts -->
                     <div class="sidebar-box">
