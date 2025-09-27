@@ -590,29 +590,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Load More button
-let allPosts = Array.from(blogContainer.querySelectorAll('.entry'));
-let visibleCount = 4; // 默认显示前6篇
-allPosts.forEach((post, index) => {
-  if (index >= visibleCount) {
-    post.style.display = "none";
-  }
-});
-
-let loadMoreBtn = document.getElementById('loadMoreBtn');
-if (loadMoreBtn) {
-  loadMoreBtn.addEventListener('click', () => {
-    let hiddenPosts = allPosts.filter(post => post.style.display === "none");
-    hiddenPosts.slice(0, 6).forEach(post => post.style.display = "block");
-
-    // 触发 Isotope 重新布局
-    iso.arrange();
-
-    // 如果没有更多隐藏文章，隐藏按钮
-    if (allPosts.every(post => post.style.display === "block")) {
-      loadMoreBtn.style.display = "none";
-    }
-  });
-}
-
 })(); // 结束 IIFE
