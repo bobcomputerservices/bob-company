@@ -1554,7 +1554,7 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Sidebar coded by ChatGPT
+# Blog coded by ChatGPT
 --------------------------------------------------------------*/
 
 /* Blog general */
@@ -1659,6 +1659,15 @@ section {
   color: #6c757d;      /* 灰色 */
   margin-top: 2px;
 }
+
+.entry-meta {
+  margin-bottom: 15px; /* 日期和描述之间留一行 */
+}
+
+.entry-content p + p {
+  margin-top: 15px; /* 英文和中文描述之间留一行 */
+}
+
 
 /*--------------------------------------------------------------
 # Coded by ChatGPT 
