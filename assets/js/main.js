@@ -474,4 +474,83 @@ window.addEventListener('load', () => {
   window.__doAnchorFix = handleAnchorFix;
 })();
 
+/* ====== Blog logic ====== */
+document.addEventListener("DOMContentLoaded", function() {
+  const entriesContainer = document.querySelector("#blog-entries");
+  const allEntries = Array.from(entriesContainer.querySelectorAll("article.entry"));
+  const categoriesList = document.querySelector("#categories-list");
+  const recentPostsContainer = document.querySelector("#recent-posts");
+  const loadMoreBtn = document.querySelector("#load-more");
+  const loadMoreWrapper = document.querySelector("#load-more-wrapper");
+
+  let visibleCount = 20;
+
+  function renderEntries() {
+    allEntries.forEach((entry, idx) => {
+      entry.style.display = idx < visibleCount ? "" : "none";
+    });
+    if (visibleCount >= allEntries.length) {
+      loadMoreWrapper.style.display = "none";
+    } else {
+      loadMoreWrapper.style.display = "block";
+    }
+  }
+
+  function updateCategories() {
+    const counts = { autocount: 0, training: 0, events: 0, clients: 0 };
+    allEntries.forEach(e => {
+      const cat = e.dataset.category;
+      if (cat && counts[cat] !== undefined) counts[cat]++;
+    });
+    categoriesList.querySelectorAll("a").forEach(a => {
+      const cat = a.dataset.filter;
+      a.querySelector(".count").textContent = `(${counts[cat] || 0})`;
+    });
+  }
+
+  function renderRecentPosts() {
+    const sorted = [...allEntries].sort((a, b) => {
+      return new Date(b.dataset.date) - new Date(a.dataset.date);
+    });
+    recentPostsContainer.innerHTML = "";
+    sorted.slice(0, 5).forEach(post => {
+      const img = post.querySelector(".entry-img img").src;
+      const title = post.querySelector(".entry-title").textContent;
+      const date = post.dataset.date;
+      const div = document.createElement("div");
+      div.className = "post-item clearfix";
+      div.innerHTML = `
+        <img src="${img}" alt="">
+        <h4><a href="#">${title}</a></h4>
+        <time>${date}</time>
+      `;
+      recentPostsContainer.appendChild(div);
+    });
+  }
+
+  // Category filtering
+  categoriesList.addEventListener("click", e => {
+    if (e.target.closest("a")) {
+      e.preventDefault();
+      const filter = e.target.closest("a").dataset.filter;
+      allEntries.forEach(entry => {
+        entry.style.display = entry.dataset.category === filter ? "" : "none";
+      });
+      loadMoreWrapper.style.display = "none"; // 过滤时隐藏 load more
+    }
+  });
+
+  // Load More
+  loadMoreBtn.addEventListener("click", e => {
+    e.preventDefault();
+    visibleCount += 20;
+    renderEntries();
+  });
+
+  // Init
+  renderEntries();
+  updateCategories();
+  renderRecentPosts();
+});
+  
 })(); // 结束 IIFE
