@@ -560,10 +560,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       link.querySelector('.count').textContent = '(' + count + ')';
     });
-  }
-});
 
-  // Generate Recent Posts (latest 5 by date)
+    // Generate Recent Posts (latest 5 by date)
     let posts = Array.from(blogContainer.querySelectorAll('.entry'));
     posts.sort((a, b) => {
       let dateA = new Date(a.querySelector('time').getAttribute('datetime'));
