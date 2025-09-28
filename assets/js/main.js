@@ -522,7 +522,6 @@ document.addEventListener("DOMContentLoaded", function() {
       div.innerHTML = `
         <img src="${img}" alt="">
         <h4><a href="#">${title}</a></h4>
-        <time>${date}</time>
       `;
       recentPostsContainer.appendChild(div);
     });
