@@ -1673,15 +1673,6 @@ section {
   padding: 0;      /* 去掉内边距 */
 }
 
-.blog .entry-img img,
-.blog .entry-img iframe {
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border-radius: 0; /* 如果你不要圆角，就取消 */
-}
-
 
 /*--------------------------------------------------------------
 # Coded by ChatGPT 
