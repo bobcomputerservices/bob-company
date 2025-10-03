@@ -1588,6 +1588,23 @@ section {
   text-decoration: none;
 }
 
+/* 自定义社交图标样式 */
+.custom-social a {
+  margin-right: 12px;         /* 图标之间的间距 */
+  display: inline-block;
+}
+
+.custom-social img.social-icon {
+  height: 36px;               /* 统一高度 */
+  width: auto;                /* 保持比例 */
+  vertical-align: middle;     /* 保证对齐 */
+  transition: transform 0.3s; /* 加点 hover 动效 */
+}
+
+.custom-social img.social-icon:hover {
+  transform: scale(1.1);      /* 鼠标移上去稍微放大 */
+}
+
 #footer .footer-bottom {
   padding-top: 30px;
   padding-bottom: 30px;
