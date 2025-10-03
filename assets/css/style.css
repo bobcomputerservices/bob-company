@@ -142,6 +142,8 @@ h1, h2, h3, h4, h5, h6 {
 
 #header .logo img {
   max-height: 80px;
+  padding-top: 5px;      /* 给图片自身一点缓冲 */
+  object-fit: contain;   /* 确保完整显示，不会被裁切 */
 }
 
 /* 主页面 - hero 区header透明，借用hero背景 */
