@@ -1978,3 +1978,15 @@ section {
 #clientsCarouselIndustries .carousel-control-next {
   display: none;
 }
+
+/* 覆盖 Arsha 原本的Social Networks圆底样式 */
+#footer .footer-top .social-links a {
+  background: none !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin-right: 12px;   /* 两个图标间距 */
+  border-radius: 0 !important;
+  display: inline-block;
+}
+
