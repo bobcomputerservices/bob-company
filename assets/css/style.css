@@ -128,24 +128,33 @@ h1, h2, h3, h4, h5, h6 {
 
 #header .logo {
   font-size: 30px;
-  padding-top: 5px;   /* 整个 logo 区域下移 */
-  display: flex;
+  padding-top: 5px;          /* 整个 logo 区域下移 */
+  display: flex;             /* 让图片和文字并排 */
+  align-items: center;       /* 垂直对齐居中 */
   margin: 0;
-  padding: 0;
   line-height: 1;
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: none;
-}
-
-#header .logo a {
   color: #fff;
 }
 
 #header .logo img {
-  max-height: 80px;
+  height: 70px;          /* 默认 logo 高度 */
   padding-top: 5px;      /* 给图片自身一点缓冲 */
   object-fit: contain;   /* 确保完整显示，不会被裁切 */
+  margin-right: 8px;     /* 图和文字间隔 */
+}
+
+#header .logo .logo-text {
+  font-family: 'Times New Roman', serif;
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: -2px;
+  white-space: nowrap;
+  margin-left: 8px;
+  vertical-align: middle;
+  color: #fff;
 }
 
 /* 主页面 - hero 区header透明，借用hero背景 */
@@ -161,6 +170,40 @@ body:not(.subpage) #header.header-scrolled {
 /* 子页面 - header蓝底，文字可见 */
 body.subpage #header {
   background: #37517e;
+}
+
+/* Header 排版根据屏幕大小调节 平板 & 中等屏幕 (≤768px) */
+@media (max-width: 768px) {
+  #header {
+    justify-content: center;    /* 整个 logo 居中 */
+  }
+
+  #header .logo {
+    flex-direction: column;     /* 图片和文字上下排 */
+    align-items: center;
+    text-align: center;
+  }
+
+  #header .logo img {
+    height: 50px;               /* logo 缩小 */
+    margin-right: 0;
+    margin-bottom: 5px;
+  }
+
+  #header .logo .logo-text {
+    font-size: 18px;            /* 文字跟着缩小 */
+  }
+}
+
+/* Header 排版根据屏幕大小调节 超小屏幕 (≤480px) */
+@media (max-width: 480px) {
+  #header .logo img {
+    height: 45px;               /* 再小一点 */
+  }
+
+  #header .logo .logo-text {
+    font-size: 14px;            /* 字更小 */
+  }
 }
 
 /*--------------------------------------------------------------
@@ -1697,18 +1740,6 @@ section {
 /*--------------------------------------------------------------
 # Coded by ChatGPT 
 --------------------------------------------------------------*/
-
-/* --- Custom Company Logo Text --- */
-.logo-text {
-  font-family: 'Times New Roman', serif;
-  font-size: 48px;
-  font-weight: 600;
-  letter-spacing: -2px;
-  white-space: nowrap;
-  margin-left: 8px;
-  vertical-align: middle;
-  color: #fff;
-}
 
 #hero {
   background: url("../img/hero-bg2.jpg") no-repeat center center;
