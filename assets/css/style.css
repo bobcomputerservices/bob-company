@@ -1568,12 +1568,18 @@ section {
   color: #fff;
   line-height: 1;
   padding: 8px 0;
-  margin-right: 4px;
+  margin-right: 10px;    /* 两个 icon 之间的间距 */
   border-radius: 50%;
   text-align: center;
   width: 36px;
   height: 36px;
   transition: 0.3s;
+}
+
+.social-links .social-icon {
+  height: 32px;       /* 统一高度 */
+  width: auto;        /* 宽度自适应，保持比例 */
+  vertical-align: middle; /* 保持垂直居中对齐 */
 }
 
 #footer .footer-top .social-links a:hover {
