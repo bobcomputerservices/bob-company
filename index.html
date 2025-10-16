@@ -1031,6 +1031,43 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+ <!-- ======= Announcement Modal ======= -->
+ <div class="modal fade" id="announcementModal" tabindex="-1" aria-labelledby="announcementModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered" style="max-width: 900px;">
+     <div class="modal-content position-relative">
+ 
+       <!-- Close button -->
+       <button type="button" 
+               data-bs-dismiss="modal" 
+               aria-label="Close"
+               style="position:absolute; top:10px; right:15px; 
+                      z-index:1055; 
+                      width:35px; height:35px;
+                      border:none; 
+                      border-radius:50%; 
+                      background-color:black; 
+                      color:white; 
+                      font-size:1.5rem; 
+                      font-weight:bold; 
+                      line-height:1; 
+                      display:flex; 
+                      align-items:center; 
+                      justify-content:center; 
+                      cursor:pointer;">
+         ×
+       </button>
+ 
+       <!-- 公告图 -->
+       <div class="modal-body p-0" style="aspect-ratio:16/9;">
+         <img src="assets/img/announcement-20251016.jpg" 
+              alt="Announcement" 
+              class="w-100 h-100" 
+              style="object-fit: cover;">
+       </div>
+     </div>
+   </div>
+ </div>
+
 </body>
 
 </html>
