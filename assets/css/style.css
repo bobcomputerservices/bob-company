@@ -1774,19 +1774,19 @@ section {
 }
 
 /* === Sticky Sidebar === */
-.blog .row {
-  align-items: flex-start;
-  overflow: visible !important;
-}
-
 .blog .col-lg-3 {
-  align-self: flex-start; /* 确保 sticky 元素随滚动 */
+  align-self: flex-start; /* 让侧栏在 Flex 容器中可 sticky */
 }
 
-.blog .sidebar {
+.sidebar {
   position: sticky;
-  top: 100px; /* 依 header 高度微调 */
-  height: fit-content;
+  top: 100px; /* 根据你的 header 高度调整 */
+}
+
+.sidebar {
+  position: sticky;
+  top: 100px;
+  transition: top 0.3s ease;
 }
 
 
