@@ -497,15 +497,22 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function updateCategories() {
-    const counts = { autocount: 0, training: 0, events: 0, clients: 0 };
+    const counts = { products: 0, autocount: 0, training: 0, events: 0, clients: 0 };
     allEntries.forEach(e => {
       const cat = e.dataset.category;
       if (cat && counts[cat] !== undefined) counts[cat]++;
     });
+    // 更新分类数量
     categoriesList.querySelectorAll("a").forEach(a => {
       const cat = a.dataset.filter;
       a.querySelector(".count").textContent = `(${counts[cat] || 0})`;
     });
+
+    // 更新总数（显示在 Categories 标题后）
+  const totalCount = allEntries.length;
+  const catTitle = document.querySelector(".sidebar-title");
+  if (catTitle && catTitle.textContent.includes("Categories")) {
+    catTitle.innerHTML = `Categories <span class="count">(${totalCount})</span>`;
   }
 
   function renderRecentPosts() {
@@ -527,6 +534,28 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
+  // Search filter
+  const searchInput = document.querySelector("#search-input");
+  if (searchInput) {
+    searchInput.addEventListener("input", function() {
+      const keyword = this.value.toLowerCase();
+      allEntries.forEach(entry => {
+        const title = entry.querySelector(".entry-title").textContent.toLowerCase();
+        entry.style.display = title.includes(keyword) ? "" : "none";
+      });
+      loadMoreWrapper.style.display = "none";
+    });
+  }
+
+  // Click "Categories" title to show all posts
+  const catTitle = document.querySelector(".sidebar-title");
+  if (catTitle && catTitle.textContent.includes("Categories")) {
+    catTitle.addEventListener("click", () => {
+      allEntries.forEach(entry => entry.style.display = "");
+      renderEntries(); // 恢复 load more 按钮
+    });
+  }
+    
   // Category filtering
   categoriesList.addEventListener("click", e => {
     if (e.target.closest("a")) {
