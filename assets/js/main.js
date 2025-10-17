@@ -526,7 +526,7 @@ document.addEventListener("DOMContentLoaded", function() {
       return new Date(b.dataset.date) - new Date(a.dataset.date);
     });
     recentPostsContainer.innerHTML = "";
-    sorted.slice(0, 5).forEach(post => {
+    sorted.slice(0, 4).forEach(post => {
       const img = post.querySelector(".entry-img img").src;
       const title = post.querySelector(".entry-title").textContent;
       const date = post.dataset.date;
