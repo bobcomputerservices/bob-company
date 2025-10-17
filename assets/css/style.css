@@ -2024,3 +2024,25 @@ section {
   display: inline-block;
 }
 
+/* === Fix Sticky Sidebar Not Working === */
+
+/* 解除 blog 区块内所有父级的 overflow 影响 */
+#blog,
+#blog .container,
+#blog .row {
+  overflow: visible !important;
+}
+
+/* 确保 sidebar 的父层是 flex-item，可 sticky */
+#blog .row {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* 关键：sidebar sticky 效果 */
+.blog .sidebar {
+  position: sticky;
+  top: 120px; /* header 高度 */
+  height: fit-content;
+}
+
