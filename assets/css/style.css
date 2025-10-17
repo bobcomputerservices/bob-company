@@ -1789,6 +1789,10 @@ section {
   transition: top 0.3s ease;
 }
 
+/* === Fix for Blog Sticky Sidebar === */
+#blog {
+  overflow: visible !important;
+}
 
 /*--------------------------------------------------------------
 # Coded by ChatGPT 
