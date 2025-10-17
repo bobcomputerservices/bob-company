@@ -548,14 +548,14 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // Click "Categories" title to show all posts
-  const catTitle = document.querySelector(".sidebar-title");
-  if (catTitle && catTitle.textContent.includes("Categories")) {
-    catTitle.addEventListener("click", () => {
-      allEntries.forEach(entry => entry.style.display = "");
+  if (document.querySelector(".sidebar-title") && 
+      document.querySelector(".sidebar-title").textContent.includes("Categories")) {
+    document.querySelector(".sidebar-title").addEventListener("click", () => {
+      allEntries.forEach(entry => (entry.style.display = ""));
       renderEntries(); // 恢复 load more 按钮
     });
   }
-    
+
   // Category filtering
   categoriesList.addEventListener("click", e => {
     if (e.target.closest("a")) {
