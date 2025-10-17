@@ -1793,24 +1793,25 @@ section.blog,
   transform: none !important;
 }
 
-/* === Sticky Sidebar 修正: 确保内容可完整显示 === */
-.sidebar {
-  position: sticky;
-  top: 100px; /* 根据 header 高度调整 */
-  height: fit-content; /* ✅ 自动适应内部高度 */
-  max-height: none; /* ✅ 移除潜在高度限制 */
-  overflow: visible; /* ✅ 确保不会裁切内容 */
-}
-
+/* === Sticky Sidebar 修正版 === */
 .blog .col-lg-3 {
   align-self: flex-start;
-  overflow: visible !important; /* ✅ 防止 flex 容器裁切内容 */
+  overflow: visible !important; /* 不限制 sidebar 内容 */
 }
 
-.blog .row {
-  align-items: flex-start; /* ✅ 避免垂直拉伸导致 sidebar 被压缩 */
+.sidebar {
+  position: sticky;
+  top: 100px; /* 按你的 header 高度调整 */
+  overflow: visible; /* 不裁掉 Recent Posts 内容 */
+  height: auto; /* 自动高度，但不触发 sticky bug */
 }
 
+/* 额外防御：确保外层不破坏 sticky */
+.blog .row,
+.blog .container,
+section.blog {
+  overflow: visible !important;
+}
 
 /*--------------------------------------------------------------
 # Coded by ChatGPT 
