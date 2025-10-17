@@ -2046,3 +2046,7 @@ section {
   height: fit-content;
 }
 
+.blog .container.aos-init.aos-animate {
+  transform: none !important;
+}
+
