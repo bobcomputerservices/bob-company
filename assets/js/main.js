@@ -543,7 +543,9 @@ document.addEventListener("DOMContentLoaded", function() {
       const keyword = this.value.toLowerCase();
       allEntries.forEach(entry => {
         const title = entry.querySelector(".entry-title").textContent.toLowerCase();
-        entry.style.display = title.includes(keyword) ? "" : "none";
+        const body = entry.querySelector("p") ? entry.querySelector("p").textContent.toLowerCase() : "";
+        entry.style.display = (title.includes(keyword) || body.includes(keyword)) ? "" : "none";
+
       });
       loadMoreWrapper.style.display = "none";
     });
