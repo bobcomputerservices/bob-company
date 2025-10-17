@@ -1793,25 +1793,23 @@ section.blog,
   transform: none !important;
 }
 
-/* === Sticky Sidebar 修正版 === */
-.blog .col-lg-3 {
-  align-self: flex-start;
-  overflow: visible !important; /* 不限制 sidebar 内容 */
-}
-
+/* === Scrollable Sidebar（可独立滚动的侧栏）=== */
 .sidebar {
-  position: sticky;
-  top: 100px; /* 按你的 header 高度调整 */
-  overflow: visible; /* 不裁掉 Recent Posts 内容 */
-  height: auto; /* 自动高度，但不触发 sticky bug */
+  position: fixed;       /* 固定在屏幕上 */
+  top: 100px;            /* 根据 header 高度微调 */
+  right: 0;              /* 贴在右侧（或根据布局调整） */
+  width: 25%;            /* 保持与原本 col-lg-3 差不多 */
+  max-height: calc(100vh - 120px); /* 限制在可视高度内 */
+  overflow-y: auto;      /* ✅ 当内容太多时可滚动 */
+  overflow-x: hidden;
+  padding-right: 10px;
 }
 
-/* 额外防御：确保外层不破坏 sticky */
-.blog .row,
-.blog .container,
-section.blog {
-  overflow: visible !important;
+/* 确保主内容不会被 sidebar 挡住 */
+.blog .col-lg-9 {
+  margin-right: 25%; /* 预留 sidebar 空间 */
 }
+
 
 /*--------------------------------------------------------------
 # Coded by ChatGPT 
