@@ -474,7 +474,7 @@ window.addEventListener('load', () => {
   window.__doAnchorFix = handleAnchorFix;
 })();
 
-/* ====== Blog logic (with smart Recent Posts) ====== */
+/* ====== Blog logic (with smart Recent Posts + auto header offset) ====== */
 document.addEventListener("DOMContentLoaded", function() {
   const entriesContainer = document.querySelector("#blog-entries");
   const allEntries = Array.from(entriesContainer.querySelectorAll("article.entry"));
@@ -485,6 +485,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let visibleCount = 20;
 
+  // ===== Render entries =====
   function renderEntries() {
     allEntries.forEach((entry, idx) => {
       entry.style.display = idx < visibleCount ? "" : "none";
@@ -492,6 +493,7 @@ document.addEventListener("DOMContentLoaded", function() {
     loadMoreWrapper.style.display = visibleCount >= allEntries.length ? "none" : "block";
   }
 
+  // ===== Update categories =====
   function updateCategories() {
     const counts = { products: 0, autocount: 0, training: 0, events: 0, clients: 0 };
     allEntries.forEach(e => {
@@ -509,7 +511,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
 
-    // 更新标题后面的总数
+    // 更新标题后的总数
     const totalCount = allEntries.length;
     const catTitle = document.querySelector(".sidebar-title");
     if (catTitle && catTitle.textContent.includes("Categories")) {
@@ -517,6 +519,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
+  // ===== Render Recent Posts =====
   function renderRecentPosts() {
     const sorted = [...allEntries].sort((a, b) => {
       return new Date(b.dataset.date) - new Date(a.dataset.date);
@@ -525,7 +528,7 @@ document.addEventListener("DOMContentLoaded", function() {
     sorted.slice(0, 4).forEach(post => {
       const img = post.querySelector(".entry-img img").src;
       const title = post.querySelector(".entry-title").textContent;
-      const id = post.id || post.querySelector(".entry-title").textContent.trim().toLowerCase().replace(/\s+/g, "-");
+      const id = post.id || title.trim().toLowerCase().replace(/\s+/g, "-");
 
       // 确保每篇文章都有 id
       if (!post.id) post.id = id;
@@ -539,7 +542,7 @@ document.addEventListener("DOMContentLoaded", function() {
       recentPostsContainer.appendChild(div);
     });
 
-    // === 👉 加入点击事件逻辑 ===
+    // === Recent Posts 点击事件 ===
     const links = recentPostsContainer.querySelectorAll(".recent-link");
     links.forEach(link => {
       link.addEventListener("click", e => {
@@ -560,18 +563,24 @@ document.addEventListener("DOMContentLoaded", function() {
             a.classList.toggle("active", a.dataset.filter === category);
           });
 
-         // 平滑滚动到目标文章（含 header offset）
-        const headerOffset = 80; // 依你 header 高度调整
-        const elementPosition = target.getBoundingClientRect().top + window.scrollY;
-        const offsetPosition = elementPosition - headerOffset;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth"
-        });
+          // 自动检测 header 高度
+          const header = document.querySelector(".header");
+          const headerOffset = header ? header.clientHeight : 80;
 
+          // 平滑滚动到目标文章（自动补偿 header 高度）
+          const elementPosition = target.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - headerOffset;
 
-  // Search filter
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+      });
+    });
+  }
+
+  // ===== Search filter =====
   const searchInput = document.querySelector("#search-input");
   if (searchInput) {
     searchInput.addEventListener("input", function() {
@@ -585,7 +594,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // Category filtering
+  // ===== Category filtering =====
   categoriesList.addEventListener("click", e => {
     const link = e.target.closest("a");
     if (link) {
@@ -607,17 +616,18 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // Load More
+  // ===== Load More =====
   loadMoreBtn.addEventListener("click", e => {
     e.preventDefault();
     visibleCount += 20;
     renderEntries();
   });
 
-  // Init
+  // ===== Init =====
   renderEntries();
   updateCategories();
   renderRecentPosts();
 });
+
   
 })(); // 结束 IIFE
