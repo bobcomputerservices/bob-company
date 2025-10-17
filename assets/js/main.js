@@ -502,6 +502,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const cat = e.dataset.category;
       if (cat && counts[cat] !== undefined) counts[cat]++;
     });
+    
     // 更新分类数量
     categoriesList.querySelectorAll("a").forEach(a => {
       const cat = a.dataset.filter;
@@ -514,7 +515,8 @@ document.addEventListener("DOMContentLoaded", function() {
   if (catTitle && catTitle.textContent.includes("Categories")) {
     catTitle.innerHTML = `Categories <span class="count">(${totalCount})</span>`;
   }
-
+ }
+  
   function renderRecentPosts() {
     const sorted = [...allEntries].sort((a, b) => {
       return new Date(b.dataset.date) - new Date(a.dataset.date);
