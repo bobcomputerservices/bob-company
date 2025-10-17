@@ -1774,15 +1774,21 @@ section {
 }
 
 /* === Sticky Sidebar === */
+.blog .row {
+  align-items: flex-start;
+  overflow: visible !important;
+}
+
 .blog .col-lg-3 {
   align-self: flex-start; /* 确保 sticky 元素随滚动 */
 }
 
 .blog .sidebar {
   position: sticky;
-  top: 120px; /* 可调整距离顶部的间距 */
+  top: 100px; /* 依 header 高度微调 */
   height: fit-content;
 }
+
 
 /*--------------------------------------------------------------
 # Coded by ChatGPT 
