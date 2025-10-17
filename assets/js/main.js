@@ -560,12 +560,16 @@ document.addEventListener("DOMContentLoaded", function() {
             a.classList.toggle("active", a.dataset.filter === category);
           });
 
-          // 平滑滚动到目标文章
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      });
-    });
-  }
+         // 平滑滚动到目标文章（含 header offset）
+        const headerOffset = 80; // 依你 header 高度调整
+        const elementPosition = target.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+
 
   // Search filter
   const searchInput = document.querySelector("#search-input");
