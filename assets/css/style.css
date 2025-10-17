@@ -1668,13 +1668,13 @@ section {
 
 /* Sidebar general */
 .blog .sidebar {
-  margin-top: 30px;
+  margin-top: 15px;
 }
 
 .blog .sidebar .sidebar-box {
   background: #f7f7f7; /* 浅灰底色 */
-  padding: 20px;
-  margin-bottom: 30px;
+  padding: 10px;
+  margin-bottom: 15px;
   border-radius: 8px;
   box-shadow: 0px 2px 15px rgba(55, 81, 126, 0.08);
 }
@@ -1682,7 +1682,7 @@ section {
 .blog .sidebar .sidebar-title {
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   color: #37517e;
 }
 
@@ -1694,7 +1694,7 @@ section {
 }
 
 .blog .sidebar ul li+li {
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .blog .sidebar ul a {
@@ -1710,19 +1710,19 @@ section {
 .blog .sidebar .post-item {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .blog .sidebar .post-item img {
-  width: 80px;
-  height: 60px;
+  width: 60px;
+  height: 40px;
   object-fit: cover;
   border-radius: 6px;
   margin-right: 15px;
 }
 
 .blog .sidebar .post-item h4 {
-  font-size: 14px;
+  font-size: 10px;
   margin: 0;
   line-height: 1.4;
   flex: 1;
