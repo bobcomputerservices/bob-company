@@ -503,10 +503,14 @@ document.addEventListener("DOMContentLoaded", function() {
       if (cat && counts[cat] !== undefined) counts[cat]++;
     });
     
-    // 更新分类数量
+    // 更新分类数量（包括 all）
     categoriesList.querySelectorAll("a").forEach(a => {
       const cat = a.dataset.filter;
-      a.querySelector(".count").textContent = `(${counts[cat] || 0})`;
+      if (cat === "all") {
+        a.querySelector(".count").textContent = `(${allEntries.length})`;
+      } else {
+        a.querySelector(".count").textContent = `(${counts[cat] || 0})`;
+      }
     });
 
     // 更新总数（显示在 Categories 标题后）
@@ -565,10 +569,16 @@ document.addEventListener("DOMContentLoaded", function() {
     if (e.target.closest("a")) {
       e.preventDefault();
       const filter = e.target.closest("a").dataset.filter;
-      allEntries.forEach(entry => {
-        entry.style.display = entry.dataset.category === filter ? "" : "none";
-      });
-      loadMoreWrapper.style.display = "none"; // 过滤时隐藏 load more
+  
+      if (filter === "all") {
+        allEntries.forEach(entry => entry.style.display = "");
+        renderEntries(); // 恢复 Load More
+      } else {
+        allEntries.forEach(entry => {
+          entry.style.display = entry.dataset.category === filter ? "" : "none";
+        });
+        loadMoreWrapper.style.display = "none";
+      }
     }
   });
 
