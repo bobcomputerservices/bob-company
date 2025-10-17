@@ -1759,6 +1759,25 @@ section {
   padding: 0;      /* 去掉内边距 */
 }
 
+/* === Search Sidebar === */
+.blog .sidebar .search-bar {
+  display: flex;
+  justify-content: center;
+}
+
+.blog .sidebar .search-bar input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* === Sticky Sidebar === */
+.blog .sidebar {
+  position: sticky;
+  top: 100px; /* 可调整距离顶部的间距 */
+}
 
 /*--------------------------------------------------------------
 # Coded by ChatGPT 
