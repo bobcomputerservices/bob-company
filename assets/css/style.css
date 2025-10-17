@@ -1673,6 +1673,7 @@ section {
 
 .blog .sidebar .sidebar-box {
   background: #f7f7f7; /* 浅灰底色 */
+  font-size: 15px;
   padding: 10px;
   margin-bottom: 15px;
   border-radius: 8px;
@@ -1680,7 +1681,7 @@ section {
 }
 
 .blog .sidebar .sidebar-title {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
   margin-bottom: 10px;
   color: #37517e;
@@ -1722,7 +1723,7 @@ section {
 }
 
 .blog .sidebar .post-item h4 {
-  font-size: 10px;
+  font-size: 12px;
   margin: 0;
   line-height: 1.4;
   flex: 1;
