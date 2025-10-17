@@ -474,7 +474,7 @@ window.addEventListener('load', () => {
   window.__doAnchorFix = handleAnchorFix;
 })();
 
-/* ====== Blog logic ====== */
+/* ====== Blog logic (with smart Recent Posts) ====== */
 document.addEventListener("DOMContentLoaded", function() {
   const entriesContainer = document.querySelector("#blog-entries");
   const allEntries = Array.from(entriesContainer.querySelectorAll("article.entry"));
@@ -485,14 +485,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let visibleCount = 20;
 
-  // 🔹 为每篇文章生成唯一 ID
-  allEntries.forEach((entry, idx) => {
-    if (!entry.id) {
-      entry.id = "post-" + idx;
-    }
-  });
-
-  // 🔹 控制显示数量
   function renderEntries() {
     allEntries.forEach((entry, idx) => {
       entry.style.display = idx < visibleCount ? "" : "none";
@@ -500,14 +492,14 @@ document.addEventListener("DOMContentLoaded", function() {
     loadMoreWrapper.style.display = visibleCount >= allEntries.length ? "none" : "block";
   }
 
-  // 🔹 更新分类数量
   function updateCategories() {
     const counts = { products: 0, autocount: 0, training: 0, events: 0, clients: 0 };
     allEntries.forEach(e => {
       const cat = e.dataset.category;
       if (cat && counts[cat] !== undefined) counts[cat]++;
     });
-    
+
+    // 更新分类数量
     categoriesList.querySelectorAll("a").forEach(a => {
       const cat = a.dataset.filter;
       if (cat === "all") {
@@ -517,6 +509,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
 
+    // 更新标题后面的总数
     const totalCount = allEntries.length;
     const catTitle = document.querySelector(".sidebar-title");
     if (catTitle && catTitle.textContent.includes("Categories")) {
@@ -524,40 +517,57 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // 🔹 Recent Posts 列表 + 点击跳转功能
   function renderRecentPosts() {
     const sorted = [...allEntries].sort((a, b) => {
       return new Date(b.dataset.date) - new Date(a.dataset.date);
     });
-
     recentPostsContainer.innerHTML = "";
     sorted.slice(0, 4).forEach(post => {
       const img = post.querySelector(".entry-img img").src;
       const title = post.querySelector(".entry-title").textContent;
-      const postId = post.id;
+      const id = post.id || post.querySelector(".entry-title").textContent.trim().toLowerCase().replace(/\s+/g, "-");
+
+      // 确保每篇文章都有 id
+      if (!post.id) post.id = id;
+
       const div = document.createElement("div");
       div.className = "post-item clearfix";
       div.innerHTML = `
         <img src="${img}" alt="">
-        <h4><a href="#${postId}" class="recent-link">${title}</a></h4>
+        <h4><a href="#${id}" class="recent-link">${title}</a></h4>
       `;
       recentPostsContainer.appendChild(div);
     });
 
-    // 🔹 点击后平滑滚动到目标文章
-    recentPostsContainer.querySelectorAll(".recent-link").forEach(link => {
+    // === 👉 加入点击事件逻辑 ===
+    const links = recentPostsContainer.querySelectorAll(".recent-link");
+    links.forEach(link => {
       link.addEventListener("click", e => {
         e.preventDefault();
         const targetId = e.currentTarget.getAttribute("href").substring(1);
         const target = document.getElementById(targetId);
         if (target) {
+          const category = target.dataset.category;
+
+          // 自动过滤到对应分类
+          allEntries.forEach(entry => {
+            entry.style.display = entry.dataset.category === category ? "" : "none";
+          });
+          loadMoreWrapper.style.display = "none";
+
+          // 高亮分类按钮
+          categoriesList.querySelectorAll("a").forEach(a => {
+            a.classList.toggle("active", a.dataset.filter === category);
+          });
+
+          // 平滑滚动到目标文章
           target.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       });
     });
   }
 
-  // 🔹 Search filter
+  // Search filter
   const searchInput = document.querySelector("#search-input");
   if (searchInput) {
     searchInput.addEventListener("input", function() {
@@ -571,11 +581,16 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // 🔹 Category filtering
+  // Category filtering
   categoriesList.addEventListener("click", e => {
-    if (e.target.closest("a")) {
+    const link = e.target.closest("a");
+    if (link) {
       e.preventDefault();
-      const filter = e.target.closest("a").dataset.filter;
+      const filter = link.dataset.filter;
+
+      categoriesList.querySelectorAll("a").forEach(a => a.classList.remove("active"));
+      link.classList.add("active");
+
       if (filter === "all") {
         allEntries.forEach(entry => entry.style.display = "");
         renderEntries();
@@ -588,21 +603,17 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // 🔹 Load More
+  // Load More
   loadMoreBtn.addEventListener("click", e => {
     e.preventDefault();
     visibleCount += 20;
     renderEntries();
   });
 
-  // 初始化
+  // Init
   renderEntries();
   updateCategories();
   renderRecentPosts();
-
-  // 🔹 平滑滚动支持（备用 CSS）
-  document.documentElement.style.scrollBehavior = "smooth";
 });
-
   
 })(); // 结束 IIFE
