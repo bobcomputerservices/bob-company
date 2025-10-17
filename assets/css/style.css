@@ -577,7 +577,6 @@ body.subpage #header {
 --------------------------------------------------------------*/
 section {
   padding: 60px 0;
-  overflow: hidden;
 }
 
 .section-bg {
@@ -1773,26 +1772,27 @@ section {
   font-size: 14px;
 }
 
-/* === Sticky Sidebar === */
+/* === Sticky Sidebar (Final Setup) === */
 .blog .col-lg-3 {
-  align-self: flex-start; /* 让侧栏在 Flex 容器中可 sticky */
+  align-self: stretch; /* 让侧栏与主栏等高，sticky 才会生效 */
 }
 
-.sidebar {
+.blog .sidebar {
   position: sticky;
-  top: 100px; /* 根据你的 header 高度调整 */
+  top: 120px; /* header 距离，可根据实际调整 */
+  height: fit-content; /* 根据内容自动决定高度 */
+  overflow: visible; /* 避免内层滚动 */
+  z-index: 1; /* 确保不被覆盖 */
 }
 
-.sidebar {
-  position: sticky;
-  top: 100px;
-  transition: top 0.3s ease;
-}
-
-/* === Fix for Blog Sticky Sidebar === */
-#blog {
+/* 确保外层容器允许 sticky 正常工作 */
+section.blog,
+.blog .row,
+.blog .container {
   overflow: visible !important;
+  transform: none !important;
 }
+
 
 /*--------------------------------------------------------------
 # Coded by ChatGPT 
@@ -2024,29 +2024,5 @@ section {
   display: inline-block;
 }
 
-/* === Fix Sticky Sidebar Not Working === */
 
-/* 解除 blog 区块内所有父级的 overflow 影响 */
-#blog,
-#blog .container,
-#blog .row {
-  overflow: visible !important;
-}
-
-/* 确保 sidebar 的父层是 flex-item，可 sticky */
-#blog .row {
-  display: flex;
-  align-items: flex-start;
-}
-
-/* 关键：sidebar sticky 效果 */
-.blog .sidebar {
-  position: sticky;
-  top: 120px; /* header 高度 */
-  height: fit-content;
-}
-
-.blog .container.aos-init.aos-animate {
-  transform: none !important;
-}
 
