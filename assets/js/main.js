@@ -433,7 +433,6 @@ window.addEventListener('load', () => {
       const finalTop = Math.max(0, rectTop - offset - 8); // small buffer
       // use instant jump first to avoid browser auto-anchor glitches, then smooth
       window.scrollTo({ top: finalTop, behavior: 'smooth' });
-      console && console.log('Anchor fix -> scrolled to', id, 'finalTop:', finalTop);
     };
 
     // If imagesLoaded available, wait for body images to finish then scroll
