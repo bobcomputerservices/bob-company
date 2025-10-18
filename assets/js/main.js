@@ -477,6 +477,8 @@ window.addEventListener('load', () => {
 /* ====== Blog logic (with smart Recent Posts + auto header offset) ====== */
 document.addEventListener("DOMContentLoaded", function() {
   const entriesContainer = document.querySelector("#blog-entries");
+  if (!entriesContainer) return; // ✅ 防止在 index.html 报错
+  
   const allEntries = Array.from(entriesContainer.querySelectorAll("article.entry"));
   const categoriesList = document.querySelector("#categories-list");
   const recentPostsContainer = document.querySelector("#recent-posts");
