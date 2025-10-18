@@ -580,15 +580,16 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // ===== Search filter =====
+  // === 🔍 Search filter ===
   const searchInput = document.querySelector("#search-input");
   if (searchInput) {
     searchInput.addEventListener("input", function() {
       const keyword = this.value.toLowerCase();
       allEntries.forEach(entry => {
         const title = entry.querySelector(".entry-title").textContent.toLowerCase();
-        const body = entry.querySelector("p") ? entry.querySelector("p").textContent.toLowerCase() : "";
-        entry.style.display = (title.includes(keyword) || body.includes(keyword)) ? "" : "none";
+        const bodyParagraphs = Array.from(entry.querySelectorAll("p"));
+        const bodyText = bodyParagraphs.map(p => p.textContent.toLowerCase()).join(" ");
+        entry.style.display = (title.includes(keyword) || bodyText.includes(keyword)) ? "" : "none";
       });
       loadMoreWrapper.style.display = "none";
     });
