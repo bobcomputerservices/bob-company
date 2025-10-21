@@ -960,29 +960,37 @@
   <!-- ======= Footer ======= -->
   <footer id="footer">
 
+    <!-- ======= Footer Newsletter Section ======= -->
     <div class="footer-newsletter">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-6">
             <h4>Join Our Newsletter</h4>
             <p>Don’t miss a thing! Sign up for our newsletter and be the first to know about our news, events, and exclusive offers.</p>
-           
-            <!-- ✅ Zoho Campaigns Web-Optin Form Starts Here -->
+    
+            <!-- ✅ Newsletter Form Start -->
+            <div id="newsletter-form">
+              <!-- ✅ fallback form (shown first) -->
+              <form id="newsletter-fallback" style="display:block; margin-top:30px; background:#fff; padding:6px 10px; position:relative; border-radius:50px; box-shadow:0px 2px 15px rgba(0,0,0,0.06); text-align:left;">
+                <input type="email" name="email" placeholder="Enter your email" required style="border:0; padding:4px 8px; width:calc(100% - 100px); border-radius:50px;">
+                <input type="submit" value="Subscribe" style="position:absolute; top:0; right:0; bottom:0; border:0; background:#47b2e4; color:#fff; font-size:16px; padding:0 20px; border-radius:50px; transition:0.3s;">
+              </form>
+            </div>
+    
+            <!-- ✅ Zoho Campaign Script -->
             <script type="text/javascript" src="https://zgnp-zngp.maillist-manage.com/js/optin.min.js"
-            onload="setupSF('sf3z452b11ee7bf62a40c4e2f6263e25c90e8de6d4d320b08567288740274c51ef48','ZCFORMVIEW',false,'light',false,'0')"></script>
-            <script type="text/javascript">
-            function runOnFormSubmit_sf3z452b11ee7bf62a40c4e2f6263e25c90e8de6d4d320b08567288740274c51ef48(th){
-              /* optional: event before submit */
-            };
+            onload="setupSF('sf3z452b11ee7bf62a40c4e2f6263e25c90e8de6d4d320b08567288740274c51ef48','ZCFORMVIEW',false,'light',false,'0');
+            document.getElementById('newsletter-fallback').style.display='none';">
             </script>
-            
             <div id="sf3z452b11ee7bf62a40c4e2f6263e25c90e8de6d4d320b08567288740274c51ef48" data-type="signupform"></div>
-            <!-- ✅ Zoho Campaigns Web-Optin Form Ends Here -->
-           
+            <!-- ✅ Newsletter Form End -->
+    
           </div>
         </div>
       </div>
     </div>
+    <!-- ======= End Footer Newsletter Section ======= -->
+
 
     <div class="footer-top">
       <div class="container">
