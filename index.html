@@ -1074,7 +1074,7 @@
 
   <!-- ======= Announcement Modal ======= -->
   <div class="modal fade" id="announcementModal" tabindex="-1" aria-labelledby="announcementModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 900px;">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 480px;"> <!-- 改窄版宽度 -->
       <div class="modal-content position-relative">
   
         <!-- Close button -->
@@ -1103,9 +1103,9 @@
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgGmDPzW6lFTgzGn4bBm-EsSmkNdwFN-KDWFvrUf408VAGHw/viewform" 
              target="_blank" 
              class="announcement-link d-block position-relative">
-            <img src="assets/img/announcement-20251024portrait.jpg" 
+            <img src="assets/img/announcement-20251016.jpg" 
                  alt="Announcement" 
-                 class="w-100 h-auto d-block">
+                 class="announcement-img">
             <div class="hover-overlay d-flex align-items-center justify-content-center">
               <span>Register Now</span>
             </div>
@@ -1121,6 +1121,17 @@
     position: relative;
     overflow: hidden;
   }
+  
+  .announcement-img {
+    width: 100%;
+    height: auto;
+    max-height: 85vh;   /* 限制最大高度：视窗高度的85% */
+    object-fit: contain; /* 维持比例完整显示 */
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+  }
+  
   .hover-overlay {
     position: absolute;
     inset: 0;
@@ -1131,13 +1142,24 @@
     opacity: 0;
     transition: opacity 0.4s ease;
   }
+  
   .announcement-link:hover .hover-overlay {
     opacity: 1;
     cursor: pointer;
   }
+  
+  /* 小屏幕时稍微缩小整体弹窗 */
+  @media (max-width: 576px) {
+    .modal-dialog {
+      max-width: 90%;
+    }
+    .hover-overlay span {
+      font-size: 1.4rem;
+    }
+  }
   </style>
   
-  <!-- Announcement Auto Popup -->
+  <!-- Announcement Auto Popup (延迟3秒) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const heroSection = document.querySelector('#hero');
@@ -1145,11 +1167,10 @@
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              // 延迟3秒弹出公告
               setTimeout(() => {
                 const announcementModal = new bootstrap.Modal(document.getElementById('announcementModal'));
                 announcementModal.show();
-              }, 3000); // 3000 毫秒 = 3 秒
+              }, 3000);
               observer.disconnect();
             }
           });
@@ -1159,6 +1180,7 @@
       }
     });
   </script>
+
 
 
 </body>
