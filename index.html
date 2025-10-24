@@ -1072,43 +1072,71 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
- <!-- ======= Announcement Modal ======= -->
- <div class="modal fade" id="announcementModal" tabindex="-1" aria-labelledby="announcementModalLabel" aria-hidden="true">
-   <div class="modal-dialog modal-dialog-centered" style="max-width: 900px;">
-     <div class="modal-content position-relative">
- 
-       <!-- Close button -->
-       <button type="button" 
-               data-bs-dismiss="modal" 
-               aria-label="Close"
-               style="position:absolute; top:10px; right:15px; 
-                      z-index:1055; 
-                      width:35px; height:35px;
-                      border:none; 
-                      border-radius:50%; 
-                      background-color:black; 
-                      color:white; 
-                      font-size:1.5rem; 
-                      font-weight:bold; 
-                      line-height:1; 
-                      display:flex; 
-                      align-items:center; 
-                      justify-content:center; 
-                      cursor:pointer;">
-         ×
-       </button>
- 
-       <!-- 公告图 -->
-       <div class="modal-body p-0" style="aspect-ratio:16/9;">
-         <img src="assets/img/announcement-20251016.jpg" 
-              alt="Announcement" 
-              class="w-100 h-100" 
-              style="object-fit: cover;">
-       </div>
-     </div>
-   </div>
- </div>
-
+  <!-- ======= Announcement Modal ======= -->
+  <div class="modal fade" id="announcementModal" tabindex="-1" aria-labelledby="announcementModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 900px;">
+      <div class="modal-content position-relative">
+  
+        <!-- Close button -->
+        <button type="button" 
+                data-bs-dismiss="modal" 
+                aria-label="Close"
+                style="position:absolute; top:10px; right:15px; 
+                       z-index:1055; 
+                       width:35px; height:35px;
+                       border:none; 
+                       border-radius:50%; 
+                       background-color:black; 
+                       color:white; 
+                       font-size:1.5rem; 
+                       font-weight:bold; 
+                       line-height:1; 
+                       display:flex; 
+                       align-items:center; 
+                       justify-content:center; 
+                       cursor:pointer;">
+          ×
+        </button>
+  
+        <!-- 公告图 + hover 效果 -->
+        <div class="modal-body p-0 position-relative">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgGmDPzW6lFTgzGn4bBm-EsSmkNdwFN-KDWFvrUf408VAGHw/viewform" 
+             target="_blank" 
+             class="announcement-link d-block position-relative">
+            <img src="assets/img/announcement-20251024portrait.jpg" 
+                 alt="Announcement" 
+                 class="w-100 h-auto d-block">
+            <div class="hover-overlay d-flex align-items-center justify-content-center">
+              <span>Register Now</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Hover 效果样式 -->
+  <style>
+  .announcement-link {
+    position: relative;
+    overflow: hidden;
+  }
+  .hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .announcement-link:hover .hover-overlay {
+    opacity: 1;
+    cursor: pointer;
+  }
+  </style>
+  
   <!-- Announcement Auto Popup -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -1117,17 +1145,21 @@
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              const announcementModal = new bootstrap.Modal(document.getElementById('announcementModal'));
-              announcementModal.show();
+              // 延迟3秒弹出公告
+              setTimeout(() => {
+                const announcementModal = new bootstrap.Modal(document.getElementById('announcementModal'));
+                announcementModal.show();
+              }, 3000); // 3000 毫秒 = 3 秒
               observer.disconnect();
             }
           });
         }, { threshold: 0.5 });
-
+  
         observer.observe(heroSection);
       }
     });
   </script>
+
 
 </body>
 
