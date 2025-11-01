@@ -968,24 +968,46 @@
             <h4>Join Our Newsletter</h4>
             <p>Don’t miss a thing! Sign up for our newsletter and be the first to know about our updates.</p>
     
-            <form id="zcampaignOptinForm" method="POST" action="https://zgnp-zngp.maillist-manage.com/weboptin.zc" target="_zcSignup" onsubmit="showThankYou(event)">
+            <form method="POST" id="zcampaignOptinForm"
+                  style="margin:0;width:100%;padding:0px 25px"
+                  action="https://zgnp-zngp.maillist-manage.com/weboptin.zc"
+                  target="_zcSignup">
+              
+              <!-- email 输入 -->
               <div class="d-flex justify-content-center">
-                <input type="email" name="CONTACT_EMAIL" id="EMBED_FORM_EMAIL_LABEL" placeholder="Enter your email" required style="border-radius:50px 0 0 50px; padding:10px; border:1px solid #ccc; flex:1;">
-                <input type="submit" value="Subscribe" style="border-radius:0 50px 50px 0; border:none; background:#47b2e4; color:#fff; padding:10px 25px; cursor:pointer;">
+                <input type="email" name="CONTACT_EMAIL" id="EMBED_FORM_EMAIL_LABEL"
+                       placeholder="Enter your email" required
+                       style="border-radius:50px 0 0 50px; padding:10px; border:1px solid #ccc; flex:1;">
+                <input type="submit" value="Subscribe"
+                       style="border-radius:0 50px 50px 0; border:none; background:#47b2e4; color:#fff; padding:10px 25px; cursor:pointer;">
               </div>
-    
+            
               <!-- Hidden fields required by Zoho -->
-              <input type="hidden" name="zx" value="135d8e10d">
-              <input type="hidden" name="zcld" value="1156d13c8b4773d91">
+              <input type="hidden" id="fieldBorder" value="">
+              <input type="hidden" id="submitType" name="submitType" value="optinCustomView">
+              <input type="hidden" id="emailReportId" name="emailReportId" value="">
+              <input type="hidden" id="formType" name="formType" value="QuickForm">
+              <input type="hidden" name="zx" id="cmpZuid" value="135d8e10d">
               <input type="hidden" name="zcvers" value="3.0">
-              <input type="hidden" name="mode" value="OptinCreateView">
-              <input type="hidden" name="zctd" value="1156d13c8b4773b91">
-              <input type="hidden" name="zc_trackCode" value="ZCFORMVIEW">
-              <input type="hidden" name="zc_formIx" value="3z452b11ee7bf62a40c4e2f6263e25c90e8de6d4d320b08567288740274c51ef48">
-              <input type="hidden" name="zc_src" value="embed_form"> 
+              <input type="hidden" name="oldListIds" id="allCheckedListIds" value="">
+              <input type="hidden" id="mode" name="mode" value="OptinCreateView">
+              <input type="hidden" id="zcld" name="zcld" value="1156d13c8b4773d91">
+              <input type="hidden" id="zctd" name="zctd" value="1156d13c8b4773b91">
+              <input type="hidden" id="document_domain" value="">
+              <input type="hidden" id="zc_Url" value="zgnp-zngp.maillist-manage.com">
+              <input type="hidden" id="new_optin_response_in" value="0">
+              <input type="hidden" id="duplicate_optin_response_in" value="0">
+              <input type="hidden" name="zc_trackCode" id="zc_trackCode" value="ZCFORMVIEW">
+              <input type="hidden" id="zc_formIx" name="zc_formIx" value="3z452b11ee7bf62a40c4e2f6263e25c90e8de6d4d320b08567288740274c51ef48">
+              <input type="hidden" id="viewFrom" value="URL_ACTION">
+              <input type="hidden" name="zc_src" value="embed_form">
+              <span style="display: none" id="dt_CONTACT_EMAIL">1,true,6,Contact Email,2</span>
             </form>
-    
-            <p id="thankYouMsg" style="display:none; color:green; margin-top:10px;">Thank you for subscribing!</p>
+            
+            <p id="thankYouMsg" style="display:none;color:green;margin-top:10px;">
+              Thank you for subscribing!
+            </p>
+           
           </div>
         </div>
       </div>
