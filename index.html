@@ -1096,7 +1096,6 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
-  <!-- 为隐藏 annnouncement popup 暂时加入的
  
   <!-- ======= Announcement Modal ======= -->
   <div class="modal fade" id="announcementModal" tabindex="-1" aria-labelledby="announcementModalLabel" aria-hidden="true">
@@ -1140,7 +1139,8 @@
       </div>
     </div>
   </div>
-  
+
+ 
   <!-- Hover 效果样式 -->
   <style>
   .announcement-link {
@@ -1187,8 +1187,15 @@
   
   <!-- Announcement Auto Popup (延迟2秒) -->
   <script>
+    // 🔥 控制开关：要显示弹窗就改成 true，不要就改 false
+    const announcementEnabled = false;
+  
     document.addEventListener("DOMContentLoaded", function() {
+  
+      if (!announcementEnabled) return; // 👈 禁用时直接停止执行
+  
       const heroSection = document.querySelector('#hero');
+  
       if (heroSection) {
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
@@ -1207,17 +1214,17 @@
     });
   </script>
 
-  --> 为隐藏 annnouncement popup 暂时加入的
 
-<script src="https://zgnp-zngp.maillist-manage.com/js/optin.min.js" 
-        onload="setupSF('sf3z452b11ee7bf62a40c4e2f6263e25c90e8de6d4d320b08567288740274c51ef48','ZCFORMVIEW',false,'light',false,'0')">
-</script>
-
-<script>
-function runOnFormSubmit_sf3z452b11ee7bf62a40c4e2f6263e25c90e8de6d4d320b08567288740274c51ef48(th){
-  /* Before submit — optional custom event */
-}
-</script>
+  <!-- Newsletter 链接 Zoho Campaign form -->
+  <script src="https://zgnp-zngp.maillist-manage.com/js/optin.min.js" 
+          onload="setupSF('sf3z452b11ee7bf62a40c4e2f6263e25c90e8de6d4d320b08567288740274c51ef48','ZCFORMVIEW',false,'light',false,'0')">
+  </script>
+  
+  <script>
+  function runOnFormSubmit_sf3z452b11ee7bf62a40c4e2f6263e25c90e8de6d4d320b08567288740274c51ef48(th){
+    /* Before submit — optional custom event */
+  }
+  </script>
 
 
 </body>
