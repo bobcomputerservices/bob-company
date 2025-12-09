@@ -2045,5 +2045,10 @@ section.blog,
   display: inline-block;
 }
 
+#preloader {
+    display: none !important;
+}
+
+
 
 
