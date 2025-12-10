@@ -517,7 +517,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     recentPostsContainer.innerHTML = "";
     sorted.slice(0, 4).forEach(post => {
-      const img = post.querySelector(".entry-img img").src;
+      const imgTag = post.querySelector(".entry-img img");
+      const img = imgTag ? imgTag.src : "assets/img/blog/default.jpg";
+
       const title = post.querySelector(".entry-title").textContent;
       const id = post.id || title.trim().toLowerCase().replace(/\s+/g, "-");
 
