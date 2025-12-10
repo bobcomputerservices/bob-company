@@ -517,8 +517,32 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     recentPostsContainer.innerHTML = "";
     sorted.slice(0, 4).forEach(post => {
-      const imgTag = post.querySelector(".entry-img img");
-      const img = imgTag ? imgTag.src : "assets/img/blog/default.jpg";
+      // 取得文章缩略图（支持 YouTube iframe 自动转 thumbnail）
+      let imgTag = post.querySelector(".entry-img img");
+      let iframeTag = post.querySelector(".entry-img iframe");
+      let img = "";
+      
+      if (imgTag) {
+        // 文章有图片 → 用图片
+        img = imgTag.src;
+      } 
+      else if (iframeTag) {
+        // 文章是视频 → 自动抓 YouTube Thumbnail
+        const src = iframeTag.src;
+        const match = src.match(/embed\/([^?]+)/);
+      
+        if (match) {
+          const videoId = match[1];
+          img = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+        } else {
+          // fallback（如果未来遇到不是 YouTube 的 iframe）
+          img = "assets/img/blog/default.jpg";
+        }
+      } 
+      else {
+        // 既不是图片也不是视频 → fallback
+        img = "assets/img/blog/default.jpg";
+      }
 
       const title = post.querySelector(".entry-title").textContent;
       const id = post.id || title.trim().toLowerCase().replace(/\s+/g, "-");
