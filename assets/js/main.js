@@ -687,5 +687,44 @@ document.addEventListener("DOMContentLoaded", function () {
     document.head.appendChild(script);
   });
 });
+
+/* ===== Auto-generate Article schema ===== */
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("article.entry").forEach(article => {
+    const titleEl = article.querySelector(".entry-title");
+    if (!titleEl) return;
+
+    const id = article.id;
+    const date = article.dataset.date || "2026-01-01";
+
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": titleEl.textContent.trim(),
+      "datePublished": date,
+      "author": {
+        "@type": "Organization",
+        "name": "BOB Computer Services"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BOB Computer Services",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://bob.com.my/assets/img/logo.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": `https://bob.com.my/blog.html#${id}`
+      }
+    };
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(schema);
+    document.head.appendChild(script);
+  });
+});
   
 })(); // 结束 IIFE
