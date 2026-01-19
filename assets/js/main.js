@@ -647,5 +647,45 @@ document.addEventListener("DOMContentLoaded", function() {
   renderRecentPosts();
 });
 
+/* ===== Auto-generate VideoObject schema for blog videos ===== */
+document.addEventListener("DOMContentLoaded", function () {
+  const articles = document.querySelectorAll("article.entry");
+
+  articles.forEach(article => {
+    const iframe = article.querySelector("iframe[src*='youtube.com/embed']");
+    if (!iframe) return;
+
+    const videoIdMatch = iframe.src.match(/embed\/([^\?&]+)/);
+    if (!videoIdMatch) return;
+
+    const videoId = videoIdMatch[1];
+    const titleEl = article.querySelector(".entry-title");
+    const date = article.dataset.date || "2026-01-01";
+
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": titleEl ? titleEl.textContent.trim() : "BOB Computer Services Video",
+      "description": titleEl ? titleEl.textContent.trim() : "Video by BOB Computer Services",
+      "thumbnailUrl": `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+      "uploadDate": date,
+      "embedUrl": `https://www.youtube.com/embed/${videoId}`,
+      "contentUrl": `https://www.youtube.com/watch?v=${videoId}`,
+      "publisher": {
+        "@type": "Organization",
+        "name": "BOB Computer Services",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://bob.com.my/assets/img/logo.png"
+        }
+      }
+    };
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(schema);
+    document.head.appendChild(script);
+  });
+});
   
 })(); // 结束 IIFE
