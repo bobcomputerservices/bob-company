@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+
+  <url>
+    <loc>https://bob.com.my/blog.html</loc>
+    <video:video>
+      <video:title>Sync Your Systems. Simplify Your Workflow</video:title>
+      <video:thumbnail_loc>
+        https://img.youtube.com/vi/A6E35miyefY/hqdefault.jpg
+      </video:thumbnail_loc>
+      <video:content_loc>
+        https://www.youtube.com/watch?v=A6E35miyefY
+      </video:content_loc>
+      <video:publication_date>2025-12-08</video:publication_date>
+    </video:video>
+  </url>
+
+  <url>
+    <loc>https://bob.com.my/blog.html</loc>
+    <video:video>
+      <video:title>AutoCount Loading List Plugin</video:title>
+      <video:thumbnail_loc>
+        https://img.youtube.com/vi/aRUwSeiQEiI/hqdefault.jpg
+      </video:thumbnail_loc>
+      <video:content_loc>
+        https://www.youtube.com/watch?v=aRUwSeiQEiI
+      </video:content_loc>
+      <video:publication_date>2022-11-12</video:publication_date>
+    </video:video>
+  </url>
+
+</urlset>
