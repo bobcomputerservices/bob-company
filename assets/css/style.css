@@ -2004,22 +2004,20 @@ section.blog,
 
 /* AutoCount page hero background */
 #hero-autocount {
-  background: url("../img/hero-autocount-bg.jpg") no-repeat center center;
-  background-size: cover;
-  background-attachment: fixed;
-  position: relative;
-  color: #fff;  /* 让文字保持白色 */
-  z-index: 1;
-}
-
-#hero-autocount {
   width: 100%;
   height: 80vh;
-  background: #37517e;
+
+  background-image: url("../img/hero-autocount-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+
   position: relative;
   z-index: 1;
   margin-top: -80px; /* 让 Hero 往上顶，把 header 背后填满 */
   padding-top: 80px; /* 保证 hero 内容不被 header 遮住 */
+  color: #fff;  /* 让文字保持白色 */
 }
 
 #hero-autocount .container {
