@@ -2003,5 +2003,7 @@ section.blog,
   background: url("../img/hero-autocount-bg.jpg") no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
+  position: relative;
+  color: #fff;  /* 让文字保持白色 */
+  z-index: 1;
 }
-
