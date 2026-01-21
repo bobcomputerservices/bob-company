@@ -2157,7 +2157,7 @@ section.blog,
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.2); /* 深浅可调：0.35～0.55 */
+  background: rgba(0, 0, 0, 0.1); /* 黑色，深浅可调：0.35～0.55 */
   z-index: 1;
 }
 
