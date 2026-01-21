@@ -1997,3 +1997,11 @@ section.blog,
   border-radius: 0 !important;
   display: inline-block;
 }
+
+/* AutoCount page hero background */
+.hero-autocount {
+  background: url("../img/hero-autocount-bg.jpg") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
