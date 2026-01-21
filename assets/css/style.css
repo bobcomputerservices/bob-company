@@ -1999,7 +1999,7 @@ section.blog,
 }
 
 /* AutoCount page hero background */
-.hero-autocount {
+#hero-autocount {
   background: url("../img/hero-autocount-bg.jpg") no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
