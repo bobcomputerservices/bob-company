@@ -2018,6 +2018,8 @@ section.blog,
   background: #37517e;
   position: relative;
   z-index: 1;
+  margin-top: -80px; /* 让 Hero 往上顶，把 header 背后填满 */
+  padding-top: 80px; /* 保证 hero 内容不被 header 遮住 */
 }
 
 #hero-autocount .container {
