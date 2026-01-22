@@ -2204,3 +2204,95 @@ section.blog,
   color: #157801;
 }
 
+/*--------------------------------------------------------------
+# Header-autocount - copied and coded by Fish
+--------------------------------------------------------------*/
+#header-autocount {
+  height: 80px;
+  transition: all 0.5s;
+  z-index: 997;
+  padding: 5px 0;
+ 
+  display: flex;                
+  align-items: center;         
+  justify-content: space-between; 
+}
+
+#header-autocount.header-scrolled, #header.header-inner-pages {
+  background: rgba(21, 120, 1, 0.9);
+}
+
+#header-autocount .logo {
+  font-size: 30px;
+  padding-top: 5px;          /* 整个 logo 区域下移 */
+  display: flex;             /* 让图片和文字并排 */
+  align-items: center;       /* 垂直对齐居中 */
+  margin: 0;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: none;
+  color: #fff;
+}
+
+#header-autocount .logo img {
+  height: 70px;          /* 默认 logo 高度 */
+  padding-top: 5px;      /* 给图片自身一点缓冲 */
+  object-fit: contain;   /* 确保完整显示，不会被裁切 */
+  margin-right: 8px;     /* 图和文字间隔 */
+}
+
+#header-autocount .logo .logo-text {
+  font-family: 'Times New Roman', serif;
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: -2px;
+  white-space: nowrap;
+  margin-left: 8px;
+  vertical-align: middle;
+  color: #fff;
+}
+
+/* 主页面 - hero 区header透明，借用hero背景 */
+body:not(.subpage) #header-autocount {
+  background: transparent;
+}
+
+/* 滚动过 hero 时自动变绿底 */
+body:not(.subpage) #header-autocount.header-scrolled {
+  background: #157801;
+}
+
+/* Header 排版根据屏幕大小调节 平板 & 中等屏幕 (≤768px) */
+@media (max-width: 768px) {
+  #header-autocount {
+    justify-content: center;    /* 整个 logo 居中 */
+  }
+
+  #header-autocount .logo {
+    flex-direction: column;     /* 图片和文字上下排 */
+    align-items: center;
+    text-align: center;
+  }
+
+  #header-autocount .logo img {
+    height: 50px;               /* logo 缩小 */
+    margin-right: 0;
+    margin-bottom: 5px;
+  }
+
+  #header-autocount .logo .logo-text {
+    font-size: 18px;            /* 文字跟着缩小 */
+  }
+}
+
+/* Header 排版根据屏幕大小调节 超小屏幕 (≤480px) */
+@media (max-width: 480px) {
+  #header-autocount .logo img {
+    height: 45px;               /* 再小一点 */
+  }
+
+  #header-autocount .logo .logo-text {
+    font-size: 14px;            /* 字更小 */
+  }
+}
