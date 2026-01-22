@@ -2173,6 +2173,16 @@ section.blog,
    Primary Color: #157801
    ========================================= */
 
+body.autocount-page #header {
+  background: #157801; /* AutoCount 主绿 */
+}
+
+/* 滚动后仍保持绿色 */
+body.autocount-page #header.header-scrolled,
+body.autocount-page #header.header-inner-pages {
+  background: #157801;
+}
+
 /* 主按钮（CTA） */
 #hero-autocount .btn-get-started,
 #hero-autocount .btn-watch-video i {
