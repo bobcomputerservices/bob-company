@@ -2212,7 +2212,7 @@ body.autocount-page .navbar .dropdown ul {
 
 /* Dropdown 默认文字颜色（跟 index.html 一样） */
 body.autocount-page .navbar .dropdown ul a {
-  color: #37517e; /* Arsha 默认深色字 */
+  color: #0C3C53; 
 }
 
 /* Hover / Active 改成浅绿 */
