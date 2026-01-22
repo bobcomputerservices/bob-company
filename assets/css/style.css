@@ -5,6 +5,16 @@
 * License: https://bootstrapmade.com/license/
 */
 
+/* =========================================
+   Global Theme Variables - 主页面+blog.html专属颜色覆盖
+   ========================================= */
+:root {
+  --main-color: #37517e;      /* index / blog 主色 */
+  --accent-color: #47b2e4;    /* hover / active */
+  --heading-color: #37517e;
+  --text-on-dark: #ffffff;
+}
+
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
@@ -2169,6 +2179,15 @@ section.blog,
 }
 
 /* =========================================
+   AutoCount Theme Override - AutoCount 页面专属颜色覆盖
+   ========================================= */
+body.autocount-page {
+  --main-color: #157801;      /* 深绿 */
+  --accent-color: #6fdc6f;    /* 浅绿 */
+  --heading-color: #157801;
+}
+
+/* =========================================
    AutoCount Page Theme Color Override
    Primary Color: #157801
    ========================================= */
@@ -2195,14 +2214,14 @@ body.autocount-page #footer {
 /* Menu 默认文字（保持白色） */
 body.autocount-page .navbar a,
 body.autocount-page .navbar a:focus {
-  color: #ffffff;
+  color: var(--text-on-dark);
 }
 
 /* Hover / Active 改为浅绿 */
 body.autocount-page .navbar a:hover,
 body.autocount-page .navbar .active,
 body.autocount-page .navbar li:hover > a {
-  color: #6fdc6f; /* 浅绿（安全、不刺眼） */
+  color: var(--accent-color); /* 浅绿（安全、不刺眼） */
 }
 
 /* Dropdown 背景（保持白色） */
@@ -2218,7 +2237,7 @@ body.autocount-page .navbar .dropdown ul a {
 /* Hover / Active 改成浅绿 */
 body.autocount-page .navbar .dropdown ul a:hover,
 body.autocount-page .navbar .dropdown ul .active {
-  color: #6fdc6f;
+  color: var(--accent-color);
 }
 
 /* =========================================
@@ -2226,11 +2245,11 @@ body.autocount-page .navbar .dropdown ul .active {
    ========================================= */
 
 body.autocount-page .section-title h2 {
-  color: #157801; /* AutoCount 深绿 */
+  color: var(--heading-color); /* AutoCount 深绿 */
 }
 
 body.autocount-page section h2 {
-  color: #157801;
+  color: var(--main-color);
 }
 
 /* 灰色底线（可留） */
@@ -2240,7 +2259,7 @@ body.autocount-page .section-title h2::before {
 
 /* 中间那条短线（主视觉） */
 body.autocount-page .section-title h2::after {
-  background: #6fdc6f; /* 浅绿 */
+  background: var(--accent-color); /* 浅绿 */
 }
 
 /* =========================================
@@ -2250,8 +2269,8 @@ body.autocount-page .section-title h2::after {
 /* 主按钮（Primary） */
 body.autocount-page .btn-get-started,
 body.autocount-page .btn-primary {
-  background: #157801;
-  color: #ffffff;
+  background: var(--main-color);
+  color: var(--text-on-dark);
   border: none;
   transition: 0.3s;
 }
@@ -2259,7 +2278,7 @@ body.autocount-page .btn-primary {
 /* 主按钮 hover */
 body.autocount-page .btn-get-started:hover,
 body.autocount-page .btn-primary:hover {
-  background: #6fdc6f;
+  background: var(--accent-color);
   color: #ffffff;
 }
 
@@ -2267,7 +2286,7 @@ body.autocount-page .btn-primary:hover {
 body.autocount-page .btn-learn-more,
 body.autocount-page .btn-outline {
   background: transparent;
-  color: #157801;
+  color: var(--accent-color);
   border: 2px solid #157801;
   transition: 0.3s;
 }
@@ -2275,9 +2294,9 @@ body.autocount-page .btn-outline {
 /* 次按钮 hover */
 body.autocount-page .btn-learn-more:hover,
 body.autocount-page .btn-outline:hover {
-  background: #6fdc6f;
+  background: var(--accent-color);
   color: #ffffff;
-  border-color: #6fdc6f;
+  border-color: var(--accent-color);
 }
 
 /* =========================================
@@ -2287,7 +2306,7 @@ body.autocount-page .btn-outline:hover {
 /* 常见 icon 统一成浅绿 */
 body.autocount-page i,
 body.autocount-page .icon i {
-  color: #6fdc6f;
+  color: var(--accent-color);
 }
 
 /* Feature box icon（如果有圆形背景） */
