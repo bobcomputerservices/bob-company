@@ -2253,18 +2253,13 @@ section.blog,
   color: #fff;
 }
 
-/* 主页面 - hero 区header透明，借用hero背景 */
-body:not(.subpage) #header-autocount {
+/* hero区 header透明，借用hero背景 */
+#header-autocount {
   background: transparent;
 }
 
 /* 滚动过 hero 时自动变绿底 */
-body:not(.subpage) #header-autocount.header-scrolled {
-  background: #157801;
-}
-
-/* autocount子页面 - header绿底，文字可见 */
-body.subpage #header-autocount {
+#header-autocount.header-scrolled {
   background: #157801;
 }
 
