@@ -5,6 +5,53 @@
 * License: https://bootstrapmade.com/license/
 */
 
+/* ==========================================================
+   COLOR REFERENCE
+   BOB Computer Services Website
+   ----------------------------------------------------------
+   用途说明：
+   - 方便日后换色时 Search & Replace
+   - 避免误删、误改非关键颜色
+   - index.html / blog.html / autocount.html 已区分
+   ========================================================== */
+
+/* =========================
+   MAIN SITE (index.html & blog.html)
+   ========================= */
+
+/* 主页面整体视觉基调 (Header background, Footer background, Section title h2) = #37517e  深蓝 */
+/* CTA = #283A5A 深蓝, transparency 0.9 */
+/* 主要强调色 (hover/active, primary button, section title underline, accent Colors) = #47b2e4  浅蓝 */
+/* Navbar dropdown menu 字体颜色 = #0c3c53  深蓝灰 */
+/* Text- Dark 深色文字 = #333 / #444 / #444444 (一般内容文字) / #343a40 (较深文字) */
+/* 次要文字 (footer/small text/meta info) = #555 / #5e5e5e / #6c757d / #777777 / #848484 */
+/* 辅助蓝系（辅助区块用色/section 背景) = #4668a2 / #6182ba */
+/* 其他 = 
+#209dd8
+#31a9e1
+#6bc1e9
+#73c5eb
+#6ec1ff
+#007bff
+#0d6efd
+#18d26e
+#28a745
+*/
+
+/* =========================
+   AUT OCOUNT PAGE (autocount.html)
+   ========================= */
+
+/* 主页面整体视觉基调 (Header background, Footer background) = #157801  深绿 */
+/* 标题色（Heading, Section title h2) = #0f5e01  更深的绿 */
+/* 强调色（Accent, Button hover, Icon / highlight, Hover / active 状态) = #6fdc6f  浅绿 */
+/* 装饰/分隔线 (Section title underline（底线), 分隔背景) = #d4e9d4  很淡的绿 */
+/* Navbar dropdown menu 字体颜色 = #0c3c53  深蓝灰 */
+
+/* ==========================================================
+   END OF COLOR REFERENCE
+   ========================================================== */
+
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
