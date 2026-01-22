@@ -2216,6 +2216,29 @@ section.blog,
 }
 
 /* =========================================
+   Hero Image Carousel (AutoCount / Hero)
+   ========================================= */
+
+.hero-img .carousel-inner img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Hero carousel 不要左右箭头 */
+.hero-img .carousel-control-prev,
+.hero-img .carousel-control-next {
+  display: none;
+}
+
+/* Indicator 调小一点，不抢画面 */
+.hero-img .carousel-indicators button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin: 0 4px;
+}
+
+/* =========================================
    AutoCount Page Theme Color Override
    Primary Color: #157801
    ========================================= */
@@ -2232,7 +2255,7 @@ body.autocount-page #header.header-inner-pages {
 
 /* AutoCount Footer */
 body.autocount-page #footer {
-  background: #0f5e01; /* 深一点的绿 */
+  background: #157801; 
 }
 
 /* =========================================
@@ -2346,3 +2369,4 @@ body.autocount-page .icon-box .icon {
 body.autocount-page .icon-box:hover .icon {
   background: rgba(111, 220, 111, 0.25);
 }
+
