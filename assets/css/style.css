@@ -2217,16 +2217,6 @@ section.blog,
   color: #fff;
 }
 
-/* hero区 header透明，借用hero背景 */
-#header-autocount {
-  background: transparent;
-}
-
-/* 滚动过 hero 时自动变绿底 */
-#header-autocount.header-scrolled {
-  background: #157801;
-}
-
 /* Header 排版根据屏幕大小调节 平板 & 中等屏幕 (≤768px) */
 @media (max-width: 768px) {
   #header-autocount {
