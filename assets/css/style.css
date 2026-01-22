@@ -2243,3 +2243,59 @@ body.autocount-page .section-title h2::after {
   background: #6fdc6f; /* 浅绿 */
 }
 
+/* =========================================
+   AutoCount Page - Button System
+   ========================================= */
+
+/* 主按钮（Primary） */
+body.autocount-page .btn-get-started,
+body.autocount-page .btn-primary {
+  background: #157801;
+  color: #ffffff;
+  border: none;
+  transition: 0.3s;
+}
+
+/* 主按钮 hover */
+body.autocount-page .btn-get-started:hover,
+body.autocount-page .btn-primary:hover {
+  background: #6fdc6f;
+  color: #ffffff;
+}
+
+/* 次按钮（Outline / Learn more） */
+body.autocount-page .btn-learn-more,
+body.autocount-page .btn-outline {
+  background: transparent;
+  color: #157801;
+  border: 2px solid #157801;
+  transition: 0.3s;
+}
+
+/* 次按钮 hover */
+body.autocount-page .btn-learn-more:hover,
+body.autocount-page .btn-outline:hover {
+  background: #6fdc6f;
+  color: #ffffff;
+  border-color: #6fdc6f;
+}
+
+/* =========================================
+   AutoCount Page - Icons
+   ========================================= */
+
+/* 常见 icon 统一成浅绿 */
+body.autocount-page i,
+body.autocount-page .icon i {
+  color: #6fdc6f;
+}
+
+/* Feature box icon（如果有圆形背景） */
+body.autocount-page .icon-box .icon {
+  background: rgba(111, 220, 111, 0.15); /* 浅绿淡底 */
+}
+
+/* Hover 时更明显一点 */
+body.autocount-page .icon-box:hover .icon {
+  background: rgba(111, 220, 111, 0.25);
+}
