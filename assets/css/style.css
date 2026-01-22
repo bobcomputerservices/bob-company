@@ -2184,25 +2184,25 @@ body.autocount-page #header.header-inner-pages {
 }
 
 /* 主按钮（CTA） */
-#hero .btn-get-started,
-#hero .btn-watch-video i {
+body.autocount-page #hero .btn-get-started,
+body.autocount-page #hero .btn-watch-video i {
   background-color: #157801;
   color: #fff;
 }
 
 /* hover 状态 */
-#hero .btn-get-started:hover {
+body.autocount-page #hero .btn-get-started:hover {
   background-color: #0f5e01; /* 深一点的绿 */
 }
 
 /* Hero 内强调文字（如果有） */
-#hero h1 span,
-#hero h2 span {
+body.autocount-page #hero h1 span,
+body.autocount-page #hero h2 span {
   color: #157801;
 }
 
 /* icon / 小重点（如果你之后用到） */
-#hero .icon i {
+body.autocount-page #hero .icon i {
   color: #157801;
 }
 
