@@ -2051,11 +2051,11 @@ section.blog,
   transition: 0.5s;
   margin: 10px 0 0 0;
   color: #fff;
-  background: #47b2e4;
+  background: #6fdc6f;
 }
 
 #hero-autocount .btn-get-started:hover {
-  background: #209dd8;
+  background: #6fdc6f;
 }
 
 #hero-autocount .btn-watch-video {
@@ -2077,7 +2077,7 @@ section.blog,
 }
 
 #hero-autocount .btn-watch-video:hover i {
-  color: #47b2e4;
+  color: #6fdc6f;
 }
 
 #hero-autocount .animated {
