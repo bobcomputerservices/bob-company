@@ -2187,3 +2187,33 @@ body.autocount-page #header.header-inner-pages {
 body.autocount-page #footer {
   background: #0f5e01; /* 深一点的绿 */
 }
+
+/* =========================================
+   AutoCount Page - Navbar Colors
+   ========================================= */
+
+/* Menu 默认文字（保持白色） */
+body.autocount-page .navbar a,
+body.autocount-page .navbar a:focus {
+  color: #ffffff;
+}
+
+/* Hover / Active 改为浅绿 */
+body.autocount-page .navbar a:hover,
+body.autocount-page .navbar .active,
+body.autocount-page .navbar li:hover > a {
+  color: #6fdc6f; /* 浅绿（安全、不刺眼） */
+}
+
+/* =========================================
+   AutoCount Page - Section Title (h2)
+   ========================================= */
+
+body.autocount-page .section-title h2 {
+  color: #157801; /* AutoCount 深绿 */
+}
+
+body.autocount-page section h2 {
+  color: #157801;
+}
+
