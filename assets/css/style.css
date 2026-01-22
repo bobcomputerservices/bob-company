@@ -2205,6 +2205,22 @@ body.autocount-page .navbar li:hover > a {
   color: #6fdc6f; /* 浅绿（安全、不刺眼） */
 }
 
+/* Dropdown 背景（保持白色） */
+body.autocount-page .navbar .dropdown ul {
+  background: #ffffff;
+}
+
+/* Dropdown 默认文字颜色（跟 index.html 一样） */
+body.autocount-page .navbar .dropdown ul a {
+  color: #37517e; /* Arsha 默认深色字 */
+}
+
+/* Hover / Active 改成浅绿 */
+body.autocount-page .navbar .dropdown ul a:hover,
+body.autocount-page .navbar .dropdown ul .active {
+  color: #6fdc6f;
+}
+
 /* =========================================
    AutoCount Page - Section Title (h2)
    ========================================= */
@@ -2215,5 +2231,15 @@ body.autocount-page .section-title h2 {
 
 body.autocount-page section h2 {
   color: #157801;
+}
+
+/* 灰色底线（可留） */
+body.autocount-page .section-title h2::before {
+  background: #d4e9d4; /* 很淡的绿灰 */
+}
+
+/* 中间那条短线（主视觉） */
+body.autocount-page .section-title h2::after {
+  background: #6fdc6f; /* 浅绿 */
 }
 
