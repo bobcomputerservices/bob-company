@@ -2219,23 +2219,21 @@ section.blog,
    Hero Image Carousel (AutoCount / Hero)
    ========================================= */
 
-.hero-img .carousel-inner img {
-  max-width: 100%;
-  height: auto;
+/* Hero Carousel - Fade & Indicator Fix */
+.hero-img {
+  position: relative;
+  overflow: hidden; /* 防止 indicator 超出 */
 }
 
-/* Hero carousel 不要左右箭头 */
-.hero-img .carousel-control-prev,
-.hero-img .carousel-control-next {
-  display: none;
+.hero-img .carousel-indicators {
+  bottom: 15px; /* 距离底部，可调节 */
 }
 
-/* Indicator 调小一点，不抢画面 */
 .hero-img .carousel-indicators button {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  margin: 50 4px;
+  margin: 0 4px;
 }
 
 /* =========================================
