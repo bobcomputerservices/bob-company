@@ -2255,11 +2255,16 @@ section.blog,
 
 /* 主页面 - hero 区header透明，借用hero背景 */
 body:not(.subpage) #header-autocount {
-  background: #157801;
+  background: transparent;
 }
 
 /* 滚动过 hero 时自动变绿底 */
 body:not(.subpage) #header-autocount.header-scrolled {
+  background: #157801;
+}
+
+/* autocount子页面 - header绿底，文字可见 */
+body.subpage #header-autocount {
   background: #157801;
 }
 
