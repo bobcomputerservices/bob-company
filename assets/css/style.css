@@ -2227,11 +2227,6 @@ section.blog,
   background: #157801;
 }
 
-/* autocount子页面 - header绿底，文字可见 */
-body.subpage #header-autocount {
-  background: #157801;
-}
-
 /* Header 排版根据屏幕大小调节 平板 & 中等屏幕 (≤768px) */
 @media (max-width: 768px) {
   #header-autocount {
