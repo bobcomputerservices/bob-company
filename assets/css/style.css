@@ -2191,15 +2191,6 @@ section.blog,
   }
 }
 
-.hero-title span {
-  display: block;
-}
-
-/* 关键：禁止第一行自动断成两行 */
-.hero-title .line-1 {
-  white-space: nowrap;
-}
-
 /* =========================================
    AutoCount Hero Overlay (Safe Version)
    Only applies to autocount.html
