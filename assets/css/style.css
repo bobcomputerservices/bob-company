@@ -2046,7 +2046,7 @@ section.blog,
 }
 
 /*--------------------------------------------------------------
-# Hero-autocount Section - Copied and coded by Fish
+# Hero-autocount Section - Coed by ChatGPT
 --------------------------------------------------------------*/
 
 /* AutoCount page hero background */
@@ -2189,6 +2189,15 @@ section.blog,
   100% {
     transform: translateY(-10px);
   }
+}
+
+.hero-title span {
+  display: block;
+}
+
+/* 关键：禁止第一行自动断成两行 */
+.hero-title .line-1 {
+  white-space: nowrap;
 }
 
 /* =========================================
