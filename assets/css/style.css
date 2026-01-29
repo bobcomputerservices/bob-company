@@ -2372,6 +2372,10 @@ body.autocount-page .icon-box:hover .icon {
    AutoCount Page - About Section
    ========================================= */
 
+.autocount-page #about .col-lg-6 {
+  text-align: center;
+}
+
 .autocount-page .about-logo {
   width: 70px;
   margin: 0 auto 10px auto;  /* 左右 auto = 居中 */
