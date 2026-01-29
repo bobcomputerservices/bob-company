@@ -2377,9 +2377,17 @@ body.autocount-page .icon-box:hover .icon {
 }
 
 .autocount-page .about-logo {
-  width: 70px;
-  margin: 0 auto 10px auto;  /* 左右 auto = 居中 */
-  display: block;            /* 关键：让 img 变成 block */
+  height: 48px;
+  width: auto;
+  margin: 0 auto 10px auto;
+  display: block;
 }
+
+@media (max-width: 768px) {
+  .autocount-page .about-logo {
+    height: 40px;
+  }
+}
+
 
 
