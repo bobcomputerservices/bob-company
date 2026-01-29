@@ -2368,3 +2368,12 @@ body.autocount-page .icon-box:hover .icon {
   background: rgba(111, 220, 111, 0.25);
 }
 
+/* =========================================
+   AutoCount Page - About Section
+   ========================================= */
+
+.autocount-page .about-logo {
+  width: 70px;
+  margin-bottom: 10px;
+}
+
