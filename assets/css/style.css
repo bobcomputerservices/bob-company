@@ -2412,6 +2412,80 @@ body.autocount-page .icon-box:hover .icon {
 }
 
 /* =========================================
+   AutoCount Page - Services section
+   ========================================= */
+
+/* Section 本身（白色背景） */
+.autocount-page #services {
+  padding: 60px 0;
+  background: #fff;
+}
+
+/* 每一个 service block（纵向排列） */
+.autocount-page .service-item {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+/* 左边 vertical title tab */
+.autocount-page .service-tab {
+  width: 70px;
+  background: linear-gradient(180deg, #1fa84f, #0b6e2f);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px 0 0 12px;
+}
+
+.autocount-page .service-tab span {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 4px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* 右边 picture box（carousel + overlay） */
+.autocount-page .service-box {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0 12px 12px 0;
+}
+
+/* Carousel 图片本身 */
+.autocount-page .service-box img {
+  height: 280px;
+  object-fit: cover;
+}
+
+/* Overlay（重点：固定、不随 carousel 动） */
+.autocount-page .service-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.autocount-page .service-overlay p {
+  max-width: 700px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #2f2f2f;
+}
+
+
+
+
+
+
+/* =========================================
    AutoCount Page - Back to top button
    ========================================= */
 
