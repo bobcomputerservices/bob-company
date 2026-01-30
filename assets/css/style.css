@@ -2425,7 +2425,8 @@ body.autocount-page .icon-box:hover .icon {
 .autocount-page .service-item {
    width: 900px;
    display: flex;
-  margin-bottom: 40px;
+   position: center;
+   margin-bottom: 40px;
 }
 
 /* 左边 vertical title tab */
