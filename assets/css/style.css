@@ -2423,7 +2423,8 @@ body.autocount-page .icon-box:hover .icon {
 
 /* 每一个 service block（纵向排列） */
 .autocount-page .service-item {
-  display: flex;
+   width: 900px;
+   display: flex;
   margin-bottom: 40px;
 }
 
@@ -2479,11 +2480,6 @@ body.autocount-page .icon-box:hover .icon {
   line-height: 1.6;
   color: #2f2f2f;
 }
-
-
-
-
-
 
 /* =========================================
    AutoCount Page - Back to top button
