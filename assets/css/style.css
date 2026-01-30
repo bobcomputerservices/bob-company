@@ -2425,7 +2425,6 @@ body.autocount-page .icon-box:hover .icon {
 .autocount-page .service-item {
    width: 900px;
    display: flex;
-   position: center;
    margin-bottom: 40px;
 }
 
@@ -2450,7 +2449,7 @@ body.autocount-page .icon-box:hover .icon {
 
 /* 右边 picture box（carousel + overlay） */
 .autocount-page .service-box {
-  position: relative;
+  position: center;
   width: 100%;
   overflow: hidden;
   border-radius: 0 12px 12px 0;
