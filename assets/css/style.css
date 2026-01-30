@@ -2389,5 +2389,27 @@ body.autocount-page .icon-box:hover .icon {
   }
 }
 
+/* =========================================
+   AutoCount Page - Awards Section
+   ========================================= */
+
+.autocount-page #awards {
+  padding: 60px 0;
+}
+
+.autocount-page #awards .awards-img {
+  max-width: 700px;
+  margin: 0 auto;
+  display: block;
+}
+
+.autocount-page #awards p {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+
 
 
