@@ -2476,7 +2476,7 @@ body.autocount-page .icon-box:hover .icon {
 }
 
 .autocount-page .service-overlay p {
-  margin-top: 20px;
+  margin-top: 0;
   max-width: 720px;
   font-size: 1.05rem;
   line-height: 1.7;
