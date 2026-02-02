@@ -2451,14 +2451,13 @@ body.autocount-page .icon-box:hover .icon {
 .autocount-page .service-box {
   position: relative;
   width: 100%;
-  height: 500px; /* 约 16:9 */
+  height: auto;
   overflow: hidden;
   border-radius: 0 12px 12px 0;
 }
 
 /* Carousel 图片本身 */
 .autocount-page .service-box img {
-  height: 500px;
   object-fit: cover;
 }
 
