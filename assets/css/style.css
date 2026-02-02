@@ -2458,7 +2458,6 @@ body.autocount-page .icon-box:hover .icon {
 
 /* Carousel 图片本身 */
 .autocount-page .service-box img {
-  height: 500px;
   object-fit: cover;
 }
 
