@@ -2424,13 +2424,13 @@ body.autocount-page .icon-box:hover .icon {
 .autocount-page .service-item {
    max-width: 900px;
    display: flex;
+   align-items: stretch; /* 🔑 强制左右等高 */
    margin: 0 auto 50px auto; /* 居中 + 下间距 */
 }
 
 /* 左边 vertical title tab */
 .autocount-page .service-tab {
   width: 70px;
-  height: 500px;
   background: linear-gradient(180deg, #1fa84f, #0b6e2f);
   color: #fff;
   display: flex;
@@ -2497,6 +2497,7 @@ body.autocount-page .icon-box:hover .icon {
 }
 
 .autocount-page .carousel-indicators {
+  position: absolute;
   bottom: -10px; /* 距离底部，可调节 */
 }
 
