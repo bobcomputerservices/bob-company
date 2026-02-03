@@ -2430,6 +2430,7 @@ body.autocount-page .icon-box:hover .icon {
 /* 左边 vertical title tab */
 .autocount-page .service-tab {
   width: 70px;
+  height: 500px;
   background: linear-gradient(180deg, #1fa84f, #0b6e2f);
   color: #fff;
   display: flex;
