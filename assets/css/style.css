@@ -2495,11 +2495,6 @@ body.autocount-page .icon-box:hover .icon {
   transition: all 0.3s ease;
 }
 
-.autocount-page .carousel-indicators .active {
-  background-color: #157801; /* 主绿色 */
-  opacity: 1;
-}
-
 .autocount-page .carousel-indicators {
   bottom: 10px; /* 距离底部，可调节 */
 }
