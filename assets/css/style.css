@@ -2483,16 +2483,29 @@ body.autocount-page .icon-box:hover .icon {
   font-weight: 500;
 }
 
-.autocount-page .carousel-indicators {
-  bottom: 15px; /* 距离底部，可调节 */
-}
-
-.autocount-page .carousel-indicators button {
-  width: 8px;
-  height: 8px;
+/* =========================================
+   AutoCount page – Carousel Indicators
+   ========================================= */
+.autocount-page .carousel-indicators [data-bs-target] {
+  background-color: rgba(21, 120, 1, 0.4); /* #157801 半透明 */
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   margin: 0 4px;
-  color: #157801;
+  transition: all 0.3s ease;
+}
+
+.autocount-page .carousel-indicators .active {
+  background-color: #157801; /* 主绿色 */
+  opacity: 1;
+}
+
+.autocount-page .carousel-indicators [data-bs-target] {
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.4);
+}
+
+.autocount-page .carousel-indicators {
+  bottom: 10px; /* 距离底部，可调节 */
 }
 
 /* =========================================
