@@ -253,63 +253,65 @@
   
       <!-- Service Item -->
       <div class="service-item">
+      
+        <!-- 左侧 Tab -->
         <div class="service-tab consultation">
           <span>CONSULTATION</span>
         </div>
-  
-      <div class="service-box">
       
-        <div id="serviceCarousel1"
-             class="carousel slide"
-             data-bs-ride="carousel"
-             data-bs-interval="4000">
+        <!-- Picture Box（定位容器） -->
+        <div class="service-box">
       
-          <!-- Indicators（一定要在 carousel 里面） -->
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#serviceCarousel1" data-bs-slide-to="0" class="active"></button>
-            <button type="button" data-bs-target="#serviceCarousel1" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#serviceCarousel1" data-bs-slide-to="2"></button>
-            <button type="button" data-bs-target="#serviceCarousel1" data-bs-slide-to="3"></button>
-            <button type="button" data-bs-target="#serviceCarousel1" data-bs-slide-to="4"></button>
-            <button type="button" data-bs-target="#serviceCarousel1" data-bs-slide-to="5"></button>
+          <div id="serviceCarousel1"
+               class="carousel slide"
+               data-bs-ride="carousel"
+               data-bs-interval="4000">
+      
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#serviceCarousel1" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#serviceCarousel1" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#serviceCarousel1" data-bs-slide-to="2"></button>
+              <button type="button" data-bs-target="#serviceCarousel1" data-bs-slide-to="3"></button>
+              <button type="button" data-bs-target="#serviceCarousel1" data-bs-slide-to="4"></button>
+              <button type="button" data-bs-target="#serviceCarousel1" data-bs-slide-to="5"></button>
+            </div>
+      
+            <!-- Slides -->
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="assets/img/BOB-autocount-ecosystem.png" class="d-block w-100" alt="">
+              </div>
+              <div class="carousel-item">
+                <img src="assets/img/BOB-autocount-accounting.png" class="d-block w-100" alt="">
+              </div>
+              <div class="carousel-item">
+                <img src="assets/img/BOB-autocount-accountingcloud.png" class="d-block w-100" alt="">
+              </div>
+              <div class="carousel-item">
+                <img src="assets/img/BOB-autocount-POS.png" class="d-block w-100" alt="">
+              </div>
+              <div class="carousel-item">
+                <img src="assets/img/BOB-autocount-hrms.png" class="d-block w-100" alt="">
+              </div>
+              <div class="carousel-item">
+                <img src="assets/img/BOB-autocount-onesales.png" class="d-block w-100" alt="">
+              </div>
+            </div>
           </div>
       
-          <!-- Slides -->
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="assets/img/BOB-autocount-ecosystem.png" class="d-block w-100" alt="">
-            </div>
-            <div class="carousel-item">
-              <img src="assets/img/BOB-autocount-accounting.png" class="d-block w-100" alt="">
-            </div>
-            <div class="carousel-item">
-              <img src="assets/img/BOB-autocount-accountingcloud.png" class="d-block w-100" alt="">
-            </div>
-            <div class="carousel-item">
-              <img src="assets/img/BOB-autocount-POS.png" class="d-block w-100" alt="">
-            </div>
-            <div class="carousel-item">
-              <img src="assets/img/BOB-autocount-hrms.png" class="d-block w-100" alt="">
-            </div>
-            <div class="carousel-item">
-              <img src="assets/img/BOB-autocount-onesales.png" class="d-block w-100" alt="">
-            </div>
-          </div>
-      
-        </div>
-      </div>
-         
-          <!-- Overlay -->
+          <!-- ✅ Overlay 一定要在 service-box 里面 -->
           <div class="service-overlay">
             <p>
               We analyse your business requirements and recommend the most suitable
-              <br><strong>AutoCount modules, editions, and plugins</strong>,<br>ensuring a scalable and
-              best-practice system design tailored to your operations.
+              <br><strong>AutoCount modules, editions, and plugins</strong>,<br>
+              ensuring a scalable and best-practice system design tailored to your operations.
             </p>
           </div>
+      
         </div>
       </div>
-  
+
       <div class="service-item">
         <div class="service-tab plugin customization">
           <span>PLUGIN CUSTOMIZATION</span>
