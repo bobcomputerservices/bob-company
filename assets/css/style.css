@@ -2496,7 +2496,7 @@ body.autocount-page .icon-box:hover .icon {
 }
 
 .autocount-page .carousel-indicators {
-  bottom: 10px; /* 距离底部，可调节 */
+  bottom: -10px; /* 距离底部，可调节 */
 }
 
 /* =========================================
