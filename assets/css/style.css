@@ -2500,10 +2500,6 @@ body.autocount-page .icon-box:hover .icon {
   opacity: 1;
 }
 
-.autocount-page .carousel-indicators [data-bs-target] {
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.4);
-}
-
 .autocount-page .carousel-indicators {
   bottom: 10px; /* 距离底部，可调节 */
 }
