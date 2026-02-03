@@ -43,7 +43,7 @@
    ========================= */
 
 /* 主页面整体视觉基调 (Header background, Footer background) = #157801  深绿 */
-/* 标题色（Heading, Section title h2) = #0f5e01  更深的绿 */
+/* 标题色（Heading, CTA, Section title h2) = #0f5e01  更深的绿 */
 /* 强调色（Accent, Button hover, Icon / highlight, Hover / active 状态) = #6fdc6f  浅绿 */
 /* 装饰/分隔线 (Section title underline（底线), 分隔背景) = #d4e9d4  很淡的绿 */
 /* Navbar dropdown menu 字体颜色 = #0c3c53  深蓝灰 */
@@ -2551,6 +2551,67 @@ body.autocount-page .icon-box:hover .icon {
     align-items: center;
     justify-content: flex-end;
   }
+}
+
+/* =========================================
+   AutoCount Page - Newsletter
+   ========================================= */
+.autocount-page #footer {
+  font-size: 14px;
+  background: #157801;
+}
+
+.autocount-page #footer .footer-newsletter {
+  padding: 50px 0;
+  background: #f4fAf5;
+  text-align: center;
+  font-size: 15px;
+  color: #444444;
+}
+
+.autocount-page #footer .footer-newsletter h4 {
+  font-size: 24px;
+  margin: 0 0 20px 0;
+  padding: 0;
+  line-height: 1;
+  font-weight: 600;
+  color: #157801;
+}
+
+.autocount-page #footer .footer-newsletter form {
+  margin-top: 30px;
+  background: #fff;
+  padding: 6px 10px;
+  position: relative;
+  border-radius: 50px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.06);
+  text-align: left;
+}
+
+.autocount-page #footer .footer-newsletter form input[type="email"] {
+  border: 0;
+  padding: 4px 8px;
+  width: calc(100% - 100px);
+}
+
+.autocount-page #footer .footer-newsletter form input[type="submit"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border: 0;
+  background: none;
+  font-size: 16px;
+  padding: 0 20px;
+  background: #6fdc6f;
+  color: #fff;
+  transition: 0.3s;
+  border-radius: 50px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.autocount-page #footer .footer-newsletter form input[type="submit"]:hover {
+  background: #1FD942;
 }
 
 /* =========================================
