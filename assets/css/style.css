@@ -1989,7 +1989,6 @@ section.blog,
   border: 1px solid #47b2e4;
   margin: 0 3px;
   opacity: 1;
-  pointer-events: none;   /* 禁止点击 */
 }
 
 /* ✅ active 状态 */
@@ -2493,6 +2492,7 @@ body.autocount-page .icon-box:hover .icon {
   height: 8px;
   border-radius: 50%;
   margin: 0 4px;
+  color: #157801;
 }
 
 /* =========================================
