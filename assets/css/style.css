@@ -2484,6 +2484,17 @@ body.autocount-page .icon-box:hover .icon {
   font-weight: 500;
 }
 
+.autocount-page .carousel-indicators {
+  bottom: 15px; /* 距离底部，可调节 */
+}
+
+.autocount-page .carousel-indicators button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin: 0 4px;
+}
+
 /* =========================================
    AutoCount Page - Back to top button
    ========================================= */
