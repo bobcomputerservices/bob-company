@@ -495,19 +495,54 @@
   <!-- ======= CTA Section ======= -->
   <section id="cta" class="cta">
     <div class="container" data-aos="zoom-in">
-      <div class="row">
-        <div class="col-lg-9 text-center text-lg-start">
+      <div class="text-center">
           <h3>Discuss Your AutoCount Implementation</h3>
           <p>Contact us for a professional discussion tailored to your business needs.</p>
-        </div>
-        <div class="col-lg-3 cta-btn-container text-center">
-          <a class="cta-btn align-middle" href="#contact">Contact Us</a>
+          <a class="cta-btn" href="#" data-bs-toggle="modal" data-bs-target="#businessCardModal">APPOINTMENT</a>
+      </div>
+  </div>
+  </section>
+  <!-- End CTA -->
+
+  <!-- ======= Business Card Modal ======= -->
+  <div class="modal fade" id="businessCardModal" tabindex="-1" aria-labelledby="businessCardModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 900px;"> <!-- 控制宽度 -->
+      <div class="modal-content position-relative">
+       
+         <!-- Custom Close button -->
+        <button type="button" 
+                data-bs-dismiss="modal" 
+                aria-label="Close"
+                style="position:absolute; top:10px; right:15px; 
+                       z-index:1055; 
+                       width:35px; height:35px;
+                       border:none; 
+                       border-radius:50%; 
+                       background-color:black; 
+                       color:white; 
+                       font-size:1.5rem; 
+                       font-weight:bold; 
+                       line-height:1; 
+                       display:flex; 
+                       align-items:center; 
+                       justify-content:center; 
+                       cursor:pointer;">
+          ×
+        </button>
+        
+        <div class="modal-body p-0" style="aspect-ratio:16/9;">
+          <img src="assets/img/businesscard.png" 
+               alt="Business Card" 
+               class="w-100 h-100" 
+               style="object-fit: cover;">
         </div>
       </div>
     </div>
-  </section>
-  <!-- End CTA -->
-  
+  </div>
+
+    </section>
+  <!-- End Cta Section --> 
+   
   </main>
 
   <!-- ======= Footer ======= -->
