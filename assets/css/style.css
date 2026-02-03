@@ -2502,6 +2502,58 @@ body.autocount-page .icon-box:hover .icon {
 }
 
 /* =========================================
+   AutoCount page – CTA
+   ========================================= */
+.autocount-page .cta {
+  background: linear-gradient(rgba(15, 94, 1, 0.9), rgba(15, 94, 1, 0.9)), url("../img/cta-bob.jpg") fixed center center;
+  background-size: cover;
+  padding: 120px 0;
+}
+
+.autocount-page .cta h3 {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.autocount-page .cta p {
+  color: #fff;
+}
+
+.autocount-page .cta .cta-btn {
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 40px;
+  border-radius: 50px;
+  transition: 0.5s;
+  margin: 10px;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.autocount-page .cta .cta-btn:hover {
+  background: #6fdc6f;
+  border: 2px solid #6fdc6f;
+}
+
+@media (max-width: 1024px) {
+  .autocount-page .cta {
+    background-attachment: scroll;
+  }
+}
+
+@media (min-width: 769px) {
+  .autocount-page .cta .cta-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+
+/* =========================================
    AutoCount Page - Back to top button
    ========================================= */
 
