@@ -2611,7 +2611,96 @@ body.autocount-page .icon-box:hover .icon {
 }
 
 .autocount-page #footer .footer-newsletter form input[type="submit"]:hover {
-  background: #1FD942;
+  background: #1fd942;
+}
+
+.autocount-page #footer .footer-top {
+  padding: 60px 0 30px 0;
+  background: #fff;
+}
+
+.autocount-page #footer .footer-top .footer-contact {
+  margin-bottom: 30px;
+}
+
+.autocount-page #footer .footer-top .footer-contact h3 {
+  font-size: 28px;
+  margin: 0 0 10px 0;
+  padding: 2px 0 2px 0;
+  line-height: 1;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #157801;
+}
+
+.autocount-page #footer .footer-top .footer-contact p {
+  font-size: 14px;
+  line-height: 24px;
+  margin-bottom: 0;
+  font-family: "Jost", sans-serif;
+  color: #5e5e5e;
+}
+
+.autocount-page #footer .footer-top h4 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #157801;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.autocount-page #footer .footer-top .footer-links {
+  margin-bottom: 30px;
+}
+
+.autocount-page #footer .footer-top .footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.autocount-page #footer .footer-top .footer-links ul i {
+  padding-right: 2px;
+  color: #6fdc6f;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.autocount-page #footer .footer-top .footer-links ul li {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.autocount-page #footer .footer-top .footer-links ul li:first-child {
+  padding-top: 0;
+}
+
+.autocount-page #footer .footer-top .footer-links ul a {
+  color: #777777;
+  transition: 0.3s;
+  display: inline-block;
+  line-height: 1;
+}
+
+.autocount-page #footer .footer-top .footer-links ul a:hover {
+  text-decoration: none;
+  color: #6fdc6f;
+}
+
+.autocount-page #footer .footer-top .social-links a {
+  font-size: 18px;
+  display: inline-block;
+  background: #6fdc6f;
+  color: #fff;
+  line-height: 1;
+  padding: 8px 0;
+  margin-right: 10px;    /* 两个 icon 之间的间距 */
+  border-radius: 50%;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  transition: 0.3s;
 }
 
 /* =========================================
