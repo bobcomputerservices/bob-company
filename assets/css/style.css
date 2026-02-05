@@ -2410,6 +2410,18 @@ body.autocount-page .icon-box:hover .icon {
   text-align: center;
 }
 
+/* Awards section image control */
+#awards .awards-content {
+  max-height: 60vh;      /* 桌面也不会太夸张 */
+  overflow: hidden;
+}
+
+#awards .awards-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  /* 不裁切奖项内容 */
+}
+
 /* =========================================
    AutoCount Page - Services section
    ========================================= */
