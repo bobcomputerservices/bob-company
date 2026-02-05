@@ -2422,6 +2422,18 @@ body.autocount-page .icon-box:hover .icon {
   object-fit: contain;  /* 不裁切奖项内容 */
 }
 
+@media (max-width: 768px) {
+  #awards .awards-content {
+    max-height: 45vh;
+  }
+}
+
+@media (max-width: 576px) {
+  #awards .awards-content {
+    max-height: 40vh;
+  }
+}
+
 /* =========================================
    AutoCount Page - Services section
    ========================================= */
