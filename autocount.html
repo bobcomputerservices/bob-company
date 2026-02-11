@@ -756,7 +756,7 @@
     transition: opacity 0.4s ease;
   }
   
-  .announcement-link:hover .hover-overlay {
+  .hover-enabled .announcement-link:hover .hover-overlay {
     opacity: 1;
     cursor: pointer;
   }
@@ -772,32 +772,44 @@
   }
   </style>
   
-  <!-- Announcement Auto Popup (延迟2秒) -->
+  <!-- Announcement Auto Popup -->
   <script>
-    // 🔥 控制开关：要显示弹窗就改成 true，不要就改 false
-    const announcementEnabled = false;
+    // 🔥 控制开关
+    const announcementEnabled = true;        // 控制弹窗出现,停用弹窗就设置 false
+    const announcementHoverEnabled = false;   // 控制 hover 效果,停用 hover 就设置 false
+    const announcementDelay = 2000;          // 延迟时间（毫秒）
   
     document.addEventListener("DOMContentLoaded", function() {
   
-      if (!announcementEnabled) return; // 👈 禁用时直接停止执行
-  
-      const heroSection = document.querySelector('#hero');
-  
-      if (heroSection) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              setTimeout(() => {
-                const announcementModal = new bootstrap.Modal(document.getElementById('announcementModal'));
-                announcementModal.show();
-              }, 2000);
-              observer.disconnect();
-            }
-          });
-        }, { threshold: 0.5 });
-  
-        observer.observe(heroSection);
+      // ✅ 控制 hover 是否启用
+      if (announcementHoverEnabled) {
+        document.body.classList.add("hover-enabled");
       }
+  
+      // ❌ 如果弹窗关闭，直接停止
+      if (!announcementEnabled) return;
+  
+      // 如果页面有 #hero 就观察它，没有就直接触发
+      const triggerSection = document.querySelector('#hero') || document.body;
+  
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+  
+            setTimeout(() => {
+              const modalElement = document.getElementById('announcementModal');
+              if (modalElement) {
+                const announcementModal = new bootstrap.Modal(modalElement);
+                announcementModal.show();
+              }
+            }, announcementDelay);
+  
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.5 });
+  
+      observer.observe(triggerSection);
     });
   </script>
 
