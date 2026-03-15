@@ -2530,7 +2530,13 @@ body.autocount-page .icon-box:hover .icon {
    ========================= */
 
 .plugins {
-  background: #f6fbf6;
+  linear-gradient(#f6fbf6,#f6fbf6),
+  linear-gradient(90deg,#e9f4e9 1px,transparent 1px),
+  linear-gradient(#e9f4e9 1px,transparent 1px);
+  background-size:
+  auto,
+  40px 40px,
+  40px 40px;
 }
 
 .row {
@@ -2577,6 +2583,7 @@ body.autocount-page .icon-box:hover .icon {
   font-size: 0.95rem;
   line-height: 1.6;
   margin-bottom: 15px;
+  min-height:140px;
 }
 
 .plugin-demo-img {
@@ -2657,6 +2664,28 @@ body.autocount-page .icon-box:hover .icon {
 
 .video-preview:hover .video-overlay {
   opacity: 1;
+}
+
+.video-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.video-grid img{
+  width:100%;
+  border-radius:6px;
+}
+
+.video-placeholder{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f3f8f3;
+  border:1px dashed #cfe6cf;
+  border-radius:6px;
+  font-size:0.9rem;
+  color:#6a8a6a;
 }
 
 @media (max-width: 768px) {
