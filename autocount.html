@@ -519,13 +519,14 @@
               Automatically exchange data and retrieve updates like e-invoice status to keep systems synchronized and reduce manual work.<br><br>
               <strong>数据同步插件</strong> 可将 AutoCount 与 POS、电商、ERP 或自家系统无缝整合，实现资料自动同步与即时回传（如电子发票状态），减少人工操作并确保数据准确。
               </p>
-    
-              <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/A6E35miyefY"
-                  title="Data Sync Plugin Demo"
-                  allowfullscreen></iframe>
+                
+              <div class="video-preview" data-video="A6E35miyefY">
+                <img src="https://img.youtube.com/vi/A6E35miyefY/hqdefault.jpg" class="img-fluid">
+                <div class="video-overlay">
+                  ▶ Watch Demo
+                </div>
               </div>
-    
+             
             </div>
           </div>
     
@@ -594,11 +595,13 @@
               <strong>标签系统插件</strong> 可从销售订单或收货单直接打印条码标签，灵活选择物品与数量，并支持成本价暗码，提升标签准确度与库存管理效率。
               </p>
     
-              <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/9Me4KHYZvQg"
-                allowfullscreen></iframe>
+              <div class="video-preview" data-video="9Me4KHYZvQg">
+                <img src="https://img.youtube.com/vi/9Me4KHYZvQg/hqdefault.jpg" class="img-fluid">
+                <div class="video-overlay">
+                  ▶ Watch Demo
+                </div>
               </div>
-    
+             
             </div>
           </div>
     
@@ -615,12 +618,14 @@
               Generate loading lists quickly using filters such as delivery area and delivery date. Simplifies delivery planning and ensures accurate loading preparation.<br><br>
               <strong>装货清单插件</strong> 可根据送货地区、日期等条件快速生成装货清单，方便安排配送与货物装载，让物流流程更高效。
               </p>
-    
-              <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/aRUwSeiQEiI"
-                allowfullscreen></iframe>
+                
+              <div class="video-preview" data-video="aRUwSeiQEiI">
+                <img src="https://img.youtube.com/vi/aRUwSeiQEiI/hqdefault.jpg" class="img-fluid">
+                <div class="video-overlay">
+                  ▶ Watch Demo
+                </div>
               </div>
-    
+             
             </div>
           </div>
     
@@ -638,11 +643,13 @@
               <strong>木材管理插件</strong> 专为木材行业设计，提供吨数计算、出材登记与库存追踪功能，实现高效的木材库存管理。
               </p>
     
-              <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/rCLMTAvbCVY"
-                allowfullscreen></iframe>
-              </div>
-    
+              <div class="video-preview" data-video="rCLMTAvbCVY">
+                <img src="https://img.youtube.com/vi/rCLMTAvbCVY/hqdefault.jpg" class="img-fluid">
+                <div class="video-overlay">
+                  ▶ Watch Demo
+                </div>
+              </div>    
+             
             </div>
           </div>
     
@@ -660,11 +667,13 @@
               <strong>过磅系统插件</strong> 可连接过磅系统，在卸货时自动计算净重量并生成采购单据，大幅提升准确度与作业效率。
               </p>
     
-              <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/MQTNp5mUXvY"
-                allowfullscreen></iframe>
-              </div>
-    
+              <div class="video-preview" data-video="MQTNp5mUXvY">
+                <img src="https://img.youtube.com/vi/MQTNp5mUXvY/hqdefault.jpg" class="img-fluid">
+                <div class="video-overlay">
+                  ▶ Watch Demo
+                </div>
+              </div>    
+                 
             </div>
           </div>
     
@@ -707,6 +716,39 @@
         </div>
       </div>
     </section>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+  
+    const previews = document.querySelectorAll(".video-preview");
+  
+    previews.forEach(preview => {
+  
+      preview.addEventListener("click", function(){
+  
+        const videoId = this.dataset.video;
+  
+        const iframe = document.createElement("iframe");
+  
+        iframe.setAttribute(
+          "src",
+          "https://www.youtube.com/embed/" + videoId + "?autoplay=1"
+        );
+  
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.style.width = "100%";
+        iframe.style.height = "315px";
+        iframe.style.border = "0";
+  
+        this.innerHTML = "";
+        this.appendChild(iframe);
+  
+      });
+  
+    });
+  
+  });
+  </script>
  
   <!-- ======= CTA Section ======= -->
   <section id="cta" class="cta">
