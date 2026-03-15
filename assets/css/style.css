@@ -2562,16 +2562,6 @@ body.autocount-page .icon-box:hover .icon {
   border-top: 4px solid #6fdc6f;
 }
 
-.plugin-card:hover .plugin-img,
-.plugin-card:hover .video-preview img {
-  transform: scale(1.03);
-}
-
-.plugin-img,
-.video-preview img {
-  transition: transform 0.35s ease;
-}
-
 .plugin-img {
   border-radius: 6px;
   margin-bottom: 15px;
