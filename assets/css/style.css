@@ -2616,10 +2616,19 @@ body.autocount-page .icon-box:hover .icon {
 .video-preview {
   position: relative;
   cursor: pointer;
+  text-align: center;
 }
 
 .video-preview img {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
   border-radius: 6px;
+  transition: transform 0.35s ease;
+}
+
+.video-preview:hover img {
+  transform: scale(1.04);
 }
 
 .video-overlay {
