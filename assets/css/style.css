@@ -2525,6 +2525,80 @@ body.autocount-page .icon-box:hover .icon {
   bottom: -10px; /* 距离底部，可调节 */
 }
 
+/* =========================
+   Customized Plugins Section
+   ========================= */
+
+.plugins {
+  background: #f6fbf6;
+}
+
+.plugin-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 22px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.plugin-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.plugin-img {
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.plugin-card h4 {
+  color: #0f5e01;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.plugin-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.plugin-demo-img {
+  border-radius: 6px;
+  opacity: 0.85;
+}
+
+/* responsive video */
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* video carousel indicators */
+
+.plugin-indicators {
+  position: relative;
+  margin-top: 10px;
+}
+
+.plugin-indicators button {
+  background-color: #6fdc6f;
+}
+
+.plugin-dummy {
+  background: #f6fbf6;
+  border: 2px dashed #d4e9d4;
+}
+
 /* =========================================
    AutoCount page – CTA
    ========================================= */
