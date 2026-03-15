@@ -1820,7 +1820,7 @@ section.blog,
 --------------------------------------------------------------*/
 
 #hero {
-  background: url("../img/hero-bg2.jpg") no-repeat center center;
+  background: url("../img/hero-bg2.webp") no-repeat center center;
   background-size: cover;   /* 自动铺满，不会拉伸 */
   background-attachment: fixed; /* 让背景固定不动，增加高级感（可选） */
   position: relative;
