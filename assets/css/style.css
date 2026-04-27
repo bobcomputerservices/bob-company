@@ -2712,15 +2712,15 @@ letter-spacing:0.3px;
 
 }
 
-/* 垂直 video stack */
-.video-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 12px; /* 两个视频之间的间距 */
+/* 2-column video grid */
+.video-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
-/* 保持 16:9 比例 */
-.video-stack .video-preview {
+/* 保持视频比例一致 */
+.video-grid-2 .video-preview {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -2728,10 +2728,17 @@ letter-spacing:0.3px;
 }
 
 /* 图片填满 */
-.video-stack img {
+.video-grid-2 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* 手机自动变 1 列 */
+@media (max-width: 768px) {
+  .video-grid-2 {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* =========================================
