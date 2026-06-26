@@ -891,64 +891,128 @@ section {
   background-color: #4668a2;
 }
 
+
 /*--------------------------------------------------------------
 # Services
 --------------------------------------------------------------*/
+
 .services .icon-box {
-  box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  transition: all ease-in-out 0.4s;
   background: #fff;
+  border-radius: 16px;
+  padding: 28px 22px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+
   display: flex;
   flex-direction: column;
-  align-items: center;   /* 水平居中 */
-  justify-content: flex-start; /* 顶部对齐 */
+  align-items: center;
   text-align: center;
-  border-radius: 8px;
+
+  height: 100%;
+  transition: all 0.35s ease;
 }
 
-/* icon */
-.services .icon-box .icon {
-  margin-bottom: 10px;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
+/* Hover */
 
-.services .icon-box .icon i {
-  color: #47b2e4;
-  font-size: 36px;
-  transition: 0.3s;
-}
-
-/* 标题 */
-.services .icon-box h4 {
-  font-weight: 500;
-  margin-bottom: 15px;
-  font-size: 24px;
-  color: #37517e;
-}
-
-/* 图片 */
-.services .icon-box .service-img {
-  max-width: 100%;     /* 不撑大 */
-  height: auto;        /* 保持比例 */
-  margin-top: 10px;
-  display: block;
-  transition: transform 0.3s ease; /* hover 动画 */
-}
-
-/* hover 效果 */
 .services .icon-box:hover {
-  transform: translateY(-10px);
-  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
 }
 
-.services .icon-box:hover .icon i {
-  color: #6bc1e9;
-  transform: scale(1.2);
+/* Title */
+
+.services .icon-box h4 {
+  color: #37517e;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.35;
+
+  margin-bottom: 16px;
+
+  min-height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+/* Description */
+
+.services .icon-box p {
+  color: #666;
+  font-size: 15px;
+  line-height: 1.7;
+
+  margin-bottom: 24px;
+
+  flex-grow: 1;
+}
+
+/* Image */
+
+.services .service-img {
+  width: 100%;
+  max-width: 180px;
+  max-height: 140px;
+
+  object-fit: contain;
+
+  margin-top: auto;
+
+  transition: transform 0.35s ease;
+}
+
+/* Hover Image */
 
 .services .icon-box:hover .service-img {
   transform: scale(1.05);
+}
+
+/* Tablet */
+
+@media (max-width: 1199px) {
+
+  .services .icon-box {
+    padding: 24px 18px;
+  }
+
+  .services .icon-box h4 {
+    font-size: 19px;
+  }
+
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+  .services .icon-box {
+
+    margin-bottom: 10px;
+
+  }
+
+  .services .icon-box h4 {
+
+    font-size: 18px;
+
+    min-height: auto;
+
+  }
+
+  .services .icon-box p {
+
+    font-size: 14px;
+
+  }
+
+  .services .service-img {
+
+    max-width: 160px;
+
+    max-height: 120px;
+
+  }
+
 }
 
 
