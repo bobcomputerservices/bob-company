@@ -633,8 +633,8 @@ section {
 }
 
 .cliens img {
-  max-width: auto;
-  height: 60px;
+  max-width: 70%;
+  height: auto;
   transition: none;
   filter: none;
 }
