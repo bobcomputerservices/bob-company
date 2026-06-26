@@ -899,7 +899,7 @@ section {
 .services .icon-box {
   background: #fff;
   border-radius: 16px;
-  padding: 28px 22px;
+  padding: 10px 10px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 
   display: flex;
