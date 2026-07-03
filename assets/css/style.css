@@ -2461,13 +2461,13 @@ body.autocount-page .icon-box:hover .icon {
 }
 
 .autocount-page #awards .awards-img {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   display: block;
 }
 
 .autocount-page #awards p {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   font-size: 1rem;
   line-height: 1.7;
